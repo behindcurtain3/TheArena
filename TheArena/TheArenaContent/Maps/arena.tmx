@@ -2,6 +2,7 @@
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
  <properties>
   <property name="Assembly" value="TheArena"/>
+  <property name="MapScript" value="TheArena.MapScripts.ArenaScript"/>
  </properties>
  <tileset firstgid="1" source="Tilesets/grass.tsx"/>
  <tileset firstgid="19" source="Tilesets/watergrass.tsx"/>
@@ -284,6 +285,11 @@
   <object type="TheArena.GameObjects.Mobs.Bee" x="722" y="242" width="21" height="24">
    <properties>
     <property name="HP" value="1500"/>
+   </properties>
+  </object>
+  <object name="NorthBridgeExit" type="GameEngine.GameObjects.MapZone" x="704" y="441" width="32" height="24">
+   <properties>
+    <property name="$MapZoneHit" value="NorthBridge_MapZoneHit"/>
    </properties>
   </object>
  </objectgroup>
