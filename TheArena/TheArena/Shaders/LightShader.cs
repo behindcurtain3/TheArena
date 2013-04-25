@@ -8,6 +8,7 @@ using GameEngine.Drawing;
 using GameEngine.Shaders;
 using GameEngine;
 using GameEngine.Info;
+using TheArena.GameObjects;
 
 namespace TheArena.Shaders
 {
@@ -20,7 +21,7 @@ namespace TheArena.Shaders
         private Effect _lightShader;
         private RenderTarget2D _lightTarget;
 
-        public List<ILightSource> LightSources { get; private set; }
+        public List<LightSource> LightSources { get; private set; }
 
         public Texture2D LightMap { get { return (Texture2D)_lightTarget; } }
 
@@ -29,9 +30,9 @@ namespace TheArena.Shaders
         public Color AmbientLight { get; set; }
 
         public LightShader(GraphicsDevice graphicsDevice, int circlePointAccuracy)
-            :base(graphicsDevice)
+            : base(graphicsDevice)
         {
-            this.LightSources = new List<ILightSource>();
+            this.LightSources = new List<LightSource>();
             this.AmbientLight = Color.White;
             this.CirclePointAccurracy = circlePointAccuracy;
         }
@@ -73,8 +74,8 @@ namespace TheArena.Shaders
 
         public override void UnloadContent()
         {
-            if( _lightShader != null ) _lightShader.Dispose();
-            if( _lightTarget != null ) _lightTarget.Dispose();
+            if (_lightShader != null) _lightShader.Dispose();
+            if (_lightTarget != null) _lightTarget.Dispose();
 
             _lightShader = null;
             _lightTarget = null;
@@ -88,16 +89,16 @@ namespace TheArena.Shaders
         }
 
         //TODO: HIGHLY UNOPTIMIZED, DO NOT INITIALISE VERTICES EACH ROUND, USE VERTEX BUFFERS AND INDICES
-        public override void ApplyShader(SpriteBatch spriteBatch, ViewPortInfo viewPortInfo,  GameTime gameTime, RenderTarget2D inputBuffer, RenderTarget2D outputBuffer )
+        public override void ApplyShader(SpriteBatch spriteBatch, ViewPortInfo viewPortInfo, GameTime gameTime, RenderTarget2D inputBuffer, RenderTarget2D outputBuffer)
         {
             GraphicsDevice.SetRenderTarget(_lightTarget);
             GraphicsDevice.Clear(AmbientLight);
             GraphicsDevice.BlendState = BlendState.Additive;
 
-            foreach (ILightSource lightSource in LightSources)
+            foreach (LightSource lightSource in LightSources)
             {
-                float x = lightSource.PX;
-                float y = lightSource.PY;
+                float x = lightSource.Pos.X;
+                float y = lightSource.Pos.Y;
 
                 if (lightSource.PositionType == LightPositionType.Relative)
                 {
@@ -112,8 +113,8 @@ namespace TheArena.Shaders
                 x = -1.0f + x * 2;
                 y = 1.0f - y * 2;
 
-                float radiusX = lightSource.RadiusX * viewPortInfo.ActualZoom;
-                float radiusY = lightSource.RadiusY * viewPortInfo.ActualZoom;
+                float radiusX = lightSource.Width * viewPortInfo.ActualZoom;
+                float radiusY = lightSource.Height * viewPortInfo.ActualZoom;
 
                 radiusX /= _lightTarget.Width;
                 radiusY /= _lightTarget.Height;
@@ -134,9 +135,9 @@ namespace TheArena.Shaders
                 {
                     pass.Apply();
                     GraphicsDevice.DrawUserPrimitives(
-                        PrimitiveType.TriangleList, 
-                        vertexCircle, 
-                        0, CirclePointAccurracy, 
+                        PrimitiveType.TriangleList,
+                        vertexCircle,
+                        0, CirclePointAccurracy,
                         VertexPositionColor.VertexDeclaration
                     );
                 }
@@ -147,7 +148,7 @@ namespace TheArena.Shaders
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, _lightShader);
             {
-                spriteBatch.Draw( inputBuffer, inputBuffer.Bounds, Color.White);
+                spriteBatch.Draw(inputBuffer, inputBuffer.Bounds, Color.White);
             }
             spriteBatch.End();
         }

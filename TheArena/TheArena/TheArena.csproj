@@ -110,12 +110,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameObjects\BasicLightSource.cs" />
     <Compile Include="GameObjects\Coin.cs" />
     <Compile Include="GameObjects\CombatDummy.cs" />
     <Compile Include="GameObjects\Heroes\DeathKnight.cs" />
     <Compile Include="GameObjects\Heroes\Hero.cs" />
     <Compile Include="GameObjects\Heroes\Monk.cs" />
+    <Compile Include="GameObjects\LightSource.cs" />
     <Compile Include="GameObjects\Mobs\Bat.cs" />
     <Compile Include="GameObjects\Mobs\Bee.cs" />
     <Compile Include="GameObjects\Mobs\Mob.cs" />
