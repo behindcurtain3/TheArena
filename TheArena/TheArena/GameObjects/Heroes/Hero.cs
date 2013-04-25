@@ -17,7 +17,7 @@ namespace TheArena.GameObjects.Heroes
         private const int BASE_DMG = 35;
         private const int BASE_DMG_RANGE = 4;
         private const int INPUT_DELAY = 0;
-        private const float MOVEMENT_SPEED = 2.1f;
+        private const float MOVEMENT_SPEED = 2.9f;
         private double _prevGameTime = 0;
 
         public bool CollisionDetection { get; set; }
@@ -71,6 +71,12 @@ namespace TheArena.GameObjects.Heroes
             LightSource.RadiusY = 32 * 8;
             LightSource.Color = Color.White;
             LightSource.PositionType = LightPositionType.Relative;
+        }
+
+        public override void PostInitialize(GameTime gameTime, TeeEngine engine)
+        {
+            LightShader lightShader = (LightShader)engine.GetPostGameShader("LightShader");
+            lightShader.LightSources.Add(LightSource);
         }
 
         public override void LoadContent(ContentManager content)

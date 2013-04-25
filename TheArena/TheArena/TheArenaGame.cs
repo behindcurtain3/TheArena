@@ -151,16 +151,14 @@ namespace TheArena
         /// </summary>
         protected override void LoadContent()
         {
-            Engine.LoadMap("Content/Maps/arena.tmx");
-
-            CurrentSampler = SamplerStates[SamplerIndex];
-
             LightShader = new LightShader(this.GraphicsDevice, CIRCLE_POINT_ACCURACY);
             LightShader.AmbientLight = new Color(30, 15, 15);
             LightShader.Enabled = false;
-            //LightShader.LightSources.Add(((Hero)Engine.GetEntity("Player")).LightSource);
-            LightShader.LightSources.Add(new BasicLightSource(32, 32, 32 * 29.0f, 32 * 29.0f, Color.CornflowerBlue, LightPositionType.Relative));
-            Engine.RegisterGameShader(LightShader);
+            Engine.RegisterGameShader("LightShader", LightShader);
+
+            Engine.LoadMap("Content/Maps/arena.tmx");
+
+            CurrentSampler = SamplerStates[SamplerIndex];
 
             Engine.DrawingOptions.ShowEntityDebugInfo = false;
             Engine.DrawingOptions.ShowBoundingBoxes = false;
