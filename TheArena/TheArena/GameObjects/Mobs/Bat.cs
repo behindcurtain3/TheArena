@@ -12,7 +12,6 @@ namespace TheArena.GameObjects.Mobs
             : base(x, y, Mob.BAT)
         {
             WorthGold = 1;
-
             MaxHP = 100;
             HP = MaxHP;
             Damage = 10;

@@ -36,6 +36,7 @@ namespace TheArena.GameObjects.Mobs
         private double _randomModifier;
         private float _attackSpeed = 5.4f;
         private float _moveSpeed = 1.8f;
+        private bool _attackHit = false;
 
         public Mob()
         {
@@ -103,11 +104,17 @@ namespace TheArena.GameObjects.Mobs
                     this._attackHeight.Y += 30.0f / ATTACK_COUNTER_LIMIT;
                     this.Drawables.SetGroupProperty("Body", "Offset", _attackHeight);
 
-                    if (Entity.IntersectsWith(this, "Shadow", player, "Shadow", gameTime))
+                    if (!_attackHit && Entity.IntersectsWith(this, "Shadow", player, "Shadow", gameTime))
+                    {
                         player.HP -= Damage;
+                        _attackHit = true;
+                    }
 
                     if (_attackCounter++ == ATTACK_COUNTER_LIMIT)
+                    {
                         _attackStance = AttackStance.NotAttacking;
+                        _attackHit = false;
+                    }
                 }
                 // ATTACK PREPERATION LOGIC.
                 else if (_attackStance == AttackStance.Preparing)
