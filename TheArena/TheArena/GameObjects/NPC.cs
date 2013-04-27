@@ -3,12 +3,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using GameEngine.Drawing;
 using System;
+using TheArena.Interfaces;
 
 namespace TheArena.GameObjects
 {
     public enum Direction { Up, Right, Down, Left };
 
-    public class NPC : Entity
+    public class NPC : Entity, IAttackable
     {
         public static Random randomGenerator = new Random();
 
@@ -104,6 +105,11 @@ namespace TheArena.GameObjects
         public override void UnloadContent()
         {
 
+        }
+
+        public virtual void onHit(Entity source, int damage)
+        {
+            HP -= damage;
         }
 
         /// <summary>

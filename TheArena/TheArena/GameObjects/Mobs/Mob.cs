@@ -107,7 +107,7 @@ namespace TheArena.GameObjects.Mobs
 
                     if (!_attackHit && Entity.IntersectsWith(this, "Shadow", player, "Shadow", gameTime))
                     {
-                        player.HP -= Damage;
+                        player.onHit(this, Damage);
                         _attackHit = true;
                     }
 
