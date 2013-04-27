@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GameEngine.GameObjects;
+﻿using GameEngine.GameObjects;
+using Microsoft.Xna.Framework;
 
 namespace TheArena.Interfaces
 {
@@ -10,7 +7,7 @@ namespace TheArena.Interfaces
     {
         int HP { get; set; }
 
-        void onHit(Entity source, int damage);
+        void onHit(Entity source, int damage, GameTime gameTime);
 
     }
 }

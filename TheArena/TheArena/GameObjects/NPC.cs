@@ -11,6 +11,7 @@ namespace TheArena.GameObjects
 
     public class NPC : Entity, IAttackable
     {
+        
         public static Random randomGenerator = new Random();
 
         public const string RACE_HUMAN_MALE = @"Animations/Characters/male_npc.anim";
@@ -102,10 +103,9 @@ namespace TheArena.GameObjects
             CurrentDrawableState = "Walk_Right";
         }
 
-        public virtual void onHit(Entity source, int damage)
+        public virtual void onHit(Entity source, int damage, GameTime gameTime)
         {
             HP -= damage;
-
             // TODO: check for death
         }
 

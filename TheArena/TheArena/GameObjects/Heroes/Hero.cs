@@ -104,6 +104,13 @@ namespace TheArena.GameObjects.Heroes
             Tile prevTile = engine.Map.GetPxTopMostTile(Pos.X, Pos.Y);
             float moveSpeedModifier = prevTile.GetProperty<float>("MoveSpeed", 1.0f);
 
+            // Restore opacity after a hit
+            if (Opacity < 1)
+            {
+                Opacity += 0.02f;
+                if (Opacity > 1) Opacity = 1;
+            }
+
             // ATTACK KEY.
             if (keyboardState.IsKeyDown(Keys.A))
             {
@@ -241,12 +248,19 @@ namespace TheArena.GameObjects.Heroes
                             !_prevAttackedEntities.Contains(entity) &&
                             Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
                         {
-                            ((IAttackable)entity).onHit(this, RollForDamage());
+                            ((IAttackable)entity).onHit(this, RollForDamage(), gameTime);
                             _prevAttackedEntities.Add(entity);
                         }
                     }
                 }
-            }  
+            }
+        }
+
+        public override void onHit(Entity source, int damage, GameTime gameTime)
+        {
+            base.onHit(source, damage, gameTime);
+
+            Opacity = 0.5f;
         }
 
         private int RollForDamage()
