@@ -38,7 +38,7 @@ namespace TheArena.GameObjects
                 if (instance.Drawable is Animation)
                 {
                     Animation anim = (Animation)instance.Drawable;
-                    anim.onAnimationFinished += new Animation.AnimationFinishedEventHandler(anim_onAnimationFinished);
+                    //anim.onAnimationFinished += new Animation.AnimationFinishedEventHandler(anim_onAnimationFinished);
                 }
             }
             

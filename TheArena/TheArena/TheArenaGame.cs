@@ -336,7 +336,7 @@ namespace TheArena
                     SpriteBatch.DrawString(DefaultSpriteFont, "Total Entities = " + Engine.Entities.Count, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Latest Node Index = " + Engine.QuadTree.LatestNodeIndex, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Actual Zoom = " + viewPort.ActualZoom, GeneratePos(textHeight), Color.White);
-                    SpriteBatch.DrawString(DefaultSpriteFont, "Dummy State = " + Engine.GetEntity("CombatDummy").CurrentDrawableState, GeneratePos(textHeight), Color.White);
+                    //SpriteBatch.DrawString(DefaultSpriteFont, "Dummy State = " + Engine.GetEntity("CombatDummy").CurrentDrawableState, GeneratePos(textHeight), Color.White);
                 }
 
                 if (showDiagnostics)

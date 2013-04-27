@@ -40,6 +40,22 @@ namespace TheArena.MapScripts
             if (entitiesHit.Contains(engine.GetEntity("Player")))
             {
                 // TODO: Destroy the bridge tiles & cutoff the "path" across the water
+                TileLayer layer = engine.Map.GetLayerByName("Bridges and Items");
+
+                if (layer != null)
+                {
+                    layer[22, 10] = 58;
+                    layer[22, 11] = 59;
+                    layer[22, 12] = 60;
+                    layer[22, 13] = 59;
+                    Tile tile = engine.Map.GetTxTopMostTile(22, 13);
+                    tile.SetProperty("Impassable", "true");
+
+                    // Remove the zone that triggers this event
+                    engine.RemoveEntity("NorthBridgeExit");
+
+                    _northHit = true;
+                }
             }
         }
     }

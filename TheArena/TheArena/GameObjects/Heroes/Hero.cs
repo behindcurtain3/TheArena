@@ -234,7 +234,7 @@ namespace TheArena.GameObjects.Heroes
                     {
                         _prevAttackedEntities.Remove(entity);
                     }
-
+                    /*
                     if (entity is CombatDummy)
                     {
                         if (CurrentDrawableState.Contains("Slash") &&
@@ -245,7 +245,7 @@ namespace TheArena.GameObjects.Heroes
                             _prevAttackedEntities.Add(entity);
                         }
                     }
-                    else if (entity is Mob)
+                    else */if (entity is Mob)
                     {
                         if (CurrentDrawableState.Contains("Slash") &&
                             !_prevAttackedEntities.Contains(entity) &&
