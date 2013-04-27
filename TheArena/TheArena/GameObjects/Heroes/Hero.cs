@@ -242,7 +242,7 @@ namespace TheArena.GameObjects.Heroes
                     {
                         _prevAttackedEntities.Remove(entity);
                     }
-                    if (entity is IAttackable)
+                    if (entity is IAttackable && entity != this)
                     {
                         if (CurrentDrawableState.Contains("Slash") &&
                             !_prevAttackedEntities.Contains(entity) &&
