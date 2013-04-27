@@ -4,10 +4,11 @@ using Microsoft.Xna.Framework;
 using GameEngine.Drawing;
 using System;
 using TheArena.GameObjects.Heroes;
+using TheArena.Interfaces;
 
 namespace TheArena.GameObjects.Mobs
 {
-    public class Mob : Entity
+    public class Mob : Entity, IAttackable
     {
         enum AttackStance { NotAttacking, Preparing, Attacking };
         public const string BAT = @"Animations/Monsters/bat.anim";
@@ -21,7 +22,7 @@ namespace TheArena.GameObjects.Mobs
 
         public string Type { get; set; }
         public int Lvl { get; set; }
-        public int HP { get; internal set; }
+        public int HP { get; set; }
         public int MaxHP { get; internal set; }
         public int Damage { get; set; }
         public int WorthGold { get; set; }
@@ -188,13 +189,13 @@ namespace TheArena.GameObjects.Mobs
             base.Update(gameTime, engine);
         }
 
-        public void DealDamage(NPC source, int amount)
+        public void onHit(Entity source, int damage)
         {
-            HP -= amount;
+            HP -= damage;
 
-            if (HP <= 0 && !_xpGiven)
+            if (HP <= 0 && !_xpGiven && source is Hero)
             {
-                source.RewardXP(Lvl);
+                ((Hero)source).RewardXP(Lvl);
                 _xpGiven = true;
             }
             
