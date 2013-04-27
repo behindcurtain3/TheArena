@@ -140,7 +140,7 @@ namespace TheArena.GameObjects.Mobs
                 {
                     double distance = Vector2.Distance(player.Pos, this.Pos);
 
-                    if (distance < AGRO_DISTANCE)
+                    if (distance < AGRO_DISTANCE && player.HP > 0)
                     {
                         // Move towards the player for an attack move.
                         double angle = Math.Atan2(

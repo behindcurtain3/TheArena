@@ -95,161 +95,175 @@ namespace TheArena.GameObjects.Heroes
 
         public override void Update(GameTime gameTime, TeeEngine engine)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-
-            Vector2 movement = Vector2.Zero;
-            float prevX = Pos.X;
-            float prevY = Pos.Y;
-
-            Tile prevTile = engine.Map.GetPxTopMostTile(Pos.X, Pos.Y);
-            float moveSpeedModifier = prevTile.GetProperty<float>("MoveSpeed", 1.0f);
-
-            // Restore opacity after a hit
-            if (Opacity < 1)
+            if (HP <= 0)
             {
-                Opacity += 0.02f;
-                if (Opacity > 1) Opacity = 1;
-            }
+                // Hero is dead :(
+                // Make sure the correct animation is playing
+                if (!CurrentDrawableState.Equals("Hurt"))
+                    CurrentDrawableState = "Hurt";
 
-            // ATTACK KEY.
-            if (keyboardState.IsKeyDown(Keys.A))
-            {
-                bool reset = !CurrentDrawableState.StartsWith("Slash");
-                CurrentDrawableState = "Slash_" + Direction;
+                // Reset the opacity
+                if(Opacity < 1) Opacity = 1f;
 
-                if (reset) Drawables.ResetState(CurrentDrawableState, gameTime);
             }
             else
             {
-                // MOVEMENT BASED KEYBOARD EVENTS.
-                if (keyboardState.IsKeyDown(Keys.Up))
-                {
-                    CurrentDrawableState = "Walk_Up";
-                    Direction = Direction.Up;
+                KeyboardState keyboardState = Keyboard.GetState();
 
-                    movement.Y--;
-                }
-                if (keyboardState.IsKeyDown(Keys.Down))
-                {
-                    CurrentDrawableState = "Walk_Down";
-                    Direction = Direction.Down;
+                Vector2 movement = Vector2.Zero;
+                float prevX = Pos.X;
+                float prevY = Pos.Y;
 
-                    movement.Y++;
-                }
-                if (keyboardState.IsKeyDown(Keys.Left))
-                {
-                    CurrentDrawableState = "Walk_Left";
-                    Direction = Direction.Left;
+                Tile prevTile = engine.Map.GetPxTopMostTile(Pos.X, Pos.Y);
+                float moveSpeedModifier = prevTile.GetProperty<float>("MoveSpeed", 1.0f);
 
-                    movement.X--;
-                }
-                if (keyboardState.IsKeyDown(Keys.Right))
+                // Restore opacity after a hit
+                if (Opacity < 1)
                 {
-                    CurrentDrawableState = "Walk_Right";
-                    Direction = Direction.Right;
- 
-                    movement.X++;
+                    Opacity += 0.02f;
+                    if (Opacity > 1) Opacity = 1;
                 }
 
-                // Set animation to idle of no movements where made.
-                if (movement.Length() == 0)
-                    CurrentDrawableState = "Idle_" + Direction;
+                // ATTACK KEY.
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    bool reset = !CurrentDrawableState.StartsWith("Slash");
+                    CurrentDrawableState = "Slash_" + Direction;
+
+                    if (reset) Drawables.ResetState(CurrentDrawableState, gameTime);
+                }
                 else
                 {
-                    movement.Normalize();
-                    Pos += movement * MOVEMENT_SPEED * moveSpeedModifier;
-                }
-            }
-
-            // Prevent from going out of range.
-            if (Pos.X < 0) Pos.X = 0;
-            if (Pos.Y < 0) Pos.Y = 0;
-            if (Pos.X >= engine.Map.pxWidth - 1) Pos.X = engine.Map.pxWidth - 1;
-            if (Pos.Y >= engine.Map.pxHeight - 1) Pos.Y = engine.Map.pxHeight - 1;
-
-            if (CollisionDetection)
-            {
-                // Iterate through each layer and determine if the tile is passable.
-                int tileX = (int) Pos.X / engine.Map.TileWidth;
-                int tileY = (int) Pos.Y / engine.Map.TileHeight;
-
-                int pxTileX = tileX * engine.Map.TileWidth;
-                int pxTileY = tileY * engine.Map.TileHeight;
-                int pxTileWidth = engine.Map.TileWidth;
-                int pxTileHeight = engine.Map.TileHeight;
-
-                Tile currentTile = engine.Map.GetPxTopMostTile(Pos.X, Pos.Y);
-                bool impassable = currentTile.HasProperty("Impassable");
-
-                // CORRECT ENTRY AND EXIT MOVEMENT BASED ON TILE PROPERTIES
-                // TODO
-                // to improve structure
-                // Current very very ineffecient way of checking Entry
-                string[] entryPoints = currentTile.GetProperty("Entry", "Top Bottom Left Right").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                string[] exitPoints = prevTile.GetProperty("Entry", "Top Bottom Left Right").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                bool top = prevY < pxTileY;
-                bool bottom = prevY > pxTileY + pxTileHeight;
-                bool left = prevX < pxTileX;
-                bool right = prevX > pxTileX + pxTileWidth;
-
-                // Ensure entry points.
-                impassable |= top && !ContainsItem(entryPoints, "Top");
-                impassable |= bottom && !ContainsItem(entryPoints, "Bottom");
-                impassable |= left && !ContainsItem(entryPoints, "Left");
-                impassable |= right && !ContainsItem(entryPoints, "Right");
-
-                // Ensure exit points.
-                impassable |= top && !ContainsItem(exitPoints, "Bottom");
-                impassable |= bottom && !ContainsItem(exitPoints, "Top");
-                impassable |= left && !ContainsItem(exitPoints, "Right");
-                impassable |= right && !ContainsItem(exitPoints, "Left");
-
-                // IF THE MOVEMENT WAS DEEMED IMPASSABLE, CORRECT IT.
-                // if impassable, adjust X and Y accordingly.
-                float padding = 0.001f;
-                if (impassable)
-                {
-                    if (prevY <= pxTileY && Pos.Y > pxTileY)
-                        Pos.Y = pxTileY - padding;
-                    else
-                        if (prevY >= pxTileY + pxTileHeight && Pos.Y < pxTileY + pxTileHeight)
-                            Pos.Y = pxTileY + pxTileHeight + padding;
-
-                    if (prevX <= pxTileX && Pos.X > pxTileX)
-                        Pos.X = pxTileX - padding;
-                    else
-                        if (prevX >= pxTileX + pxTileWidth && Pos.X < pxTileX + pxTileWidth)
-                            Pos.X = pxTileX + pxTileWidth + padding;
-                }
-
-                // Change the radius of the LightSource overtime using a SINE wave pattern.
-                LightSource.Pos = Pos;
-                LightSource.Width = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
-                LightSource.Height = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
-
-                // EXAMPLE OF HOW THE QUAD TREE INTERSECTING ENTITIES FUNCTION CAN WORK
-                // TODO: Add PER PIXEL collision detection to each one of these entities
-                //if (prevIntersectingEntities != null)
-                //    foreach (Entity entity in prevIntersectingEntities)
-                //        entity.Opacity = 1.0f;
-
-                _prevIntersectingEntities = engine.QuadTree.GetIntersectingEntites(this.CurrentBoundingBox);
-
-                foreach (Entity entity in _prevIntersectingEntities)
-                {
-                    if(!CurrentDrawableState.Contains("Slash") && _prevAttackedEntities.Contains(entity))
+                    // MOVEMENT BASED KEYBOARD EVENTS.
+                    if (keyboardState.IsKeyDown(Keys.Up))
                     {
-                        _prevAttackedEntities.Remove(entity);
+                        CurrentDrawableState = "Walk_Up";
+                        Direction = Direction.Up;
+
+                        movement.Y--;
                     }
-                    if (entity is IAttackable && entity != this)
+                    if (keyboardState.IsKeyDown(Keys.Down))
                     {
-                        if (CurrentDrawableState.Contains("Slash") &&
-                            !_prevAttackedEntities.Contains(entity) &&
-                            Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
+                        CurrentDrawableState = "Walk_Down";
+                        Direction = Direction.Down;
+
+                        movement.Y++;
+                    }
+                    if (keyboardState.IsKeyDown(Keys.Left))
+                    {
+                        CurrentDrawableState = "Walk_Left";
+                        Direction = Direction.Left;
+
+                        movement.X--;
+                    }
+                    if (keyboardState.IsKeyDown(Keys.Right))
+                    {
+                        CurrentDrawableState = "Walk_Right";
+                        Direction = Direction.Right;
+
+                        movement.X++;
+                    }
+
+                    // Set animation to idle of no movements where made.
+                    if (movement.Length() == 0)
+                        CurrentDrawableState = "Idle_" + Direction;
+                    else
+                    {
+                        movement.Normalize();
+                        Pos += movement * MOVEMENT_SPEED * moveSpeedModifier;
+                    }
+                }
+
+                // Prevent from going out of range.
+                if (Pos.X < 0) Pos.X = 0;
+                if (Pos.Y < 0) Pos.Y = 0;
+                if (Pos.X >= engine.Map.pxWidth - 1) Pos.X = engine.Map.pxWidth - 1;
+                if (Pos.Y >= engine.Map.pxHeight - 1) Pos.Y = engine.Map.pxHeight - 1;
+
+                if (CollisionDetection)
+                {
+                    // Iterate through each layer and determine if the tile is passable.
+                    int tileX = (int)Pos.X / engine.Map.TileWidth;
+                    int tileY = (int)Pos.Y / engine.Map.TileHeight;
+
+                    int pxTileX = tileX * engine.Map.TileWidth;
+                    int pxTileY = tileY * engine.Map.TileHeight;
+                    int pxTileWidth = engine.Map.TileWidth;
+                    int pxTileHeight = engine.Map.TileHeight;
+
+                    Tile currentTile = engine.Map.GetPxTopMostTile(Pos.X, Pos.Y);
+                    bool impassable = currentTile.HasProperty("Impassable");
+
+                    // CORRECT ENTRY AND EXIT MOVEMENT BASED ON TILE PROPERTIES
+                    // TODO
+                    // to improve structure
+                    // Current very very ineffecient way of checking Entry
+                    string[] entryPoints = currentTile.GetProperty("Entry", "Top Bottom Left Right").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] exitPoints = prevTile.GetProperty("Entry", "Top Bottom Left Right").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    bool top = prevY < pxTileY;
+                    bool bottom = prevY > pxTileY + pxTileHeight;
+                    bool left = prevX < pxTileX;
+                    bool right = prevX > pxTileX + pxTileWidth;
+
+                    // Ensure entry points.
+                    impassable |= top && !ContainsItem(entryPoints, "Top");
+                    impassable |= bottom && !ContainsItem(entryPoints, "Bottom");
+                    impassable |= left && !ContainsItem(entryPoints, "Left");
+                    impassable |= right && !ContainsItem(entryPoints, "Right");
+
+                    // Ensure exit points.
+                    impassable |= top && !ContainsItem(exitPoints, "Bottom");
+                    impassable |= bottom && !ContainsItem(exitPoints, "Top");
+                    impassable |= left && !ContainsItem(exitPoints, "Right");
+                    impassable |= right && !ContainsItem(exitPoints, "Left");
+
+                    // IF THE MOVEMENT WAS DEEMED IMPASSABLE, CORRECT IT.
+                    // if impassable, adjust X and Y accordingly.
+                    float padding = 0.001f;
+                    if (impassable)
+                    {
+                        if (prevY <= pxTileY && Pos.Y > pxTileY)
+                            Pos.Y = pxTileY - padding;
+                        else
+                            if (prevY >= pxTileY + pxTileHeight && Pos.Y < pxTileY + pxTileHeight)
+                                Pos.Y = pxTileY + pxTileHeight + padding;
+
+                        if (prevX <= pxTileX && Pos.X > pxTileX)
+                            Pos.X = pxTileX - padding;
+                        else
+                            if (prevX >= pxTileX + pxTileWidth && Pos.X < pxTileX + pxTileWidth)
+                                Pos.X = pxTileX + pxTileWidth + padding;
+                    }
+
+                    // Change the radius of the LightSource overtime using a SINE wave pattern.
+                    LightSource.Pos = Pos;
+                    LightSource.Width = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
+                    LightSource.Height = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
+
+                    // EXAMPLE OF HOW THE QUAD TREE INTERSECTING ENTITIES FUNCTION CAN WORK
+                    // TODO: Add PER PIXEL collision detection to each one of these entities
+                    //if (prevIntersectingEntities != null)
+                    //    foreach (Entity entity in prevIntersectingEntities)
+                    //        entity.Opacity = 1.0f;
+
+                    _prevIntersectingEntities = engine.QuadTree.GetIntersectingEntites(this.CurrentBoundingBox);
+
+                    foreach (Entity entity in _prevIntersectingEntities)
+                    {
+                        if (!CurrentDrawableState.Contains("Slash") && _prevAttackedEntities.Contains(entity))
                         {
-                            ((IAttackable)entity).onHit(this, RollForDamage(), gameTime);
-                            _prevAttackedEntities.Add(entity);
+                            _prevAttackedEntities.Remove(entity);
+                        }
+                        if (entity is IAttackable && entity != this)
+                        {
+                            if (CurrentDrawableState.Contains("Slash") &&
+                                !_prevAttackedEntities.Contains(entity) &&
+                                Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
+                            {
+                                ((IAttackable)entity).onHit(this, RollForDamage(), gameTime);
+                                _prevAttackedEntities.Add(entity);
+                            }
                         }
                     }
                 }
@@ -258,9 +272,17 @@ namespace TheArena.GameObjects.Heroes
 
         public override void onHit(Entity source, int damage, GameTime gameTime)
         {
+            if (HP <= 0) return;
+
             base.onHit(source, damage, gameTime);
 
             Opacity = 0.5f;
+
+            if (HP <= 0)
+            {
+                CurrentDrawableState = "Hurt";
+                Drawables.ResetState("Hurt", gameTime);
+            }
         }
 
         private int RollForDamage()

@@ -10,7 +10,7 @@ namespace TheArena.GameObjects.Heroes
 
         public Monk() : base()
         {
-            Head = NPC.ARMOR_ROBE_HEAD;
+            Head = null;// NPC.ARMOR_ROBE_HEAD;
             Legs = NPC.ARMOR_ROBE_LEGS;
             Feet = null;
             Torso = NPC.ARMOR_ROBE_TORSO;
