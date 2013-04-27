@@ -102,11 +102,6 @@ namespace TheArena.GameObjects
             CurrentDrawableState = "Walk_Right";
         }
 
-        public override void UnloadContent()
-        {
-
-        }
-
         public virtual void onHit(Entity source, int damage)
         {
             HP -= damage;

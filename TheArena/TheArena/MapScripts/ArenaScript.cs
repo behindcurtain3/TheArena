@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using GameEngine.GameObjects;
 using GameEngine.Extensions;
 using Microsoft.Xna.Framework.Input;
+using TheArena.GameObjects.Heroes;
 
 namespace TheArena.MapScripts
 {
@@ -15,7 +16,7 @@ namespace TheArena.MapScripts
     {
         private bool _northHit = false;
 
-        public void MapLoaded(TeeEngine engine, TiledMap map)
+        public void MapLoaded(TeeEngine engine, TiledMap map, MapEventArgs args)
         {
             engine.GetPostGameShader("LightShader").Enabled = false;
         }
@@ -30,32 +31,29 @@ namespace TheArena.MapScripts
             
         }
 
-        public void NorthBridge_MapZoneHit(MapZone sender, List<Entity> entitiesHit, TeeEngine engine, GameTime gameTime)
+        public void NorthBridge_MapZoneHit(MapZone sender, Entity entity, TeeEngine engine, GameTime gameTime)
         {
             // Return if the bridge is already destroyed
-            if (_northHit)
+            if (_northHit || !(entity is Hero))
                 return;
 
             // If it was the player that hit the zone, destroy the bridge
-            if (entitiesHit.Contains(engine.GetEntity("Player")))
+            
+            TileLayer layer = engine.Map.GetLayerByName("Bridges and Items");
+
+            if (layer != null)
             {
-                // TODO: Destroy the bridge tiles & cutoff the "path" across the water
-                TileLayer layer = engine.Map.GetLayerByName("Bridges and Items");
+                layer[22, 10] = 58;
+                layer[22, 11] = 59;
+                layer[22, 12] = 60;
+                layer[22, 13] = 59;
+                Tile tile = engine.Map.GetTxTopMostTile(22, 13);
+                tile.SetProperty("Impassable", "true");
 
-                if (layer != null)
-                {
-                    layer[22, 10] = 58;
-                    layer[22, 11] = 59;
-                    layer[22, 12] = 60;
-                    layer[22, 13] = 59;
-                    Tile tile = engine.Map.GetTxTopMostTile(22, 13);
-                    tile.SetProperty("Impassable", "true");
+                // Remove the zone that triggers this event
+                engine.RemoveEntity("NorthBridgeExit");
 
-                    // Remove the zone that triggers this event
-                    engine.RemoveEntity("NorthBridgeExit");
-
-                    _northHit = true;
-                }
+                _northHit = true;
             }
         }
     }

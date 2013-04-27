@@ -251,7 +251,7 @@ namespace TheArena.GameObjects.Heroes
                             !_prevAttackedEntities.Contains(entity) &&
                             Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
                         {
-                            ((Mob)entity).DealDamage(this, RollForDamage());
+                            ((Mob)entity).onHit(this, RollForDamage());
                             _prevAttackedEntities.Add(entity);
                         }
                     }

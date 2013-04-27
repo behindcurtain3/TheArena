@@ -8,9 +8,9 @@ namespace TheArena.Interfaces
 {
     public interface IAttackable
     {
-        public int HP { get; set; }
+        int HP { get; set; }
 
-        public void onHit(Entity source, int damage);
+        void onHit(Entity source, int damage);
 
     }
 }

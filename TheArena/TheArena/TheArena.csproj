@@ -121,6 +121,7 @@
     <Compile Include="GameObjects\Mobs\Mob.cs" />
     <Compile Include="GameObjects\MobSpawner.cs" />
     <Compile Include="GameObjects\NPC.cs" />
+    <Compile Include="Interfaces\IAttackable.cs" />
     <Compile Include="MapScripts\ArenaScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
