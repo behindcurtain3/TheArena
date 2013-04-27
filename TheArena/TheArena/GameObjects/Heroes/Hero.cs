@@ -7,6 +7,7 @@ using GameEngine.Tiled;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using TheArena.Shaders;
 using TheArena.GameObjects.Mobs;
 using TheArena.Interfaces;
@@ -31,6 +32,8 @@ namespace TheArena.GameObjects.Heroes
 
         private List<Entity> _prevIntersectingEntities;
         private List<Entity> _prevAttackedEntities;
+        private SoundEffect[] _onHitSfx;
+        private SoundEffect _onDeathSfx;
 
         public Hero() : base(NPC.RACE_HUMAN_MALE)
         {
@@ -82,6 +85,11 @@ namespace TheArena.GameObjects.Heroes
         public override void LoadContent(ContentManager content)
         {
             base.LoadContent(content);
+
+            _onHitSfx = new SoundEffect[3];
+            _onHitSfx[0] = content.Load<SoundEffect>("Sounds/Characters/Hit_Hurt14");
+            _onHitSfx[1] = content.Load<SoundEffect>("Sounds/Characters/Hit_Hurt6");
+            _onHitSfx[2] = content.Load<SoundEffect>("Sounds/Characters/Hit_Hurt11");
         }
 
         // TODO REMOVE.
@@ -276,12 +284,17 @@ namespace TheArena.GameObjects.Heroes
 
             base.onHit(source, damage, gameTime);
 
-            Opacity = 0.5f;
-
             if (HP <= 0)
             {
+                HP = 0;
                 CurrentDrawableState = "Hurt";
                 Drawables.ResetState("Hurt", gameTime);
+                // TODO: Add death sound effect
+            }
+            else
+            {
+                Opacity = 0.5f;
+                _onHitSfx[randomGenerator.Next(0, _onHitSfx.Length)].Play(0.5f, 0.0f, 0.0f);
             }
         }
 
