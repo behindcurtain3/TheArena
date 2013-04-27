@@ -256,12 +256,18 @@ namespace TheArena.GameObjects.Heroes
 
         public void UpdateMaxHP()
         {
-            MaxHP = (int)(Strength * 3);
+            // Keep the HP at the same % of max hp after changing MaxHP
+            float percentMax = HP / MaxHP;
+            MaxHP = (int)(Strength * 10);
+            HP = (int)(MaxHP * percentMax);
         }
 
         public void UpdateMaxMana()
         {
+            // Keep the Mana at the same % of max hp after changing MaxMana
+            float percentMax = Mana / MaxMana;
             MaxMana = (int)(Wisdom * 3);
+            Mana = (int)(MaxMana * percentMax);
         }
     }
 }

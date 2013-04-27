@@ -105,6 +105,8 @@ namespace TheArena.GameObjects
         public virtual void onHit(Entity source, int damage)
         {
             HP -= damage;
+
+            // TODO: check for death
         }
 
         /// <summary>
