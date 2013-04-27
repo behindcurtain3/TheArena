@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using TheArena.Shaders;
 using TheArena.GameObjects.Mobs;
+using TheArena.Interfaces;
 
 namespace TheArena.GameObjects.Heroes
 {
@@ -234,24 +235,13 @@ namespace TheArena.GameObjects.Heroes
                     {
                         _prevAttackedEntities.Remove(entity);
                     }
-                    /*
-                    if (entity is CombatDummy)
+                    if (entity is IAttackable)
                     {
                         if (CurrentDrawableState.Contains("Slash") &&
                             !_prevAttackedEntities.Contains(entity) &&
                             Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
                         {
-                            ((CombatDummy)entity).Spin(gameTime);
-                            _prevAttackedEntities.Add(entity);
-                        }
-                    }
-                    else */if (entity is Mob)
-                    {
-                        if (CurrentDrawableState.Contains("Slash") &&
-                            !_prevAttackedEntities.Contains(entity) &&
-                            Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
-                        {
-                            ((Mob)entity).onHit(this, RollForDamage());
+                            ((IAttackable)entity).onHit(this, RollForDamage());
                             _prevAttackedEntities.Add(entity);
                         }
                     }
