@@ -252,7 +252,7 @@
   <object gid="118" x="711" y="107"/>
   <object gid="118" x="479" y="650"/>
   <object gid="117" x="535" y="575"/>
-  <object name="Player" type="TheArena.GameObjects.Heroes.Monk" x="706" y="134" width="19" height="18"/>
+  <object name="Player" type="TheArena.GameObjects.Heroes.DeathKnight" x="706" y="134" width="19" height="18"/>
   <object name="spawner1" type="TheArena.GameObjects.MobSpawner" x="445" y="438" width="670" height="365">
    <properties>
     <property name="Interval_Max" value="15"/>
@@ -279,11 +279,6 @@
     <property name="Interval_Max" value="35"/>
     <property name="Interval_Min" value="8"/>
     <property name="Mobs" value="Bat, Bee"/>
-   </properties>
-  </object>
-  <object type="TheArena.GameObjects.Mobs.Bee" x="722" y="242" width="21" height="24">
-   <properties>
-    <property name="HP" value="1500"/>
    </properties>
   </object>
   <object name="NorthBridgeExit" type="GameEngine.GameObjects.MapZone" x="677" y="468" width="85" height="29">
