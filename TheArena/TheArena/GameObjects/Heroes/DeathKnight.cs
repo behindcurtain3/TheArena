@@ -24,12 +24,9 @@ namespace TheArena.GameObjects.Heroes
             // DEATH
             BaseRace = NPC.RACE_UNDEAD;
 
-            // Base stats
+            // LevelUp to lvl1
             Lvl = 0;
             LevelUp();
-
-            HP = MaxHP;
-            Mana = MaxMana;
         }
 
         public override void LevelUp()

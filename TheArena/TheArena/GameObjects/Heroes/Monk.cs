@@ -21,13 +21,9 @@ namespace TheArena.GameObjects.Heroes
 
             Weapon = NPC.WEAPON_LONGSWORD;
 
-            // Base Stats
+            // LevelUp to lvl 1
             Lvl = 0;
             LevelUp();
-
-            HP = MaxHP;
-            Mana = MaxMana;
-
         }
 
         public override void LevelUp()

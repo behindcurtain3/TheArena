@@ -32,11 +32,13 @@ namespace TheArena.GameObjects
         public const string ARMOR_ROBE_TORSO = @"Animations/Armor/robe_torso.anim";
         public const string ARMOR_ROBE_BELT = @"Animations/Armor/robe_belt.anim";
 
+        // Weapon animations
         public const string WEAPON_DAGGER = @"Animations/Weapons/dagger.anim";
         public const string WEAPON_LONGSWORD = @"Animations/Weapons/longsword.anim";
 
         public Direction Direction { get; set; }
 
+        // Which animations are equipped in each slot
         public string Weapon { get; set; }
         public string Head { get; set; }
         public string Torso { get; set; }
@@ -48,15 +50,13 @@ namespace TheArena.GameObjects
         public string Bracers { get; set; }
         public string BaseRace { get; set; }
 
+        // Stats
         public int Lvl { get; set; }
-        
         public int HP { get; set; }
         public int MaxHP { get; set; }
-
         public int XP { get; set; }
         public int XPToNextLevel { get; set; }
-        
-        public int Coins { get; set; }
+        public int Gold { get; set; }
 
         public NPC()
         {
@@ -81,7 +81,7 @@ namespace TheArena.GameObjects
             this.MaxHP = 0;
             this.XP = 0;
             this.XPToNextLevel = GetNeededXpAmount();
-            this.Coins = 0;
+            this.Gold = 0;
 
             this.Direction = Direction.Right;
             this.BaseRace = baseRace;

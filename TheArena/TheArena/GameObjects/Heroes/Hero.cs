@@ -24,6 +24,7 @@ namespace TheArena.GameObjects.Heroes
         public bool CollisionDetection { get; set; }
         public LightSource LightSource { get; set; }
 
+        // Hero stats
         public float Strength { get; set; }
         public float Dexterity { get; set; }
         public float Wisdom { get; set; }
@@ -60,10 +61,10 @@ namespace TheArena.GameObjects.Heroes
             Dexterity = 10;
             Wisdom = 10;
 
-            MaxHP = (int)(Strength * 3);
+            UpdateMaxHP();
             HP = MaxHP;
 
-            MaxMana = (int)(Wisdom * 3);
+            UpdateMaxMana();
             Mana = MaxMana;
 
             XP = 0;
@@ -311,7 +312,7 @@ namespace TheArena.GameObjects.Heroes
         public void UpdateMaxHP()
         {
             // Keep the HP at the same % of max hp after changing MaxHP
-            float percentMax = HP / MaxHP;
+            float percentMax = (MaxHP == 0) ? 1f : (HP / MaxHP);
             MaxHP = 105 + (int)(Strength * 2);
             HP = (int)(MaxHP * percentMax);
         }
@@ -319,7 +320,7 @@ namespace TheArena.GameObjects.Heroes
         public void UpdateMaxMana()
         {
             // Keep the Mana at the same % of max hp after changing MaxMana
-            float percentMax = Mana / MaxMana;
+            float percentMax = (MaxMana == 0) ? 1f : (Mana / MaxMana);
             MaxMana = (int)(Wisdom * 3);
             Mana = (int)(MaxMana * percentMax);
         }

@@ -309,7 +309,7 @@ namespace TheArena
 
                     SpriteBatch.DrawString(DefaultSpriteFont, Engine.GetEntity("Player").Pos.ToString(), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, TX.ToString("0.0") + "," + TY.ToString("0.0"), GeneratePos(textHeight), Color.White);
-                    SpriteBatch.DrawString(DefaultSpriteFont, "Coins=" + player.Coins, GeneratePos(textHeight), Color.White);
+                    SpriteBatch.DrawString(DefaultSpriteFont, "Coins=" + player.Gold, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Lvl={0}", player.Lvl), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("HP={0}/{1}", player.HP, player.MaxHP), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Mana={0}/{1}", player.Mana, player.MaxMana), GeneratePos(textHeight), Color.White);

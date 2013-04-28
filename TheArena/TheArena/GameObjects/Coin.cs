@@ -107,7 +107,7 @@ namespace TheArena.GameObjects
                     if (Entity.IntersectsWith(this, "Shadow", player, "Shadow", gameTime))
                     {
                         CoinSound.Play(0.05f, 0.0f, 0.0f);
-                        player.Coins += this.CoinValue;
+                        player.Gold += this.CoinValue;
                         engine.RemoveEntity(this);
                     }
                 }
