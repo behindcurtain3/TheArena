@@ -230,18 +230,6 @@ namespace TheArena
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F10, this, true))
                 Engine.DrawingOptions.ShowDrawableComponents = !Engine.DrawingOptions.ShowDrawableComponents;
 
-            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F11, this, true))
-            {
-                helmetVisible = !helmetVisible;
-                Engine.GetEntity("Player").Drawables.SetGroupProperty("Head", "Visible", helmetVisible);
-                /*
-                if (helmetVisible)
-                    Engine.GetEntity("Player").Drawables.SetGroupProperty("Head", "Offset", Vector2.Zero);
-                else
-                    Engine.GetEntity("Player").Drawables.SetGroupProperty("Head", "Offset", new Vector2(0, -40));
-                 */
-            }
-
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F12, this, true))
             {
                 Hero player = (Hero)Engine.GetEntity("Player");
@@ -284,8 +272,7 @@ namespace TheArena
             // Draw the World View Port, Centered on the Engine.GetEntity("Player") Actor.
             ViewPortInfo viewPort = Engine.DrawWorldViewPort(
                                             SpriteBatch,
-                                            Engine.GetEntity("Player").Pos.X,
-                                            Engine.GetEntity("Player").Pos.Y,
+                                            Engine.GetEntity("Player").Pos,
                                             Zoom,
                                             pxDestRectangle,
                                             Color.White,
@@ -334,7 +321,6 @@ namespace TheArena
                     SpriteBatch.DrawString(DefaultSpriteFont, "Sampler=" + CurrentSampler.ToString(), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Entities On Screen = " + Engine.EntitiesOnScreen.Count, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Total Entities = " + Engine.Entities.Count, GeneratePos(textHeight), Color.White);
-                    SpriteBatch.DrawString(DefaultSpriteFont, "Latest Node Index = " + Engine.QuadTree.LatestNodeIndex, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Actual Zoom = " + viewPort.ActualZoom, GeneratePos(textHeight), Color.White);
                     //SpriteBatch.DrawString(DefaultSpriteFont, "Dummy State = " + Engine.GetEntity("CombatDummy").CurrentDrawableState, GeneratePos(textHeight), Color.White);
                 }

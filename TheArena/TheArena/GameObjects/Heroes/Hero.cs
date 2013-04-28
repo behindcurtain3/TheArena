@@ -259,7 +259,7 @@ namespace TheArena.GameObjects.Heroes
                     //    foreach (Entity entity in prevIntersectingEntities)
                     //        entity.Opacity = 1.0f;
 
-                    _prevIntersectingEntities = engine.QuadTree.GetIntersectingEntites(this.CurrentBoundingBox);
+                    _prevIntersectingEntities = engine.Collider.GetIntersectingEntites(this.CurrentBoundingBox);
 
                     foreach (Entity entity in _prevIntersectingEntities)
                     {
