@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjects\Attacks\BeeProjectile.cs" />
     <Compile Include="GameObjects\Coin.cs" />
     <Compile Include="GameObjects\CombatDummy.cs" />
     <Compile Include="GameObjects\Heroes\DeathKnight.cs" />
@@ -202,6 +203,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Animations\Monsters\bee.anim">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Animations\Monsters\bee_attack_projectile.anim">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Animations\Monsters\combat_dummy.anim">

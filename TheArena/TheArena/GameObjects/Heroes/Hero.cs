@@ -312,7 +312,7 @@ namespace TheArena.GameObjects.Heroes
         {
             // Keep the HP at the same % of max hp after changing MaxHP
             float percentMax = HP / MaxHP;
-            MaxHP = (int)(Strength * 10);
+            MaxHP = 105 + (int)(Strength * 2);
             HP = (int)(MaxHP * percentMax);
         }
 

@@ -5,18 +5,17 @@ using GameEngine.Drawing;
 using System;
 using TheArena.GameObjects.Heroes;
 using TheArena.Interfaces;
+using TheArena.GameObjects.Attacks;
 
 namespace TheArena.GameObjects.Mobs
 {
     public class Mob : Entity, IAttackable
     {
-        enum AttackStance { NotAttacking, Preparing, Attacking };
+        public enum AttackStance { NotAttacking, Preparing, Attacking, Retreating };
         public const string BAT = @"Animations/Monsters/bat.anim";
         public const string BEE = @"Animations/Monsters/bee.anim";
 
         private const int ATTACK_COUNTER_LIMIT = 40;
-        private const double ATTACK_DISTANCE = 40;
-        private const double AGRO_DISTANCE = 200;
 
         private static Random randomGenerator = new Random();
 
@@ -26,12 +25,16 @@ namespace TheArena.GameObjects.Mobs
         public int MaxHP { get; internal set; }
         public int Damage { get; set; }
         public int WorthGold { get; set; }
+
+        public double AttackDistance { get; set; }
+        public double AggroDistance { get; set; }
+        public Entity AttackTarget { get; set; }
+        public AttackStance Stance { get; set; }
         
         private bool _xpGiven = false;
         private bool _goldGiven = false;
 
         private int _attackCounter = 0;
-        private AttackStance _attackStance = AttackStance.NotAttacking;
         private Vector2 _attackHeight = Vector2.Zero;
         private double _attackAngle = 0;
         private double _randomModifier;
@@ -66,6 +69,10 @@ namespace TheArena.GameObjects.Mobs
             _randomModifier = randomGenerator.NextDouble();
             _xpGiven = false;
             _goldGiven = false;
+
+            AttackDistance = 40;
+            AggroDistance = 200;
+            Stance = AttackStance.NotAttacking;
         }
 
         public override void LoadContent(ContentManager content)
@@ -83,6 +90,7 @@ namespace TheArena.GameObjects.Mobs
             // Get the Hero player for interaction purposes.
             Hero player = (Hero)engine.GetEntity("Player");
             Vector2 prevPos = Pos;
+            AttackTarget = player;
 
             // Check if this Bat has died.
             if (HP <= 0)
@@ -98,27 +106,18 @@ namespace TheArena.GameObjects.Mobs
             else
             {
                 // ATTACKING LOGIC.
-                if (_attackStance == AttackStance.Attacking)
+                if (Stance == AttackStance.Attacking)
                 {
                     this.Pos.X -= (float)(Math.Cos(_attackAngle) * _attackSpeed);
                     this.Pos.Y -= (float)(Math.Sin(_attackAngle) * _attackSpeed);
                     this._attackHeight.Y += 30.0f / ATTACK_COUNTER_LIMIT;
                     this.Drawables.SetGroupProperty("Body", "Offset", _attackHeight);
 
-                    if (!_attackHit && Entity.IntersectsWith(this, "Shadow", player, "Shadow", gameTime))
-                    {
-                        player.onHit(this, Damage, gameTime);
-                        _attackHit = true;
-                    }
+                    onAttack(engine, gameTime);
 
-                    if (_attackCounter++ == ATTACK_COUNTER_LIMIT)
-                    {
-                        _attackStance = AttackStance.NotAttacking;
-                        _attackHit = false;
-                    }
                 }
                 // ATTACK PREPERATION LOGIC.
-                else if (_attackStance == AttackStance.Preparing)
+                else if (Stance == AttackStance.Preparing)
                 {
                     _attackHeight.Y -= 2;
 
@@ -129,18 +128,18 @@ namespace TheArena.GameObjects.Mobs
                             this.Pos.Y - player.Pos.Y,
                             this.Pos.X - player.Pos.X
                             );
-                        _attackStance = AttackStance.Attacking;
+                        Stance = AttackStance.Attacking;
                         _attackCounter = 0;
                     }
 
                     Drawables.SetGroupProperty("Body", "Offset", _attackHeight);
                 }
                 // NON-ATTACKING LOGIC. PATROL AND APPROACH.
-                else if (_attackStance == AttackStance.NotAttacking)
+                else if (Stance == AttackStance.NotAttacking)
                 {
                     double distance = Vector2.Distance(player.Pos, this.Pos);
 
-                    if (distance < AGRO_DISTANCE && player.HP > 0)
+                    if (distance < AggroDistance && player.HP > 0)
                     {
                         // Move towards the player for an attack move.
                         double angle = Math.Atan2(
@@ -150,9 +149,9 @@ namespace TheArena.GameObjects.Mobs
 
                         // Approach Function.
                         double moveValue;
-                        if (distance < ATTACK_DISTANCE)
+                        if (distance < AttackDistance)
                         {
-                            _attackStance = AttackStance.Preparing;
+                            Stance = AttackStance.Preparing;
                             moveValue = 0;
                         }
                         else
@@ -165,6 +164,36 @@ namespace TheArena.GameObjects.Mobs
                     {
                         // Perform a standard patrol action.
                         Pos.X += (float)(Math.Cos(gameTime.TotalGameTime.TotalSeconds - _randomModifier * 90) * 2);
+                    }
+                }
+                else if (Stance == AttackStance.Retreating)
+                {
+                    double distance = Vector2.Distance(player.Pos, this.Pos);
+
+                    if (distance < AggroDistance * 1.10)
+                    {
+                        if (_attackHeight.Y < -10)
+                        {
+                            _attackHeight.Y += 0.4f;
+                            if (_attackHeight.Y > -10)
+                                _attackHeight.Y = -10;
+
+                            Drawables.SetGroupProperty("Body", "Offset", _attackHeight);
+                        }
+
+                        double angle = Math.Atan2(
+                            player.Pos.Y - this.Pos.Y,
+                            player.Pos.X - this.Pos.X
+                            );
+
+                        Pos.X += (float)(Math.Cos(angle) * -_moveSpeed);
+                        Pos.Y += (float)(Math.Sin(angle) * -_moveSpeed);
+                    }
+                    else
+                    {
+                        Stance = AttackStance.NotAttacking;
+                        if (_attackHeight.Y < -10) _attackHeight.Y = -10;
+                        Drawables.SetGroupProperty("Body", "Offset", _attackHeight);
                     }
                 }
 
@@ -199,6 +228,24 @@ namespace TheArena.GameObjects.Mobs
                 _xpGiven = true;
             }
             
+        }
+
+        /// <summary>
+        /// Do an attack
+        /// </summary>
+        public virtual void onAttack(GameEngine.TeeEngine engine, GameTime gameTime)
+        {
+            if (!_attackHit && Entity.IntersectsWith(this, "Shadow", AttackTarget, "Shadow", gameTime))
+            {
+                ((IAttackable)AttackTarget).onHit(this, Damage, gameTime);
+                _attackHit = true;
+            }
+
+            if (_attackCounter++ == ATTACK_COUNTER_LIMIT)
+            {
+                Stance = AttackStance.NotAttacking;
+                _attackHit = false;
+            }
         }
 
         /// <summary>
