@@ -31,6 +31,9 @@ namespace TheArena.GameObjects.Heroes
         public int Mana { get; set; }
         public int MaxMana { get; set; }
 
+        // Meta information used by game
+        public int Intensity { get; set; }
+
         private List<Entity> _prevIntersectingEntities;
         private List<Entity> _prevAttackedEntities;
         private SoundEffect[] _onHitSfx;
@@ -299,6 +302,10 @@ namespace TheArena.GameObjects.Heroes
             }
             else
             {
+                // Increase intensity based on how much damage is done
+                Intensity += damage;
+
+                // Gfx & Sfx
                 Opacity = 0.5f;
                 _onHitSfx[randomGenerator.Next(0, _onHitSfx.Length)].Play(0.5f, 0.0f, 0.0f);
             }

@@ -315,6 +315,7 @@ namespace TheArena
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Mana={0}/{1}", player.Mana, player.MaxMana), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("XP={0}/{1}", player.XP, player.XPToNextLevel), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Stats={0},{1},{2}", player.Strength, player.Dexterity, player.Wisdom), GeneratePos(textHeight), Color.White);
+                    SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Intensity = {0}", player.Intensity), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, fps.ToString("0.0 FPS"), GeneratePos(textHeight), fpsColor);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Resolution=" + Engine.PixelWidth + "x" + Engine.PixelHeight, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "MapSize=" + Engine.Map.txWidth + "x" + Engine.Map.txHeight, GeneratePos(textHeight), Color.White);
@@ -322,7 +323,6 @@ namespace TheArena
                     SpriteBatch.DrawString(DefaultSpriteFont, "Entities On Screen = " + Engine.EntitiesOnScreen.Count, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Total Entities = " + Engine.Entities.Count, GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Actual Zoom = " + viewPort.ActualZoom, GeneratePos(textHeight), Color.White);
-                    //SpriteBatch.DrawString(DefaultSpriteFont, "Dummy State = " + Engine.GetEntity("CombatDummy").CurrentDrawableState, GeneratePos(textHeight), Color.White);
                 }
 
                 if (showDiagnostics)

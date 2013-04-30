@@ -9,16 +9,21 @@ using GameEngine.GameObjects;
 using GameEngine.Extensions;
 using Microsoft.Xna.Framework.Input;
 using TheArena.GameObjects.Heroes;
+using TheArena.GameObjects.Mobs;
 
 namespace TheArena.MapScripts
 {
     public class ArenaScript : IMapScript
     {
         private bool _northHit = false;
+        private int _prevIntensityReduction = 0;
 
         public void MapLoaded(TeeEngine engine, TiledMap map, MapEventArgs args)
         {
             engine.GetPostGameShader("LightShader").Enabled = false;
+
+            // The player should start with zero intensity
+            ((Hero)engine.GetEntity("Player")).Intensity = 0;
         }
 
         public void MapUnloaded(TeeEngine engine, TiledMap map)
@@ -28,7 +33,37 @@ namespace TheArena.MapScripts
 
         public void Update(TeeEngine engine, GameTime gameTime)
         {
+            bool reduceIntensity = true;
             
+            foreach (Entity entity in engine.EntitiesOnScreen)
+            {
+                if (entity is Mob)
+                {
+                    Mob mob = (Mob)entity;
+
+                    // If any mob on screen is attacking the player, don't reduce their intensity value
+                    if (mob.Stance == Mob.AttackStance.Attacking)
+                    {
+                        reduceIntensity = false;
+                        break;
+                    }
+                }
+            }
+
+            if (reduceIntensity)
+            {
+                // Intensity should reduce at a rate of 90pts per 30 sec or 3pts per second
+                if (_prevIntensityReduction < gameTime.TotalGameTime.Milliseconds)
+                {
+                    Hero player = (Hero)engine.GetEntity("Player");
+                    player.Intensity--;
+                    if (player.Intensity < 0) player.Intensity = 0;
+                    
+                    _prevIntensityReduction = gameTime.TotalGameTime.Milliseconds;
+                }
+            }
+
+            if (_prevIntensityReduction == 0) _prevIntensityReduction = gameTime.TotalGameTime.Milliseconds;
         }
 
         public void NorthBridge_MapZoneHit(MapZone sender, Entity entity, TeeEngine engine, GameTime gameTime)
