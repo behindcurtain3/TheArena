@@ -15,7 +15,6 @@ namespace TheArena.MapScripts
 {
     public class ArenaScript : IMapScript
     {
-        private bool _northHit = false;
         private int _prevIntensityReduction = 0;
 
         public void MapLoaded(TeeEngine engine, TiledMap map, MapEventArgs args)
@@ -63,13 +62,12 @@ namespace TheArena.MapScripts
                 }
             }
 
-            if (_prevIntensityReduction == 0) _prevIntensityReduction = gameTime.TotalGameTime.Milliseconds;
         }
 
         public void NorthBridge_MapZoneHit(MapZone sender, Entity entity, TeeEngine engine, GameTime gameTime)
         {
             // Return if the bridge is already destroyed
-            if (_northHit || !(entity is Hero))
+            if (!(entity is Hero))
                 return;
 
             // If it was the player that hit the zone, destroy the bridge
@@ -87,8 +85,6 @@ namespace TheArena.MapScripts
 
                 // Remove the zone that triggers this event
                 engine.RemoveEntity("NorthBridgeExit");
-
-                _northHit = true;
             }
         }
     }
