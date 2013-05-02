@@ -5,9 +5,7 @@
 
   <Animation State="Fly" Group="Body" Loop="True" SpriteSheet="LPC\Monsters\Bee\bee_attack" FrameDelay="75" Origin="0.5,0.5">
     <Frames>
-      <Frame>0 ,0,8,15</Frame>
-      <Frame>8 ,0,8,15</Frame>
-      <Frame>16,0,8,15</Frame>
+      <Frame>0 ,0,7,7</Frame>
     </Frames>
   </Animation>
 
