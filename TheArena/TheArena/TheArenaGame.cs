@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Input;
 using TheArena.Shaders;
 using TheArena.GameObjects;
 using TheArena.GameObjects.Heroes;
+//using GameEngine.Pathfinding;
 
 namespace TheArena
 {
@@ -163,7 +164,7 @@ namespace TheArena
             Engine.DrawingOptions.ShowEntityDebugInfo = false;
             Engine.DrawingOptions.ShowBoundingBoxes = false;
             Engine.DrawingOptions.ShowTileGrid = false;
-            Engine.DrawingOptions.ShowQuadTree = false;
+            Engine.DrawingOptions.ShowColliderDebugInfo = false;
 
             Engine.LoadContent();
 
@@ -219,7 +220,7 @@ namespace TheArena
                 Engine.DrawingOptions.ShowTileGrid = !Engine.DrawingOptions.ShowTileGrid;
 
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F6, this, true))
-                Engine.DrawingOptions.ShowQuadTree = !Engine.DrawingOptions.ShowQuadTree;
+                Engine.DrawingOptions.ShowColliderDebugInfo = !Engine.DrawingOptions.ShowColliderDebugInfo;
 
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F7, this, true))
                 showDiagnostics = !showDiagnostics;
@@ -279,6 +280,7 @@ namespace TheArena
                                             CurrentSampler,
                                             DefaultSpriteFont);
 
+
             // DRAW DEBUGGING INFORMATION
             SpriteBatch.Begin();
             {
@@ -306,6 +308,21 @@ namespace TheArena
                     float TX = Engine.GetEntity("Player").Pos.X / Engine.Map.TileWidth;
                     float TY = Engine.GetEntity("Player").Pos.Y / Engine.Map.TileHeight;
                     Hero player = (Hero)Engine.GetEntity("Player");
+
+                    /*
+                    if (player.CurrentPath != null)
+                    {
+                        ANode[] path = player.CurrentPath.ToArray();
+                        for (int i = 0; i < path.Length; i++)
+                        {
+                            Vector2 destVec = new Vector2(
+                                    (int)Math.Ceiling(path[i].TX * viewPort.pxTileWidth - viewPort.pxDispX * viewPort.ActualZoom),
+                                    (int)Math.Ceiling(path[i].TY * viewPort.pxTileHeight - viewPort.pxDispY * viewPort.ActualZoom)
+                                );
+
+                            SpriteBatchExtensions.DrawCross(SpriteBatch, destVec, 10, Color.White, 0);
+                        }                            
+                    } */
 
                     SpriteBatch.DrawString(DefaultSpriteFont, Engine.GetEntity("Player").Pos.ToString(), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, TX.ToString("0.0") + "," + TY.ToString("0.0"), GeneratePos(textHeight), Color.White);

@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Audio;
 using TheArena.Shaders;
 using TheArena.GameObjects.Mobs;
 using TheArena.Interfaces;
+//using GameEngine.Pathfinding;
 
 namespace TheArena.GameObjects.Heroes
 {
@@ -38,6 +39,8 @@ namespace TheArena.GameObjects.Heroes
         private List<Entity> _prevAttackedEntities;
         private SoundEffect[] _onHitSfx;
         private SoundEffect[] _onDeathSfx;
+
+        //public Path CurrentPath { get; set; }
 
         public Hero() : base(NPC.RACE_HUMAN_MALE)
         {
@@ -124,7 +127,21 @@ namespace TheArena.GameObjects.Heroes
             }
             else
             {
+                MouseState mouseState = Mouse.GetState();
                 KeyboardState keyboardState = Keyboard.GetState();
+                /*
+                if (mouseState.RightButton == ButtonState.Pressed)
+                {
+                    int tileX = (int)mouseState.X / engine.Map.TileWidth;
+                    int tileY = (int)mouseState.Y / engine.Map.TileHeight;
+                    ANode target = engine.Map.Nodes[tileX, tileY];
+
+                    tileX = (int)Pos.X / engine.Map.TileWidth;
+                    tileY = (int)Pos.Y / engine.Map.TileHeight;
+                    ANode start = engine.Map.Nodes[tileX, tileY];
+
+                    CurrentPath = AStar.GeneratePath(start, target);
+                } */
 
                 Vector2 movement = Vector2.Zero;
                 float prevX = Pos.X;
