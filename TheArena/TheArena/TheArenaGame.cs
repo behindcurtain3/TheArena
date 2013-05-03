@@ -81,7 +81,6 @@ namespace TheArena
         protected override void Initialize()
         {
             Engine = new TeeEngine(this, WINDOW_WIDTH, WINDOW_HEIGHT);
-            //Engine.MapLoaded += MapLoader;
 
             base.Initialize();
         }
@@ -248,21 +247,6 @@ namespace TheArena
                     float TX = Engine.GetEntity("Player").Pos.X / Engine.Map.TileWidth;
                     float TY = Engine.GetEntity("Player").Pos.Y / Engine.Map.TileHeight;
                     Hero player = (Hero)Engine.GetEntity("Player");
-
-                    /*
-                    if (player.CurrentPath != null)
-                    {
-                        ANode[] path = player.CurrentPath.ToArray();
-                        for (int i = 0; i < path.Length; i++)
-                        {
-                            Vector2 destVec = new Vector2(
-                                    (int)Math.Ceiling(path[i].TX * viewPort.pxTileWidth - viewPort.pxDispX * viewPort.ActualZoom),
-                                    (int)Math.Ceiling(path[i].TY * viewPort.pxTileHeight - viewPort.pxDispY * viewPort.ActualZoom)
-                                );
-
-                            SpriteBatchExtensions.DrawCross(SpriteBatch, destVec, 10, Color.White, 0);
-                        }                            
-                    } */
 
                     SpriteBatch.DrawString(DefaultSpriteFont, Engine.GetEntity("Player").Pos.ToString(), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, TX.ToString("0.0") + "," + TY.ToString("0.0"), GeneratePos(textHeight), Color.White);

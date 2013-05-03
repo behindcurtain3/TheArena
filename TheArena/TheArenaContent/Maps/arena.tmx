@@ -286,5 +286,6 @@
     <property name="$MapZoneHit" value="NorthBridge_MapZoneHit"/>
    </properties>
   </object>
+  <object name="Pather" type="TheArena.GameObjects.PathFinder" x="453" y="228" width="25" height="24"/>
  </objectgroup>
 </map>

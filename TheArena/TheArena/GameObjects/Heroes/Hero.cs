@@ -40,8 +40,6 @@ namespace TheArena.GameObjects.Heroes
         private SoundEffect[] _onHitSfx;
         private SoundEffect[] _onDeathSfx;
 
-        //public Path CurrentPath { get; set; }
-
         public Hero() : base(NPC.RACE_HUMAN_MALE)
         {
             Construct(0, 0);
