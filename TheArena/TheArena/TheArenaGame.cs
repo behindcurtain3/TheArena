@@ -86,66 +86,6 @@ namespace TheArena
             base.Initialize();
         }
 
-        /*
-        private void MapLoader(TeeEngine engine, TiledMap map)
-        {
-            foreach (TiledObjectLayer tiledObjectLayer in map.TileObjectLayers)
-            {
-                foreach (TiledObject tiledObject in tiledObjectLayer.Objects)
-                {
-                    if (tiledObject.Type == "Entrance")
-                    {
-                        Engine.GetEntity("Player") = new Hero(NPC.RACE_HUMAN_MALE, Hero.CLASS_MONK);
-                        Engine.GetEntity("Player").CollisionDetection = true;
-
-                        FollowEntity = Engine.GetEntity("Player");
-
-                        Engine.GetEntity("Player").Pos = new Vector2(tiledObject.X, tiledObject.Y);
-
-                        engine.AddEntity("Player", Engine.GetEntity("Player"));
-                    }
-                    else if (tiledObject.Type == "CombatDummy")
-                    {
-                        CombatDummy dummy = new CombatDummy();
-                        dummy.Pos = new Vector2(tiledObject.X, tiledObject.Y);
-
-                        engine.AddEntity(dummy);
-                    }
-                    else if (tiledObject.Type == "Spawner")
-                    {
-                        string mobs = tiledObject.GetProperty("mobs");
-                        float minInterval = tiledObject.GetProperty<float>("interval_min", 10);
-                        float maxInterval = tiledObject.GetProperty<float>("interval_max", 10);
-
-                        MobSpawner spawner = new MobSpawner(tiledObject.X, tiledObject.Y, tiledObject.Width, tiledObject.Height, mobs, minInterval, maxInterval);
-                        engine.AddEntity(spawner);
-                    }
-                    else if (tiledObject.Gid != -1)        // Default operation is to check if it has been assigned a tile and use it if needs be.
-                    {
-                        Entity entity = new Entity();
-                        entity.Pos = new Vector2(tiledObject.X, tiledObject.Y);
-                        entity.ScaleX = 1.0f;
-                        entity.ScaleY = 1.0f;
-                        entity.Visible = true;
-
-                        Tile SourceTile = map.Tiles[tiledObject.Gid];
-                        GameDrawableInstance instance = entity.Drawables.Add("standard", SourceTile);
-
-                        entity.CurrentDrawableState = "standard";
-
-                        // Because tileds default draw origin is (0,1) - we need to update the entity positions based 
-                        // on the custom position defined in the SourceTile.Origin property.
-                        entity.Pos.X += (SourceTile.Origin.X - 0.0f) * SourceTile.GetSourceRectangle(0).Width;
-                        entity.Pos.Y += (SourceTile.Origin.Y - 1.0f) * SourceTile.GetSourceRectangle(0).Height;
-
-                        engine.AddEntity(tiledObject.Name, entity);
-                    }
-                }
-            }
-        }
-        */
-
-
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
