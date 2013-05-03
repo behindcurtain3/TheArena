@@ -15,7 +15,8 @@ namespace TheArena.MapScripts
 {
     public class ArenaScript : IMapScript
     {
-        private int _prevIntensityReduction = 0;
+        private int _intensityReductionTimer = 0;
+        private int _intensityReductionDuration = 500;
 
         public void MapLoaded(TeeEngine engine, TiledMap map, MapEventArgs args)
         {
@@ -51,14 +52,16 @@ namespace TheArena.MapScripts
 
             if (reduceIntensity)
             {
+                _intensityReductionTimer += gameTime.ElapsedGameTime.Milliseconds;
+
                 // Intensity should reduce at a rate of 90pts per 30 sec or 3pts per second
-                if (_prevIntensityReduction < gameTime.TotalGameTime.Milliseconds)
+                if (_intensityReductionTimer >= _intensityReductionDuration)
                 {
                     Hero player = (Hero)engine.GetEntity("Player");
                     player.Intensity--;
                     if (player.Intensity < 0) player.Intensity = 0;
-                    
-                    _prevIntensityReduction = gameTime.TotalGameTime.Milliseconds;
+
+                    _intensityReductionTimer = 0;
                 }
             }
 
