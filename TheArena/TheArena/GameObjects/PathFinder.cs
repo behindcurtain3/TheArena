@@ -8,6 +8,7 @@ using GameEngine.Drawing;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using GameEngine.Info;
 
 namespace TheArena.GameObjects
 {
@@ -49,8 +50,13 @@ namespace TheArena.GameObjects
             // Check to see if the path should be recreated
             if (mouseState.RightButton == ButtonState.Pressed)
             {
-                int tileX = (int)mouseState.X / engine.Map.TileWidth;
-                int tileY = (int)mouseState.Y / engine.Map.TileHeight;
+                ViewPortInfo viewPort = TheArenaGame.ViewPortInfo;
+
+                float worldX = (mouseState.X + viewPort.pxTopLeftX + viewPort.pxDispX) / viewPort.ActualZoom;
+                float worldY = (mouseState.Y + viewPort.pxTopLeftY + viewPort.pxDispY) / viewPort.ActualZoom;
+
+                int tileX = (int)(worldX / engine.Map.TileWidth);
+                int tileY = (int)(worldY / engine.Map.TileHeight);
                 ANode target = engine.Map.Nodes[tileX, tileY];
 
                 tileX = (int)Pos.X / engine.Map.TileWidth;
@@ -65,7 +71,7 @@ namespace TheArena.GameObjects
             {
                 ANode nextNode = CurrentPath.Peek();
 
-                double moveAngle = Math.Atan2(Pos.Y - nextNode.Center.Y, Pos.X - nextNode.Center.X);
+                double moveAngle = Math.Atan2(nextNode.Center.Y - Pos.Y, nextNode.Center.X - Pos.X);
 
                 Pos.X += (float)(Math.Cos(moveAngle) * _moveSpeed);
                 Pos.Y += (float)(Math.Sin(moveAngle) * _moveSpeed);

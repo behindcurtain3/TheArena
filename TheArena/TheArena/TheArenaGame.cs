@@ -23,7 +23,8 @@ namespace TheArena
     /// </summary>
     public class TheArenaGame : Microsoft.Xna.Framework.Game
     {
-
+        public static ViewPortInfo ViewPortInfo { get; set; }
+        
         // Constant (Editable) Valuables.
         const bool DEBUG = true;
 
@@ -218,6 +219,9 @@ namespace TheArena
                                             Color.White,
                                             CurrentSampler,
                                             DefaultSpriteFont);
+
+            // Update static variable
+            ViewPortInfo = viewPort;
 
 
             // DRAW DEBUGGING INFORMATION
