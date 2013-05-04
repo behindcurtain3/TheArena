@@ -16,6 +16,7 @@ namespace TheArena.GameObjects
     {
 
         public Path CurrentPath { get; set; }
+        public Direction Direction { get; set; }
 
         private float _moveSpeed = 1.8f;
 
@@ -31,13 +32,13 @@ namespace TheArena.GameObjects
 
         private void Construct(float x, float y)
         {
-
+            Direction = GameObjects.Direction.Down;
         }
 
         public override void LoadContent(ContentManager content)
         {
             Animation.LoadAnimationXML(Drawables, "Animations/Characters/female_npc.anim", content);
-            CurrentDrawableState = "Idle_Down";
+            CurrentDrawableState = "Idle_" + Direction;
 
             base.LoadContent(content);
         }
@@ -52,16 +53,15 @@ namespace TheArena.GameObjects
             {
                 ViewPortInfo viewPort = TheArenaGame.ViewPortInfo;
 
-                float worldX = (mouseState.X + viewPort.pxTopLeftX + viewPort.pxDispX) / viewPort.ActualZoom;
-                float worldY = (mouseState.Y + viewPort.pxTopLeftY + viewPort.pxDispY) / viewPort.ActualZoom;
+                Vector2 worldCoord = viewPort.GetWorldCoordinates(new Point(mouseState.X, mouseState.Y));
+                Vector2 tileCoord = worldCoord / (new Vector2(engine.Map.TileWidth, engine.Map.TileHeight)); ;
+                tileCoord.X = (int)Math.Floor(tileCoord.X);
+                tileCoord.Y = (int)Math.Floor(tileCoord.Y);
 
-                int tileX = (int)(worldX / engine.Map.TileWidth);
-                int tileY = (int)(worldY / engine.Map.TileHeight);
-                ANode target = engine.Map.Nodes[tileX, tileY];
+                ANode target = engine.Map.Nodes[(int)tileCoord.X, (int)tileCoord.Y];
 
-                tileX = (int)Pos.X / engine.Map.TileWidth;
-                tileY = (int)Pos.Y / engine.Map.TileHeight;
-                ANode start = engine.Map.Nodes[tileX, tileY];
+                tileCoord = Pos / (new Vector2(engine.Map.TileWidth, engine.Map.TileHeight)); ;
+                ANode start = engine.Map.Nodes[(int)tileCoord.X, (int)tileCoord.Y];
 
                 CurrentPath = AStar.GeneratePath(start, target);
             } 
@@ -69,16 +69,42 @@ namespace TheArena.GameObjects
             // Path to the next nobe on current path
             if (CurrentPath != null && CurrentPath.Count > 0)
             {
-                ANode nextNode = CurrentPath.Peek();
+                float prevX = Pos.X;
+                float prevY = Pos.Y;
 
+                ANode nextNode = CurrentPath.Peek();
                 double moveAngle = Math.Atan2(nextNode.Center.Y - Pos.Y, nextNode.Center.X - Pos.X);
 
                 Pos.X += (float)(Math.Cos(moveAngle) * _moveSpeed);
                 Pos.Y += (float)(Math.Sin(moveAngle) * _moveSpeed);
 
                 // If we are close enough to the node pop it off the path
-                if (Vector2.Distance(Pos, nextNode.Center) < 10)
+                if (Vector2.Distance(Pos, nextNode.Center) < 5)
                     CurrentPath.Pop();
+
+                float horzDelta = Pos.X - prevX;
+                float vertDelta = Pos.Y - prevY;
+
+                if (Math.Abs(horzDelta) > Math.Abs(vertDelta))
+                {
+                    if (prevX < Pos.X)
+                        Direction = Direction.Right;
+                    else if (prevX > Pos.X)
+                        Direction = Direction.Left;
+                }
+                else
+                {
+                    if (prevY < Pos.Y)
+                        Direction = Direction.Down;
+                    else if (prevY > Pos.Y)
+                        Direction = Direction.Up;
+                }
+   
+                CurrentDrawableState = "Walk_" + Direction;
+            }
+            else
+            {
+                CurrentDrawableState = "Idle_" + Direction;
             }
 
             base.Update(gameTime, engine);
