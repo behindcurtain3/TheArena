@@ -88,6 +88,9 @@ namespace TheArena.MapScripts
 
                 // Remove the zone that triggers this event
                 engine.RemoveEntity("NorthBridgeExit");
+
+                // Rebuild the pathfinding nodes
+                engine.Pathfinding.RebuildNeighbors(engine.Map);
             }
         }
     }

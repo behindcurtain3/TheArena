@@ -58,12 +58,15 @@ namespace TheArena.GameObjects
                 tileCoord.X = (int)Math.Floor(tileCoord.X);
                 tileCoord.Y = (int)Math.Floor(tileCoord.Y);
 
-                ANode target = engine.Map.Nodes[(int)tileCoord.X, (int)tileCoord.Y];
+                if (tileCoord.X > 0 && tileCoord.X < engine.Map.txWidth)
+                {
+                    ANode target = engine.Pathfinding.Nodes[(int)tileCoord.X, (int)tileCoord.Y];
 
-                tileCoord = Pos / (new Vector2(engine.Map.TileWidth, engine.Map.TileHeight)); ;
-                ANode start = engine.Map.Nodes[(int)tileCoord.X, (int)tileCoord.Y];
+                    tileCoord = Pos / (new Vector2(engine.Map.TileWidth, engine.Map.TileHeight)); ;
+                    ANode start = engine.Pathfinding.Nodes[(int)tileCoord.X, (int)tileCoord.Y];
 
-                CurrentPath = AStar.GeneratePath(start, target);
+                    CurrentPath = engine.Pathfinding.GeneratePath(start, target);
+                }
             } 
 
             // Path to the next nobe on current path
@@ -85,7 +88,7 @@ namespace TheArena.GameObjects
                 float horzDelta = Pos.X - prevX;
                 float vertDelta = Pos.Y - prevY;
 
-                if (Math.Abs(horzDelta) > Math.Abs(vertDelta))
+                if (Math.Abs(horzDelta) > 1)
                 {
                     if (prevX < Pos.X)
                         Direction = Direction.Right;
