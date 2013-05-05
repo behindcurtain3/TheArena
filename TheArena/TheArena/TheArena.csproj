@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="GameObjects\Attacks\BeeProjectile.cs" />
     <Compile Include="GameObjects\Coin.cs" />
+    <Compile Include="GameObjects\CollidableEntity.cs" />
     <Compile Include="GameObjects\CombatDummy.cs" />
     <Compile Include="GameObjects\Heroes\DeathKnight.cs" />
     <Compile Include="GameObjects\Heroes\Hero.cs" />

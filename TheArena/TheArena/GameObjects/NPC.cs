@@ -9,7 +9,7 @@ namespace TheArena.GameObjects
 {
     public enum Direction { Up, Right, Down, Left };
 
-    public class NPC : Entity, IAttackable
+    public class NPC : CollidableEntity, IAttackable
     {
         
         public static Random randomGenerator = new Random();
@@ -68,8 +68,7 @@ namespace TheArena.GameObjects
             Construct(0, 0, baseRace);
         }
 
-        public NPC(float x, float y, string baseRace) :
-            base(x, y, 1.0f, 1.0f)
+        public NPC(float x, float y, string baseRace)
         {
             Construct(x, y, baseRace);
         }

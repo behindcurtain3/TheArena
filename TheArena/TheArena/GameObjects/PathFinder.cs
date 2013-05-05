@@ -12,7 +12,7 @@ using GameEngine.Info;
 
 namespace TheArena.GameObjects
 {
-    public class PathFinder : Entity
+    public class PathFinder : CollidableEntity
     {
 
         public Path CurrentPath { get; set; }
@@ -25,13 +25,14 @@ namespace TheArena.GameObjects
             Construct(0, 0);
         }
 
-        public PathFinder(float x, float y) : base(x, y)
+        public PathFinder(float x, float y)
         {
             Construct(x, y);
         }
 
         private void Construct(float x, float y)
         {
+            Pos = new Vector2(x, y);
             Direction = GameObjects.Direction.Down;
         }
 
