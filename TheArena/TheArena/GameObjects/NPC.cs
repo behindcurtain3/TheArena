@@ -35,6 +35,7 @@ namespace TheArena.GameObjects
         // Weapon animations
         public const string WEAPON_DAGGER = @"Animations/Weapons/dagger.anim";
         public const string WEAPON_LONGSWORD = @"Animations/Weapons/longsword.anim";
+        public const string WEAPON_STAFF = @"Animations/Weapons/staff.anim";
 
         public Direction Direction { get; set; }
 

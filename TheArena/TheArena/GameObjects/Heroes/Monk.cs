@@ -19,7 +19,7 @@ namespace TheArena.GameObjects.Heroes
             Belt = NPC.ARMOR_ROBE_BELT;
             Bracers = null;
 
-            Weapon = NPC.WEAPON_LONGSWORD;
+            Weapon = NPC.WEAPON_STAFF;
 
             // LevelUp to lvl 1
             Lvl = 0;

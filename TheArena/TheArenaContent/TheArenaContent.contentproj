@@ -632,6 +632,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="LPC\Weapons\WEAPON_staff.png">
+      <Name>WEAPON_staff</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Maps\arena.tmx">
       <Name>arena</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
