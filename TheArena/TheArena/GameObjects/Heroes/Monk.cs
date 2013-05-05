@@ -20,6 +20,7 @@ namespace TheArena.GameObjects.Heroes
             Bracers = null;
 
             Weapon = NPC.WEAPON_STAFF;
+            AttackType = "Thrust_";
 
             // LevelUp to lvl 1
             Lvl = 0;

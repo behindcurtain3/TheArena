@@ -637,6 +637,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="LPC\Characters\Thrust\BODY_animation.png">
+      <Name>BODY_animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Maps\arena.tmx">
       <Name>arena</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

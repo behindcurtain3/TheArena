@@ -31,6 +31,7 @@ namespace TheArena.GameObjects.Heroes
         public float Wisdom { get; set; }
         public int Mana { get; set; }
         public int MaxMana { get; set; }
+        public string AttackType { get; set; }
 
         // Meta information used by game
         public int Intensity { get; set; }
@@ -127,19 +128,6 @@ namespace TheArena.GameObjects.Heroes
             {
                 MouseState mouseState = Mouse.GetState();
                 KeyboardState keyboardState = Keyboard.GetState();
-                /*
-                if (mouseState.RightButton == ButtonState.Pressed)
-                {
-                    int tileX = (int)mouseState.X / engine.Map.TileWidth;
-                    int tileY = (int)mouseState.Y / engine.Map.TileHeight;
-                    ANode target = engine.Map.Nodes[tileX, tileY];
-
-                    tileX = (int)Pos.X / engine.Map.TileWidth;
-                    tileY = (int)Pos.Y / engine.Map.TileHeight;
-                    ANode start = engine.Map.Nodes[tileX, tileY];
-
-                    CurrentPath = AStar.GeneratePath(start, target);
-                } */
 
                 Vector2 movement = Vector2.Zero;
                 float prevX = Pos.X;
@@ -158,8 +146,8 @@ namespace TheArena.GameObjects.Heroes
                 // ATTACK KEY.
                 if (keyboardState.IsKeyDown(Keys.A))
                 {
-                    bool reset = !CurrentDrawableState.StartsWith("Slash");
-                    CurrentDrawableState = "Slash_" + Direction;
+                    bool reset = !CurrentDrawableState.StartsWith(AttackType);
+                    CurrentDrawableState = AttackType + Direction;
 
                     if (reset) Drawables.ResetState(CurrentDrawableState, gameTime);
                 }
@@ -216,13 +204,13 @@ namespace TheArena.GameObjects.Heroes
 
                 foreach (Entity entity in _prevIntersectingEntities)
                 {
-                    if (!CurrentDrawableState.Contains("Slash") && _prevAttackedEntities.Contains(entity))
+                    if (!CurrentDrawableState.Contains(AttackType) && _prevAttackedEntities.Contains(entity))
                     {
                         _prevAttackedEntities.Remove(entity);
                     }
                     if (entity is IAttackable && entity != this)
                     {
-                        if (CurrentDrawableState.Contains("Slash") &&
+                        if (CurrentDrawableState.Contains(AttackType) &&
                             !_prevAttackedEntities.Contains(entity) &&
                             Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
                         {
