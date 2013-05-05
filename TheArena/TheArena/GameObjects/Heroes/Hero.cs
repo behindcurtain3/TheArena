@@ -142,7 +142,10 @@ namespace TheArena.GameObjects.Heroes
                 // Hero is dead :(
                 // Make sure the correct animation is playing
                 if (!CurrentDrawableState.Equals("Hurt"))
+                {
+                    Drawables.ResetState("Hurt", gameTime);
                     CurrentDrawableState = "Hurt";
+                }
 
                 // Reset the opacity
                 if(Opacity < 1) Opacity = 1f;
