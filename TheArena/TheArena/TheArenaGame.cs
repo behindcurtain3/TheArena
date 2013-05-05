@@ -171,12 +171,6 @@ namespace TheArena
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F10, this, true))
                 Engine.DrawingOptions.ShowDrawableComponents = !Engine.DrawingOptions.ShowDrawableComponents;
 
-            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.F12, this, true))
-            {
-                Hero player = (Hero)Engine.GetEntity("Player");
-                player.CollisionDetection = !player.CollisionDetection;
-            }
-
             // INCREASE ZOOM LEVEL
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.OemPlus, this, true))
                 Zoom += 0.1f;

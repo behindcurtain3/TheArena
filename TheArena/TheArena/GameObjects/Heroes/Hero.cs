@@ -22,18 +22,43 @@ namespace TheArena.GameObjects.Heroes
         private const int INPUT_DELAY = 0;
         private const float MOVEMENT_SPEED = 2.9f;
 
-        public bool CollisionDetection { get; set; }
         public LightSource LightSource { get; set; }
 
-        // Hero stats
+        /// <summary>
+        /// Heroes strength, effects damage dealt for melee attack and hitpoints
+        /// </summary>
         public float Strength { get; set; }
+
+        /// <summary>
+        /// Heroes dexterity, effects dodge chance (NOT IMPLEMENTED YET) and critical strike chance (NOT IMPLEMENTED YET)
+        /// </summary>
         public float Dexterity { get; set; }
+
+        /// <summary>
+        /// Heroes wisdom, effects amount of mana hero has
+        /// </summary>
         public float Wisdom { get; set; }
+
+        /// <summary>
+        /// The current amount of mana the Hero has to cast spells
+        /// </summary>
         public int Mana { get; set; }
+
+        /// <summary>
+        /// The current maximum amount of mana the hero has.
+        /// </summary>
         public int MaxMana { get; set; }
+        
+        /// <summary>
+        /// The basic attack type of the hero: Thrust, Slash
+        /// </summary>
         public string AttackType { get; set; }
 
-        // Meta information used by game
+        /// <summary>
+        /// Intensity represents how much stress the hero is under. 
+        /// A high intensity value will lower the spawn rate of mobs while a low intensity
+        /// value will allow mobs to spawn at their normal rates.
+        /// </summary>
         public int Intensity { get; set; }
 
         private List<Entity> _prevIntersectingEntities;
@@ -74,7 +99,6 @@ namespace TheArena.GameObjects.Heroes
 
             XP = 0;
 
-            CollisionDetection = true;
             LightSource = new LightSource();
             LightSource.Width = 32 * 8;
             LightSource.Height = 32 * 8;
