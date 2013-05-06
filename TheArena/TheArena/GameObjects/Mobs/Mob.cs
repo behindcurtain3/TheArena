@@ -78,7 +78,7 @@ namespace TheArena.GameObjects.Mobs
         public override void LoadContent(ContentManager content)
         {
             // Load in the animation
-            Animation.LoadAnimationXML(Drawables, Type, content);
+            DrawableSet.LoadDrawableSetXml(Drawables, Type, content);
 
             CurrentDrawableState = "Down";
 

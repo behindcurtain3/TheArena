@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TheArena.Items;
 
 namespace TheArena.GameObjects.Heroes
 {
     public class Monk : Hero
     {
 
-        public Monk() : base()
+        public Monk() : base(NPC.RACE_HUMAN_MALE)
         {
-            Head = null;// NPC.ARMOR_ROBE_HEAD;
-            Legs = NPC.ARMOR_ROBE_LEGS;
-            Feet = null;
-            Torso = NPC.ARMOR_ROBE_TORSO;
-            Hands = null;
-            Shoulders = null;
-            Belt = NPC.ARMOR_ROBE_BELT;
-            Bracers = null;
-
-            Weapon = NPC.WEAPON_STAFF;
+            Equip(ItemRepository.GameItems["RobeSkirt"]);
+            Equip(ItemRepository.GameItems["RobeShirt"]);
+            Equip(ItemRepository.GameItems["WoodenStaff"]);
             AttackType = "Thrust_";
 
             // LevelUp to lvl 1

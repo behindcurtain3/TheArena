@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using GameEngine.Drawing;
 using System;
 using TheArena.Interfaces;
+using TheArena.Items;
+using System.Collections.Generic;
 
 namespace TheArena.GameObjects
 {
@@ -18,37 +20,10 @@ namespace TheArena.GameObjects
         public const string RACE_HUMAN_FEMALE = @"Animations/Characters/female_npc.anim";
         public const string RACE_UNDEAD = @"Animations/Characters/skeleton.anim";
 
-        // Armor animations
-        public const string PLATE_ARMOR_LEGS = @"Animations/Plate Armor/plate_armor_legs.anim";
-        public const string PLATE_ARMOR_TORSO = @"Animations/Plate Armor/plate_armor_torso.anim";
-        public const string PLATE_ARMOR_FEET = @"Animations/Plate Armor/plate_armor_feet.anim";
-        public const string PLATE_ARMOR_HANDS = @"Animations/Plate Armor/plate_armor_hands.anim";
-        public const string PLATE_ARMOR_HEAD = @"Animations/Plate Armor/plate_armor_head.anim";
-        public const string PLATE_ARMOR_SHOULDERS = @"Animations/Plate Armor/plate_armor_shoulders.anim";
-
-        public const string ARMOR_ROBE_FEET = @"Animations/Armor/robe_feet.anim";
-        public const string ARMOR_ROBE_HEAD = @"Animations/Armor/robe_head.anim";
-        public const string ARMOR_ROBE_LEGS = @"Animations/Armor/robe_legs.anim";
-        public const string ARMOR_ROBE_TORSO = @"Animations/Armor/robe_torso.anim";
-        public const string ARMOR_ROBE_BELT = @"Animations/Armor/robe_belt.anim";
-
-        // Weapon animations
-        public const string WEAPON_DAGGER = @"Animations/Weapons/dagger.anim";
-        public const string WEAPON_LONGSWORD = @"Animations/Weapons/longsword.anim";
-        public const string WEAPON_STAFF = @"Animations/Weapons/staff.anim";
-
         public Direction Direction { get; set; }
 
-        // Which animations are equipped in each slot
-        public string Weapon { get; set; }
-        public string Head { get; set; }
-        public string Torso { get; set; }
-        public string Feet { get; set; }
-        public string Shoulders { get; set; }
-        public string Legs { get; set; }
-        public string Hands { get; set; }
-        public string Belt { get; set; }
-        public string Bracers { get; set; }
+        public List<Item> Backpack { get; set; }
+        public Dictionary<ItemType, Item> Equiped { get; set; }
         public string BaseRace { get; set; }
 
         // Stats
@@ -83,30 +58,26 @@ namespace TheArena.GameObjects
             this.XPToNextLevel = GetNeededXpAmount();
             this.Gold = 0;
 
+            this.Pos = new Vector2(x, y);
+            this.ScaleX = 1.0f;
+            this.ScaleY = 1.0f;
+            this.CollisionGroup = "Shadow";
+            this.Backpack = new List<Item>();
+            this.Equiped = new Dictionary<ItemType, Item>();
+
             this.Direction = Direction.Right;
             this.BaseRace = baseRace;
         }
 
         public override void LoadContent(ContentManager content)
         {
-            if (Weapon != null) Animation.LoadAnimationXML(Drawables, Weapon, content);
-            if (Shoulders != null) Animation.LoadAnimationXML(Drawables, Shoulders, content);
-            if (Head != null) Animation.LoadAnimationXML(Drawables, Head, content);
-            if (Hands != null) Animation.LoadAnimationXML(Drawables, Hands, content);
-            if (Feet != null) Animation.LoadAnimationXML(Drawables, Feet, content);
-            if (Torso != null) Animation.LoadAnimationXML(Drawables, Torso, content);
-            if (Legs != null) Animation.LoadAnimationXML(Drawables, Legs, content);
-            if (Belt != null) Animation.LoadAnimationXML(Drawables, Belt, content);
-            if (Bracers != null) Animation.LoadAnimationXML(Drawables, Bracers, content);
-            Animation.LoadAnimationXML(Drawables, BaseRace, content);
-
-            CurrentDrawableState = "Walk_Right";
+            DrawableSet.LoadDrawableSetXml(Drawables, BaseRace, content);
+            CurrentDrawableState = "Idle_Right";
         }
 
         public virtual void onHit(Entity source, int damage, GameTime gameTime)
         {
             HP -= damage;
-            // TODO: check for death
         }
 
         /// <summary>
@@ -145,5 +116,38 @@ namespace TheArena.GameObjects
             Lvl++;
             XPToNextLevel = GetNeededXpAmount();
         }
+
+        #region Equipment Methods
+
+        public void Equip(Item item)
+        {
+            Unequip(item.ItemType);
+
+            Equiped[item.ItemType] = item;
+            Drawables.Union(item.Drawables);
+        }
+
+        public void Unequip(Item item)
+        {
+            Unequip(item.ItemType);
+        }
+
+        public void Unequip(ItemType itemType)
+        {
+            if (Equiped.ContainsKey(itemType))
+                Drawables.Remove(Equiped[itemType].Drawables);
+
+            Equiped.Remove(itemType);
+        }
+
+        public bool IsEquiped(Item item)
+        {
+            if (Equiped.ContainsKey(item.ItemType))
+                return Equiped[item.ItemType] == item;
+            else
+                return false;
+        }
+
+        #endregion
     }
 }

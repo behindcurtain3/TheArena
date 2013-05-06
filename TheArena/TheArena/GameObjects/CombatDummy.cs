@@ -31,7 +31,7 @@ namespace TheArena.GameObjects
         public override void LoadContent(ContentManager content)
         {
             // Load the animation
-            Animation.LoadAnimationXML(Drawables, ANIMATION, content);
+            DrawableSet.LoadDrawableSetXml(Drawables, ANIMATION, content);
 
             foreach (GameDrawableInstance instance in Drawables.GetByGroup("Body"))
             {

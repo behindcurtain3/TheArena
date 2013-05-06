@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TheArena.Items;
 
 namespace TheArena.GameObjects.Heroes
 {
@@ -10,18 +11,12 @@ namespace TheArena.GameObjects.Heroes
 
         public DeathKnight() : base()
         {
-            //Head = NPC.PLATE_ARMOR_HEAD;
-            Legs = NPC.PLATE_ARMOR_LEGS;
-            Feet = NPC.PLATE_ARMOR_FEET;
-            Shoulders = NPC.PLATE_ARMOR_SHOULDERS;
-            Torso = NPC.PLATE_ARMOR_TORSO;
-            Hands = NPC.PLATE_ARMOR_HANDS;
-            Belt = null;
-            Bracers = null;
+            Equip(ItemRepository.GameItems["PlateBoots"]);
+            Equip(ItemRepository.GameItems["PlateGloves"]);
+            Equip(ItemRepository.GameItems["PlatePants"]);
+            Equip(ItemRepository.GameItems["PlateChest"]);
+            Equip(ItemRepository.GameItems["Longsword"]);
 
-            Weapon = NPC.WEAPON_LONGSWORD;
-
-            // DEATH
             BaseRace = NPC.RACE_UNDEAD;
 
             // LevelUp to lvl1

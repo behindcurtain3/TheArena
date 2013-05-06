@@ -125,6 +125,8 @@
     <Compile Include="GameObjects\NPC.cs" />
     <Compile Include="GameObjects\PathFinder.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\ItemRepository.cs" />
     <Compile Include="MapScripts\ArenaScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -135,6 +137,9 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Items\ItemRepository.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheArenaContent\TheArenaContent.contentproj">

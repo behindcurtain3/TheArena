@@ -44,7 +44,7 @@ namespace TheArena.GameObjects.Attacks
 
         public override void LoadContent(Microsoft.Xna.Framework.Content.ContentManager content)
         {
-            Animation.LoadAnimationXML(Drawables, "Animations/Monsters/bee_attack_projectile.anim", content);
+            DrawableSet.LoadDrawableSetXml(Drawables, "Animations/Monsters/bee_attack_projectile.anim", content);
             CurrentDrawableState = "Fly";           
             Drawables.SetGroupProperty("Body", "Rotation", (float)_moveAngle);
 

@@ -56,7 +56,7 @@ namespace TheArena.GameObjects
         public override void LoadContent(ContentManager content)
         {
             // Load the coin animation.
-            Animation.LoadAnimationXML(this.Drawables, "Animations/Misc/coin.anim", content);
+            DrawableSet.LoadDrawableSetXml(this.Drawables, "Animations/Misc/coin.anim", content);
 
             CoinSound = content.Load<SoundEffect>("Sounds/Coins/coin1");
         }

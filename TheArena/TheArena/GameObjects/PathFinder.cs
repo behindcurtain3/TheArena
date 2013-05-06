@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GameEngine.GameObjects;
-using GameEngine.Pathfinding;
+//using GameEngine.Pathfinding;
 using GameEngine.Drawing;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
@@ -12,6 +12,7 @@ using GameEngine.Info;
 
 namespace TheArena.GameObjects
 {
+    /*
     public class PathFinder : CollidableEntity
     {
 
@@ -38,7 +39,7 @@ namespace TheArena.GameObjects
 
         public override void LoadContent(ContentManager content)
         {
-            Animation.LoadAnimationXML(Drawables, "Animations/Characters/female_npc.anim", content);
+            DrawableSet.LoadDrawableSetXml(Drawables, "Animations/Characters/female_npc.anim", content);
             CurrentDrawableState = "Idle_" + Direction;
 
             base.LoadContent(content);
@@ -114,4 +115,5 @@ namespace TheArena.GameObjects
             base.Update(gameTime, engine);
         }
     }
+     */
 }
