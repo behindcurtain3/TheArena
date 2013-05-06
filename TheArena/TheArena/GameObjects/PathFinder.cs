@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GameEngine.GameObjects;
-//using GameEngine.Pathfinding;
+using GameEngine.Pathfinding;
 using GameEngine.Drawing;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
@@ -12,7 +12,6 @@ using GameEngine.Info;
 
 namespace TheArena.GameObjects
 {
-    /*
     public class PathFinder : CollidableEntity
     {
 
@@ -115,5 +114,4 @@ namespace TheArena.GameObjects
             base.Update(gameTime, engine);
         }
     }
-     */
 }

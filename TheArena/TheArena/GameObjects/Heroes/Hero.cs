@@ -219,13 +219,11 @@ namespace TheArena.GameObjects.Heroes
                         Pos += movement * MOVEMENT_SPEED * moveSpeedModifier;
                     }
                 }
-
                 
                 // Change the radius of the LightSource overtime using a SINE wave pattern.
                 LightSource.Pos = Pos;
                 LightSource.Width = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
                 LightSource.Height = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
-
                   
                 _prevIntersectingEntities = engine.Collider.GetIntersectingEntites(this.CurrentBoundingBox);
 
