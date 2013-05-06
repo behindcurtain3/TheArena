@@ -31,7 +31,6 @@ namespace TheArena.GameObjects
             }
         }
 
-        private float _deltaTime;
         private List<string> _splitMobs;
 
         public MobSpawner()
@@ -51,17 +50,6 @@ namespace TheArena.GameObjects
             Interval_Min = minInterval;
             Width = width;
             Height = height;
-
-            _deltaTime = 0;
-            SetSpawnInterval();
-        }
-
-        public override void PostInitialize(GameTime gameTime, GameEngine.TeeEngine engine)
-        {
-            // Make sure to reset the spawn interval again, this ensures the min & max have been set by the engine
-            SetSpawnInterval();
-
-            base.PostInitialize(gameTime, engine);
         }
 
         public override void LoadContent(ContentManager content)
@@ -78,40 +66,26 @@ namespace TheArena.GameObjects
             CurrentDrawableState = "Standard";
         }
 
-        public override void Update(GameTime gameTime, GameEngine.TeeEngine engine)
+        public void SpawnMob(GameEngine.TeeEngine engine)
         {
-            _deltaTime += gameTime.ElapsedGameTime.Milliseconds;
+            string type = _splitMobs[randomGenerator.Next(0, _splitMobs.Count)];
+            Vector2 pos = new Vector2(Pos.X + (CurrentBoundingBox.Width * (float)randomGenerator.NextDouble()), Pos.Y + (CurrentBoundingBox.Height * (float)randomGenerator.NextDouble()));
+            Mob mob;
 
-            if (_deltaTime >= SpawnInterval)
+            switch (type)
             {
-                string type = _splitMobs[randomGenerator.Next(0, _splitMobs.Count)];
-                Vector2 pos = new Vector2(Pos.X + (CurrentBoundingBox.Width * (float)randomGenerator.NextDouble()), Pos.Y + (CurrentBoundingBox.Height * (float)randomGenerator.NextDouble()));
-                Mob mob;
-
-                switch (type)
-                {
-                    case "Bat":
-                        mob = new Bat(pos.X, pos.Y);
-                        break;
-                    case "Bee":
-                        mob = new Bee(pos.X, pos.Y);
-                        break;
-                    default:
-                        mob = new Bee(pos.X, pos.Y);
-                        break;
-                }
-
-                engine.AddEntity(mob);
-                _deltaTime = 0;
-                SetSpawnInterval();
+                case "Bat":
+                    mob = new Bat(pos.X, pos.Y);
+                    break;
+                case "Bee":
+                    mob = new Bee(pos.X, pos.Y);
+                    break;
+                default:
+                    mob = new Bee(pos.X, pos.Y);
+                    break;
             }
 
-            base.Update(gameTime, engine);
-        }
-
-        private void SetSpawnInterval()
-        {
-            SpawnInterval = ((float)randomGenerator.NextDouble() * (Interval_Max - Interval_Min) + Interval_Min) * 1000;
+            engine.AddEntity(mob);
         }
 
     }
