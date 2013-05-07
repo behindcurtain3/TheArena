@@ -142,6 +142,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GameUI\GameUI.csproj">
+      <Project>{24EC4BCC-702B-455D-BFB2-A7E2C781CD42}</Project>
+      <Name>GameUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheArenaContent\TheArenaContent.contentproj">
       <Name>TheArenaContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
@@ -246,6 +250,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Animations\Weapons\staff.anim">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Windows\StandardWindow.ui">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

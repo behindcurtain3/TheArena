@@ -15,6 +15,8 @@ using TheArena.Shaders;
 using TheArena.GameObjects;
 using TheArena.GameObjects.Heroes;
 using TheArena.Items;
+using GameUI;
+using GameUI.Components;
 //using GameEngine.Pathfinding;
 
 namespace TheArena
@@ -63,6 +65,7 @@ namespace TheArena
         Random Random = new Random();
 
         TeeEngine Engine;
+        ArenaUI Hud;
 
         public TheArenaGame()
         {
@@ -83,6 +86,7 @@ namespace TheArena
         protected override void Initialize()
         {
             Engine = new TeeEngine(this, WINDOW_WIDTH, WINDOW_HEIGHT);
+            Hud = new ArenaUI(this);
 
             base.Initialize();
         }
@@ -115,6 +119,7 @@ namespace TheArena
 
             DefaultSpriteFont = Content.Load<SpriteFont>(@"Fonts\Default");
 
+            Hud.Components.Add(BaseWindow.LoadWindowFromXML(Content, "Windows/StandardWindow.ui"));
         }
 
         /// <summary>
@@ -133,6 +138,9 @@ namespace TheArena
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // Update the Hud
+            Hud.Update(gameTime);
+
             // F1 = Show/Hide Bounding Boxes
             // F2 = Show/Hide Debug Info
             // F3 = Enable/Disable LightShader
@@ -220,6 +228,7 @@ namespace TheArena
             // Update static variable
             ViewPortInfo = viewPort;
 
+            Hud.RenderUI(SpriteBatch, gameTime);
 
             // DRAW DEBUGGING INFORMATION
             SpriteBatch.Begin();
@@ -281,6 +290,7 @@ namespace TheArena
                 }
             }
             SpriteBatch.End();
+            
             base.Draw(gameTime);
         }
 

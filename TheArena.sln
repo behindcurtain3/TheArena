@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheArena", "TheArena\TheArena\TheArena.csproj", "{1DCC2988-451C-4395-9D60-3E958B9C4C7E}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "TheArenaContent", "TheArena\TheArenaContent\TheArenaContent.contentproj", "{CB6A6C4B-86DA-434B-B15F-2A6A269CA477}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheArenaContent", "TheArena\TheArenaContent\TheArenaContent.contentproj", "{CB6A6C4B-86DA-434B-B15F-2A6A269CA477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameUI", "GameUI\GameUI.csproj", "{24EC4BCC-702B-455D-BFB2-A7E2C781CD42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{1DCC2988-451C-4395-9D60-3E958B9C4C7E}.Release|x86.Build.0 = Release|x86
 		{CB6A6C4B-86DA-434B-B15F-2A6A269CA477}.Debug|x86.ActiveCfg = Debug|x86
 		{CB6A6C4B-86DA-434B-B15F-2A6A269CA477}.Release|x86.ActiveCfg = Release|x86
+		{24EC4BCC-702B-455D-BFB2-A7E2C781CD42}.Debug|x86.ActiveCfg = Debug|x86
+		{24EC4BCC-702B-455D-BFB2-A7E2C781CD42}.Debug|x86.Build.0 = Debug|x86
+		{24EC4BCC-702B-455D-BFB2-A7E2C781CD42}.Release|x86.ActiveCfg = Release|x86
+		{24EC4BCC-702B-455D-BFB2-A7E2C781CD42}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

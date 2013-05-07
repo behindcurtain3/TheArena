@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Window Position="250,250,256,256">
+  <Title Src="UI/Window-Title" Font="Fonts/Default">
+    <!-- Window title bar -->
+    <Frame>1,1,1,1</Frame>
+    <Height>24</Height>
+  </Title>
+
+  <!-- Src is the texture of the content pane, Font is the font to display text with
+    Padding can be 1, 2, or 4 int values
+      if there is 1 it will be applied to all four sides of the window
+      if 2 the first number is the top & bottom, 2nd number the left & right
+      if 4 the order is top, bottom, left, right
+  -->
+  <Content Src="UI/Window-Content" Font="Fonts/Default" Padding="4,4,4,4">
+    <Frame>1,4,4,4</Frame>
+    <Visible>true</Visible>
+  </Content>
+  <Components>
+    <!-- Add any components to the window here -->
+  </Components>
+</Window>
