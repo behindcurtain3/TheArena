@@ -41,7 +41,7 @@ namespace GameUI.Components
             ResetContentPane();
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent)
         {
             if (!Visible)
                 return;

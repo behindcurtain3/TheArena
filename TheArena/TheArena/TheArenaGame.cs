@@ -228,7 +228,7 @@ namespace TheArena
             // Update static variable
             ViewPortInfo = viewPort;
 
-            Hud.RenderUI(SpriteBatch, gameTime);
+            Hud.RenderUI(SpriteBatch, gameTime, pxDestRectangle);
 
             // DRAW DEBUGGING INFORMATION
             SpriteBatch.Begin();

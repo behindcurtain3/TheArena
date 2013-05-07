@@ -39,7 +39,7 @@ namespace GameUI
                 comp.HandleInput(_input);
         }
 
-        public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime)
+        public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime, Rectangle screenArea)
         {
             // Sort the components by their layer
             Components.Sort(delegate(Component a, Component b) { return a.Layer.CompareTo(b.Layer); });
@@ -49,7 +49,7 @@ namespace GameUI
 
             // Draw each component
             foreach (Component comp in Components)
-                comp.Draw(spriteBatch);
+                comp.Draw(spriteBatch, screenArea);
 
             spriteBatch.End();
         }

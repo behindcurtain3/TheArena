@@ -63,7 +63,7 @@ namespace GameUI.Components
         public override bool HandleInput(Input.InputState input)
         {
             // Is the mouse over this window?
-            bool inputHandled= (TitleBar == null) ? false : TitleBar.HandleInput(input);
+            bool inputHandled = (TitleBar == null) ? false : TitleBar.HandleInput(input);
 
             if (!inputHandled)
             {
@@ -81,12 +81,12 @@ namespace GameUI.Components
             return inputHandled;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
         {
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, parent);
 
             if (TitleBar != null)
-                TitleBar.Draw(spriteBatch);
+                TitleBar.Draw(spriteBatch, parent);
 
             for (int i = 0; i <= 8; i++)
                 spriteBatch.Draw(Texture, GetTargetRectangle(i), GetSourceRectangle(i), Color);
@@ -96,7 +96,7 @@ namespace GameUI.Components
 
             // Draw any child components
             foreach (Component child in _components)
-                child.Draw(spriteBatch);
+                child.Draw(spriteBatch, ContentPane);
 
         }
 
