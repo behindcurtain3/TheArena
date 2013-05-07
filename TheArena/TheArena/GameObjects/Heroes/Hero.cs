@@ -104,6 +104,7 @@ namespace TheArena.GameObjects.Heroes
             LightSource.Height = 32 * 8;
             LightSource.Color = Color.White;
             LightSource.PositionType = LightPositionType.Relative;
+            CollisionGroup = "Shadow";
         }
 
         public override void PostInitialize(GameTime gameTime, TeeEngine engine)

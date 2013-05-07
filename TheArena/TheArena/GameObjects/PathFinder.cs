@@ -34,11 +34,12 @@ namespace TheArena.GameObjects
         {
             Pos = new Vector2(x, y);
             Direction = GameObjects.Direction.Down;
+            CollisionGroup = "Shadow";
         }
 
         public override void LoadContent(ContentManager content)
         {
-            DrawableSet.LoadDrawableSetXml(Drawables, "Animations/Characters/female_npc.anim", content);
+            DrawableSet.LoadDrawableSetXml(Drawables, "Animations/Characters/skeleton.anim", content);
             CurrentDrawableState = "Idle_" + Direction;
 
             base.LoadContent(content);

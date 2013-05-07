@@ -122,7 +122,7 @@ namespace TheArena.MapScripts
                 engine.RemoveEntity("NorthBridgeExit");
 
                 // Rebuild the pathfinding nodes
-                //engine.Pathfinding.RebuildNeighbors(engine.Map);
+                engine.Pathfinding.RebuildNeighbors(engine.Map);
             }
         }
     }
