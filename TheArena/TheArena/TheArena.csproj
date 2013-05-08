@@ -124,6 +124,7 @@
     <Compile Include="GameObjects\MobSpawner.cs" />
     <Compile Include="GameObjects\NPC.cs" />
     <Compile Include="GameObjects\PathFinder.cs" />
+    <Compile Include="HUD\ItemSlot.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ItemRepository.cs" />
@@ -252,7 +253,7 @@
     <None Include="Animations\Weapons\staff.anim">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Windows\StandardWindow.ui">
+    <None Include="HUD\Elements\CharacterScreen.ui">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>

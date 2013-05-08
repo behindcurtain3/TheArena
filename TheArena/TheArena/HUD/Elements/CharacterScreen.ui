@@ -19,5 +19,10 @@
   </Content>
   <Components>
     <!-- Add any components to the window here -->
+    <Component type="TheArena.HUD.ItemSlot" x="0" y="0" width="34" height="34">
+      <properties>
+        
+      </properties>
+    </Component>
   </Components>
 </Window>
