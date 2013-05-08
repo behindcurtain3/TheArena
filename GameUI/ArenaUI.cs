@@ -15,19 +15,28 @@ namespace GameUI
 {
     public class ArenaUI : GameComponent
     {
-        public List<Component> Components { get; set; }
+        private Dictionary<string, Component> _components;
 
         private InputState _input;
 
 
         public ArenaUI(Game game) : base(game)
         {
-            Components = new List<Component>();
+            _components = new Dictionary<string, Component>();
 
             _input = new InputState();
         }
 
+        public void AddComponent(string name, Component comp)
+        {
+            if(!_components.ContainsKey(name))
+                _components.Add(name, comp);
+        }
 
+        public Component GetComponent(string name)
+        {
+            return _components[name];
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -35,21 +44,20 @@ namespace GameUI
 
             _input.Update();
 
-            foreach (Component comp in Components)
-                comp.HandleInput(_input);
+            foreach (string comp in _components.Keys)
+                _components[comp].HandleInput(_input);
         }
 
         public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime, Rectangle screenArea)
         {
             // Sort the components by their layer
-            Components.Sort(delegate(Component a, Component b) { return a.Layer.CompareTo(b.Layer); });
-
+            _components.OrderBy(x => x.Value.Layer);
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.PointWrap, DepthStencilState.Default, null);
 
             // Draw each component
-            foreach (Component comp in Components)
-                comp.Draw(spriteBatch, screenArea);
+            foreach (string comp in _components.Keys)
+                _components[comp].Draw(spriteBatch, screenArea);
 
             spriteBatch.End();
         }

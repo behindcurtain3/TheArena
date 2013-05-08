@@ -97,6 +97,7 @@ namespace GameUI.Components
             XmlNode frame;
             string[] frames;
 
+            window.Name = windowNode.Attributes["Name"].Value;
             string[] positions = windowNode.Attributes["Position"].Value.Split(',');
             Rectangle position = new Rectangle(
                                         Convert.ToInt32(positions[0]),

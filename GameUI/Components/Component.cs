@@ -13,6 +13,8 @@ namespace GameUI.Components
 
         public bool Visible { get; set; }
 
+        public string Name { get; set; }
+
         public Rectangle ContentPane { get; private set; }
 
         public Color Color { get; set; }

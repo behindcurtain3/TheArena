@@ -648,46 +648,46 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Content Include="Maps\arena.tmx">
+    <None Include="Maps\arena.tmx">
       <Name>arena</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\bridges.tsx">
+    </None>
+    <None Include="Maps\Tilesets\bridges.tsx">
       <Name>bridges</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\buckets.tsx">
+    </None>
+    <None Include="Maps\Tilesets\buckets.tsx">
       <Name>buckets</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\dirt.tsx">
+    </None>
+    <None Include="Maps\Tilesets\dirt.tsx">
       <Name>dirt</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\dirt2.tsx">
+    </None>
+    <None Include="Maps\Tilesets\dirt2.tsx">
       <Name>dirt2</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\grass.tsx">
+    </None>
+    <None Include="Maps\Tilesets\grass.tsx">
       <Name>grass</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\mountains.tsx">
+    </None>
+    <None Include="Maps\Tilesets\mountains.tsx">
       <Name>mountains</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\rock.tsx">
+    </None>
+    <None Include="Maps\Tilesets\rock.tsx">
       <Name>rock</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\treetop.tsx">
+    </None>
+    <None Include="Maps\Tilesets\treetop.tsx">
       <Name>treetop</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Tilesets\watergrass.tsx">
+    </None>
+    <None Include="Maps\Tilesets\watergrass.tsx">
       <Name>watergrass</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Compile Include="Sounds\Characters\Hit_Hurt14.wav">
       <Name>Hit_Hurt14</Name>
       <Importer>WavImporter</Importer>

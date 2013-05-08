@@ -119,7 +119,8 @@ namespace TheArena
 
             DefaultSpriteFont = Content.Load<SpriteFont>(@"Fonts\Default");
 
-            Hud.Components.Add(BaseWindow.LoadWindowFromXML(Content, "Windows/StandardWindow.ui"));
+            BaseWindow win = BaseWindow.LoadWindowFromXML(Content, "HUD/Elements/CharacterScreen.ui");
+            Hud.AddComponent(win.Name, win);
         }
 
         /// <summary>
@@ -189,6 +190,13 @@ namespace TheArena
             // DECREASE ZOOM LEVEL
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.OemMinus, this, true))
                 Zoom -= 0.1f;
+
+            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.C, this, true))
+            {
+                BaseWindow characterScreen = (BaseWindow)Hud.GetComponent("CharacterScreen");
+
+                characterScreen.Visible = !characterScreen.Visible;
+            }
             
             base.Update(gameTime);
         }
