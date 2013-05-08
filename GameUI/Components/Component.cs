@@ -39,6 +39,8 @@ namespace GameUI.Components
             PaddingTop = PaddingBottom = PaddingLeft = PaddingRight = 4;
 
             ResetContentPane();
+
+            base.onPositionChanged += new OnPositionChangedEventHandler(Component_onPositionChanged);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent)
@@ -66,6 +68,11 @@ namespace GameUI.Components
                                 Position.Width - (PaddingRight + PaddingLeft),
                                 Position.Height - (PaddingBottom + PaddingTop)
                             );
+        }
+
+        private void Component_onPositionChanged(Rectangle position)
+        {
+            ResetContentPane();
         }
 
     }

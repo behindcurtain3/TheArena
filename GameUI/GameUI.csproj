@@ -93,9 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\FrameComponent.cs" />
     <Compile Include="Components\MouseListener.cs" />
     <Compile Include="Components\BaseWindow.cs" />
     <Compile Include="ArenaUI.cs" />
+    <Compile Include="Components\TitleBar.cs" />
     <Compile Include="Input\InputState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

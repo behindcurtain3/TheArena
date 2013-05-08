@@ -16,12 +16,14 @@ namespace GameUI.Components
         public delegate void OnMouseClickEventHandler(object sender, EventArgs e);
         public delegate void OnDragEventHandler(object sender, EventArgs e);
         public delegate void OnDragEndEventHandler(object sender, EventArgs e);
+        public delegate void OnPositionChangedEventHandler(Rectangle position);
 
         public event OnMouseOverEventHandler onMouseOver;
         public event OnMouseOutEventHandler onMouseOut;
         public event OnMouseClickEventHandler onMouseClick;
         public event OnDragEventHandler onDrag;
-        public event OnDragEndEventHandler onDragEnd;        
+        public event OnDragEndEventHandler onDragEnd;
+        public event OnPositionChangedEventHandler onPositionChanged;
 
         private Rectangle _position;
         public Rectangle Position
@@ -33,6 +35,9 @@ namespace GameUI.Components
 
                 _position.Width = Math.Max(_position.Width, MinimumWidth);
                 _position.Height = Math.Max(_position.Height, MinimumHeight);
+
+                if (onPositionChanged != null)
+                    onPositionChanged(_position);
             }
         }
 
