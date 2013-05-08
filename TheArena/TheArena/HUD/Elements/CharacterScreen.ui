@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Window Position="250,250,256,256" Name="CharacterScreen">
-  <Title Src="UI/Window-Title" Font="Fonts/SilkScreenBold" Padding="1">
-    <!-- Window title bar -->
+<Window position="250,250,256,256" name="CharacterScreen" assembly="TheArena">
+  
+  <!-- Window Title Bar -->
+  <Title src="UI/Window-Title" font="Fonts/SilkScreenBold" padding="1">
     <Frame>1,1,1,1</Frame>
     <Height>24</Height>
     <Text>Character</Text>
@@ -13,13 +14,14 @@
       if 2 the first number is the top & bottom, 2nd number the left & right
       if 4 the order is top, bottom, left, right
   -->
-  <Content Src="UI/Window-Content" Font="Fonts/Default" Padding="4,4,4,4">
+  <Content src="UI/Window-Content" font="Fonts/Default" padding="5,8,8,8">
     <Frame>1,4,4,4</Frame>
     <Visible>true</Visible>
   </Content>
+  
+  <!-- Add any components to the window here -->
   <Components>
-    <!-- Add any components to the window here -->
-    <Component type="TheArena.HUD.ItemSlot" x="0" y="0" width="34" height="34">
+    <Component type="TheArena.HUD.ItemSlot" src="UI/Item-Frame" x="0" y="0" width="34" height="34">
       <properties>
         
       </properties>

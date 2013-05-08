@@ -23,8 +23,19 @@ namespace TheArena.HUD
         private bool _followMouse = false;
         private Vector2 _mousePosition;
 
+        public ItemSlot()
+            : base(new Rectangle(0, 0, 32, 32))
+        {
+            Construct();
+        }
+
         public ItemSlot(Rectangle position)
             : base(position)
+        {
+            Construct();
+        }
+
+        private void Construct()
         {
             // For now all item icons are 32x32, the slots are 34x34 to allow for padding
             _sourceRect = new Rectangle(0, 0, 34, 34);
@@ -44,7 +55,9 @@ namespace TheArena.HUD
             if (!Visible)
                 return;
 
-            spriteBatch.Draw(Texture, Position, _sourceRect, Color);
+            Rectangle drawAt = new Rectangle(Position.X + parent.X, Position.Y + parent.Y, Position.Width, Position.Height);
+
+            spriteBatch.Draw(Texture, drawAt, _sourceRect, Color);
 
             if (Item != null)
             {

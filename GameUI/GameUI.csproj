@@ -98,6 +98,9 @@
     <Compile Include="Components\BaseWindow.cs" />
     <Compile Include="ArenaUI.cs" />
     <Compile Include="Components\TitleBar.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="Input\InputState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

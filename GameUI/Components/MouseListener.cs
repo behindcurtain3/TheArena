@@ -57,15 +57,17 @@ namespace GameUI.Components
 
         }
 
-        public virtual bool HandleInput(InputState input)
+        public virtual bool HandleInput(InputState input, Rectangle parent)
         {
             MouseState currentMouse = input.CurrentMouseState;
             MouseState prevMouse = input.LastMouseState;
 
+            Rectangle absPosition = new Rectangle(Position.X + parent.X, Position.Y + parent.Y, Position.Width, Position.Height);
+
             // Check to see if the mouse is over
             if (!IsMouseOver)
             {
-                if (currentMouse.X >= Position.X && currentMouse.X <= Position.X + Position.Width && currentMouse.Y >= Position.Y && currentMouse.Y <= Position.Y + Position.Height)
+                if (currentMouse.X >= absPosition.X && currentMouse.X <= absPosition.X + absPosition.Width && currentMouse.Y >= absPosition.Y && currentMouse.Y <= absPosition.Y + absPosition.Height)
                 {
                     IsMouseOver = true;
 
@@ -76,7 +78,7 @@ namespace GameUI.Components
             // Check to see if the mouse is out
             else
             {
-                if (currentMouse.X < Position.X || currentMouse.X > Position.X + Position.Width || currentMouse.Y < Position.Y || currentMouse.Y > Position.Y + Position.Height)
+                if (currentMouse.X < absPosition.X || currentMouse.X > absPosition.X + absPosition.Width || currentMouse.Y < absPosition.Y || currentMouse.Y > absPosition.Y + absPosition.Height)
                 {
                     IsMouseOver = false;
 
