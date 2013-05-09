@@ -27,17 +27,44 @@ namespace TheArena.GameObjects.Heroes
         /// <summary>
         /// Heroes strength, effects damage dealt for melee attack and hitpoints
         /// </summary>
-        public float Strength { get; set; }
+        public float Strength 
+        {
+            get { return _strength; }
+            set
+            {
+                _strength = value;
+                NotifyPropertyChanged("Strength");
+            }
+        }
+        private float _strength;
 
         /// <summary>
         /// Heroes dexterity, effects dodge chance (NOT IMPLEMENTED YET) and critical strike chance (NOT IMPLEMENTED YET)
         /// </summary>
-        public float Dexterity { get; set; }
+        public float Dexterity 
+        {
+            get { return _dexterity; }
+            set
+            {
+                _dexterity = value;
+                NotifyPropertyChanged("Dexterity");
+            }
+        }
+        private float _dexterity;
 
         /// <summary>
         /// Heroes wisdom, effects amount of mana hero has
         /// </summary>
-        public float Wisdom { get; set; }
+        public float Wisdom 
+        {
+            get { return _wisdom; }
+            set
+            {
+                _wisdom = value;
+                NotifyPropertyChanged("Wisdom");
+            }
+        }
+        private float _wisdom;
 
         /// <summary>
         /// The current amount of mana the Hero has to cast spells

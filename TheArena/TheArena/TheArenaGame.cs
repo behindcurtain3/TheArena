@@ -35,8 +35,7 @@ namespace TheArena
         const int WINDOW_HEIGHT = 700;
         const int WINDOW_WIDTH = 1200;
 
-        bool helmetVisible = true;
-        bool showDebugInfo = true;
+        bool showDebugInfo = false;
         bool showDiagnostics = false;
 
         float Zoom = 1.2f;

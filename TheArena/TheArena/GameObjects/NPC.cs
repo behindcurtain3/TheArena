@@ -163,7 +163,7 @@ namespace TheArena.GameObjects
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string name)
+        protected void NotifyPropertyChanged(string name)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(name));

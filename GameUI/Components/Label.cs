@@ -26,12 +26,14 @@ namespace GameUI.Components
         {
             base.Draw(spriteBatch, parent);
 
-            spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X, ContentPane.Y + parent.Y), Color);
+            spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X + 1, ContentPane.Y + parent.Y + 1), Color.Black);
+            spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X, ContentPane.Y + parent.Y), Color);            
 
             // Draw data, aligned to the right
             if (Data != null)
             {
                 Vector2 dataPositon = new Vector2(ContentPane.X + parent.X + ContentPane.Width - Font.MeasureString(Data).X, ContentPane.Y + parent.Y);
+                spriteBatch.DrawString(Font, Data, new Vector2(dataPositon.X + 1, dataPositon.Y + 1), Color.Black);
                 spriteBatch.DrawString(Font, Data, dataPositon, Color);
             }
         }
