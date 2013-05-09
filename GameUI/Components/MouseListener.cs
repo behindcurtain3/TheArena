@@ -43,13 +43,15 @@ namespace GameUI.Components
 
         public int MinimumWidth { get; set; }
         public int MinimumHeight { get; set; }
-        public Boolean IsMouseOver { get; set; }
-        public Boolean IsMouseClick { get; set; }
+        public bool IsMouseOver { get; set; }
+        public bool IsMouseClick { get; set; }
+        public bool ConsumeOnMouseOver { get; set; }
 
         public MouseListener()
         {
             MinimumHeight = 16;
             MinimumWidth = 16;
+            ConsumeOnMouseOver = false;
         }
 
         public virtual void Update(GameTime dt)
@@ -117,7 +119,7 @@ namespace GameUI.Components
                 }
             }
 
-            return IsMouseOver;
+            return IsMouseClick || (ConsumeOnMouseOver && IsMouseOver);
         }
     }
 }

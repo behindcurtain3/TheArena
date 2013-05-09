@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Audio;
 using TheArena.Shaders;
 using TheArena.GameObjects.Mobs;
 using TheArena.Interfaces;
-//using GameEngine.Pathfinding;
+using System.ComponentModel;
 
 namespace TheArena.GameObjects.Heroes
 {

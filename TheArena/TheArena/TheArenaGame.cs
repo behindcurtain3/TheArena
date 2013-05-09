@@ -17,7 +17,6 @@ using TheArena.GameObjects.Heroes;
 using TheArena.Items;
 using GameUI;
 using GameUI.Components;
-//using GameEngine.Pathfinding;
 
 namespace TheArena
 {
@@ -119,10 +118,10 @@ namespace TheArena
 
             DefaultSpriteFont = Content.Load<SpriteFont>(@"Fonts\Default");
 
-            //BaseWindow win = BaseWindow.LoadWindowFromXML(Content, "HUD/Elements/CharacterScreen.ui");
             List<Component> hudComponents = Component.LoadComponentsFromXml("HUD/Elements/Components.ui", Content);
             foreach (Component c in hudComponents)
                 Hud.AddComponent(c.Name, c);
+
         }
 
         /// <summary>
@@ -271,7 +270,7 @@ namespace TheArena
                     SpriteBatch.DrawString(DefaultSpriteFont, Engine.GetEntity("Player").Pos.ToString(), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, TX.ToString("0.0") + "," + TY.ToString("0.0"), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, "Coins=" + player.Gold, GeneratePos(textHeight), Color.White);
-                    SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Lvl={0}", player.Lvl), GeneratePos(textHeight), Color.White);
+                    SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Lvl={0}", player.Level), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("HP={0}/{1}", player.HP, player.MaxHP), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("Mana={0}/{1}", player.Mana, player.MaxMana), GeneratePos(textHeight), Color.White);
                     SpriteBatch.DrawString(DefaultSpriteFont, String.Format("XP={0}/{1}", player.XP, player.XPToNextLevel), GeneratePos(textHeight), Color.White);

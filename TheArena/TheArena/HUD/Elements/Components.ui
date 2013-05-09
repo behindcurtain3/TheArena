@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <components assembly="TheArena">
-  <component name="CharacterScreen" type="GameUI.Components.BaseWindow" x="0" y="24" width="256" height="256">
+  <component name="CharacterScreen" type="GameUI.Components.BaseWindow" x="0" y="24" width="366" height="384">
     <properties>
       <property name="PaddingTop" value="5" />
       <property name="PaddingBottom" value="8" />
@@ -15,7 +15,7 @@
     </properties>
 
     <components>
-      <component name="CharacterScreenTitleBar" type="GameUI.Components.TitleBar" x="0" y="-24" width="256" height="24">
+      <component name="CharacterScreenTitleBar" type="GameUI.Components.TitleBar" x="0" y="-24" width="366" height="24">
         <properties>
           <property name="FrameTop" value="1" />
           <property name="FrameBottom" value="1" />
@@ -23,14 +23,152 @@
           <property name="FrameRight" value="1" />
           <property name="Texture" value="UI/Window-Title" />
           <property name="Font" value="Fonts/SilkScreenBold" />
-          <property name="Text" value="Character" />
+          <property name="Text" value="Character Information" />
           <property name="UseParentContentPane" value="false" />
           <property name="$onMouseClick" value="TitleBar_onMouseClick" />
           <property name="$onDrag" value="TitleBar_onDrag" />
           <property name="$onDragEnd" value="TitleBar_onDragEnd" />
         </properties>
       </component>
+      <component name="HeroLevel" type="GameUI.Components.Label" x="210" y="0" width="140">
+        <properties>
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Level:" />
+          <property name="Data" value="1" />
+        </properties>
+      </component>
+      <component name="HeroStrength" type="GameUI.Components.Label" x="210" y="20" width="140">
+        <properties>
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Strength:" />
+          <property name="Data" value="10" />
+        </properties>
+      </component>
+      <component name="HeroDexterity" type="GameUI.Components.Label" x="210" y="40" width="140">
+        <properties>
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Dexterity:" />
+          <property name="Data" value="10" />
+        </properties>
+      </component>
+      <component name="HeroWisdom" type="GameUI.Components.Label" x="210" y="60" width="140">
+        <properties>
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Wisdom:" />
+          <property name="Data" value="10" />
+        </properties>
+      </component>
+      
+      <!-- Equipped Item Slots-->
       <component name="EquippedHead" type="TheArena.HUD.ItemSlot" x="0" y="0" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      
+      <!-- Backpack -->
+      <component name="BackPackLabel" type="GameUI.Components.Label" x="0" y="280" width="376">
+        <properties>
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Inventory" />
+        </properties>
+      </component>
+      <component name="Backpack1" type="TheArena.HUD.ItemSlot" x="0" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack2" type="TheArena.HUD.ItemSlot" x="35" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack3" type="TheArena.HUD.ItemSlot" x="70" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack4" type="TheArena.HUD.ItemSlot" x="105" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack5" type="TheArena.HUD.ItemSlot" x="140" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack6" type="TheArena.HUD.ItemSlot" x="175" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack7" type="TheArena.HUD.ItemSlot" x="210" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack8" type="TheArena.HUD.ItemSlot" x="245" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack9" type="TheArena.HUD.ItemSlot" x="280" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack10" type="TheArena.HUD.ItemSlot" x="315" y="301" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack11" type="TheArena.HUD.ItemSlot" x="0" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack12" type="TheArena.HUD.ItemSlot" x="35" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack13" type="TheArena.HUD.ItemSlot" x="70" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack14" type="TheArena.HUD.ItemSlot" x="105" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack15" type="TheArena.HUD.ItemSlot" x="140" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack16" type="TheArena.HUD.ItemSlot" x="175" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack17" type="TheArena.HUD.ItemSlot" x="210" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack18" type="TheArena.HUD.ItemSlot" x="245" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack19" type="TheArena.HUD.ItemSlot" x="280" y="336" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="Backpack20" type="TheArena.HUD.ItemSlot" x="315" y="336" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>

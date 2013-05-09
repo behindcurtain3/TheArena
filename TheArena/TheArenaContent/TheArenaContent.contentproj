@@ -648,6 +648,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Fonts\Silkscreen.spritefont">
+      <Name>Silkscreen</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Maps\arena.tmx">
       <Name>arena</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

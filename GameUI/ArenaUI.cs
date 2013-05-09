@@ -36,7 +36,30 @@ namespace GameUI
 
         public Component GetComponent(string name)
         {
-            return _components[name];
+            // I split these because its faster to just look the component
+            // is in the top level. Only traverse the "tree" if necessary
+            if (_components.ContainsKey(name))
+                return _components[name];
+            else
+            {
+                // Search each component children recursively
+                return GetComponent(name, _components.Values.ToList());
+            }
+        }
+
+        private Component GetComponent(string name, List<Component> components)
+        {
+            foreach (Component c in components)
+            {
+                if (c.Name.Equals(name))
+                    return c;
+
+                else if(c.Children.Count > 0)
+                    GetComponent(name, c.Children);
+            }
+
+            // Return null if not found
+            return null;
         }
 
         public override void Update(GameTime gameTime)

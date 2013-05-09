@@ -17,7 +17,7 @@ namespace TheArena.GameObjects.Heroes
             AttackType = "Thrust_";
 
             // LevelUp to lvl 1
-            Lvl = 0;
+            Level = 0;
             LevelUp();
         }
 
@@ -25,7 +25,7 @@ namespace TheArena.GameObjects.Heroes
         {
             base.LevelUp();
 
-            int mod = Lvl - 1;
+            int mod = Level - 1;
 
             Strength = 8 + (mod * 1);
             Dexterity = 14 + (mod * 3);

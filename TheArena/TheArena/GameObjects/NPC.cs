@@ -6,12 +6,13 @@ using System;
 using TheArena.Interfaces;
 using TheArena.Items;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace TheArena.GameObjects
 {
     public enum Direction { Up, Right, Down, Left };
 
-    public class NPC : CollidableEntity, IAttackable
+    public class NPC : CollidableEntity, IAttackable, INotifyPropertyChanged
     {
         
         public static Random randomGenerator = new Random();
@@ -27,7 +28,18 @@ namespace TheArena.GameObjects
         public string BaseRace { get; set; }
 
         // Stats
-        public int Lvl { get; set; }
+        private int _level;
+        public int Level
+        {
+            get { return _level; }
+            set
+            {
+                _level = value;
+                NotifyPropertyChanged("Level");
+            }
+        }
+
+
         public int HP { get; set; }
         public int MaxHP { get; set; }
         public int XP { get; set; }
@@ -51,7 +63,7 @@ namespace TheArena.GameObjects
 
         private void Construct(float x, float y, string baseRace)
         {
-            this.Lvl = 1;
+            this.Level = 1;
             this.HP = 0;
             this.MaxHP = 0;
             this.XP = 0;
@@ -86,17 +98,17 @@ namespace TheArena.GameObjects
         /// <param name="mobLevel">The level of the mob that is awarding XP.</param>
         public void RewardXP(int mobLevel)
         {
-            if (mobLevel == Lvl)
+            if (mobLevel == Level)
             {
-                XP += (Lvl * 5) + 45;
+                XP += (Level * 5) + 45;
             }
-            else if (mobLevel < Lvl)
+            else if (mobLevel < Level)
             {
-                XP += ((Lvl * 5) + 45) * (1 - (Lvl - mobLevel) / 5);
+                XP += ((Level * 5) + 45) * (1 - (Level - mobLevel) / 5);
             }
-            else // mobLevel > Lvl
+            else // mobLevel > Level
             {
-                XP += ((Lvl * 5) + 45) * (int)(1 + 0.05 * (mobLevel - Lvl));
+                XP += ((Level * 5) + 45) * (int)(1 + 0.05 * (mobLevel - Level));
             }
 
             // Check for lvl up condition
@@ -108,12 +120,12 @@ namespace TheArena.GameObjects
 
         public int GetNeededXpAmount()
         {
-            return 40 * (Lvl * Lvl) + 360 * Lvl;
+            return 40 * (Level * Level) + 360 * Level;
         }
 
         public virtual void LevelUp()
         {
-            Lvl++;
+            Level++;
             XPToNextLevel = GetNeededXpAmount();
         }
 
@@ -149,5 +161,12 @@ namespace TheArena.GameObjects
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

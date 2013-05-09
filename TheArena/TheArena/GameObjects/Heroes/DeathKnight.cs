@@ -20,7 +20,7 @@ namespace TheArena.GameObjects.Heroes
             BaseRace = NPC.RACE_UNDEAD;
 
             // LevelUp to lvl1
-            Lvl = 0;
+            Level = 0;
             LevelUp();
         }
 
@@ -28,7 +28,7 @@ namespace TheArena.GameObjects.Heroes
         {
             base.LevelUp();
 
-            int mod = Lvl - 1;
+            int mod = Level - 1;
 
             Strength = 12 + (mod * 3);
             Dexterity = 6 + (mod * 1);

@@ -75,7 +75,11 @@ namespace GameUI.Components
             
             foreach (Component child in Children)
             {
-                inputHandled = child.HandleInput(input, ContentPane);
+                if (child.UseParentContentPane)
+                    inputHandled = child.HandleInput(input, ContentPane);
+                else
+                    inputHandled = child.HandleInput(input, Position);
+
                 if (inputHandled)
                     break;
             }
