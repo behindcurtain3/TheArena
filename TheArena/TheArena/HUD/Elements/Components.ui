@@ -6,10 +6,10 @@
       <property name="PaddingBottom" value="8" />
       <property name="PaddingLeft" value="8" />
       <property name="PaddingRight" value="8" />
-      <property name="FrameTop" value="1" />
-      <property name="FrameBottom" value="4" />
-      <property name="FrameLeft" value="4" />
-      <property name="FrameRight" value="4" />
+      <property name="FrameTop" value="2" />
+      <property name="FrameBottom" value="5" />
+      <property name="FrameLeft" value="5" />
+      <property name="FrameRight" value="5" />
       <property name="Texture" value="UI/Window-Content" />
       <property name="Font" value="Fonts/SilkScreenBold" />
     </properties>
