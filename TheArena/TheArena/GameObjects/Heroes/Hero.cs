@@ -107,7 +107,7 @@ namespace TheArena.GameObjects.Heroes
             CollisionGroup = "Shadow";
         }
 
-        public override void PostInitialize(GameTime gameTime, TeeEngine engine)
+        public override void PostCreate(GameTime gameTime, TeeEngine engine)
         {
             LightShader lightShader = (LightShader)engine.GetPostGameShader("LightShader");
             lightShader.LightSources.Add(LightSource);

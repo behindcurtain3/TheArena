@@ -11,11 +11,11 @@ namespace GameUI.Components
 {
     public class MouseListener
     {
-        public delegate void OnMouseOverEventHandler(object sender, EventArgs e);
-        public delegate void OnMouseOutEventHandler(object sender, EventArgs e);
-        public delegate void OnMouseClickEventHandler(object sender, EventArgs e);
-        public delegate void OnDragEventHandler(object sender, EventArgs e);
-        public delegate void OnDragEndEventHandler(object sender, EventArgs e);
+        public delegate void OnMouseOverEventHandler(object sender);
+        public delegate void OnMouseOutEventHandler(object sender);
+        public delegate void OnMouseClickEventHandler(object sender);
+        public delegate void OnDragEventHandler(object sender);
+        public delegate void OnDragEndEventHandler(object sender);
         public delegate void OnPositionChangedEventHandler(Rectangle position);
 
         public event OnMouseOverEventHandler onMouseOver;
@@ -72,7 +72,7 @@ namespace GameUI.Components
                     IsMouseOver = true;
 
                     if (onMouseOver != null)
-                        onMouseOver(this, null);
+                        onMouseOver(this);
                 }
             }
             // Check to see if the mouse is out
@@ -83,7 +83,7 @@ namespace GameUI.Components
                     IsMouseOver = false;
 
                     if (onMouseOut != null)
-                        onMouseOut(currentMouse, null);
+                        onMouseOut(currentMouse);
                 }
             }
 
@@ -95,7 +95,7 @@ namespace GameUI.Components
                     IsMouseClick = true;
 
                     if (onMouseClick != null)
-                        onMouseClick(currentMouse, null);
+                        onMouseClick(currentMouse);
                 }
             }
 
@@ -105,7 +105,7 @@ namespace GameUI.Components
                 if (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y)
                 {
                     if (onDrag != null)
-                        onDrag(currentMouse, null);
+                        onDrag(currentMouse);
                 }
 
                 if (currentMouse.LeftButton != ButtonState.Pressed)
@@ -113,7 +113,7 @@ namespace GameUI.Components
                     IsMouseClick = false;
 
                     if (onDragEnd != null)
-                        onDragEnd(currentMouse, null);
+                        onDragEnd(currentMouse);
                 }
             }
 

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<components assembly="TheArena">
+  <component name="CharacterScreen" type="GameUI.Components.BaseWindow" x="0" y="24" width="256" height="256">
+    <properties>
+      <property name="PaddingTop" value="5" />
+      <property name="PaddingBottom" value="8" />
+      <property name="PaddingLeft" value="8" />
+      <property name="PaddingRight" value="8" />
+      <property name="FrameTop" value="1" />
+      <property name="FrameBottom" value="4" />
+      <property name="FrameLeft" value="4" />
+      <property name="FrameRight" value="4" />
+      <property name="Texture" value="UI/Window-Content" />
+      <property name="Font" value="Fonts/SilkScreenBold" />
+    </properties>
+
+    <components>
+      <component name="CharacterScreenTitleBar" type="GameUI.Components.TitleBar" x="0" y="-24" width="256" height="24">
+        <properties>
+          <property name="FrameTop" value="1" />
+          <property name="FrameBottom" value="1" />
+          <property name="FrameLeft" value="1" />
+          <property name="FrameRight" value="1" />
+          <property name="Texture" value="UI/Window-Title" />
+          <property name="Font" value="Fonts/SilkScreenBold" />
+          <property name="Text" value="Character" />
+          <property name="UseParentContentPane" value="false" />
+          <property name="$onMouseClick" value="TitleBar_onMouseClick" />
+          <property name="$onDrag" value="TitleBar_onDrag" />
+          <property name="$onDragEnd" value="TitleBar_onDragEnd" />
+        </properties>
+      </component>
+      <component name="EquippedHead" type="TheArena.HUD.ItemSlot" x="0" y="0" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+    </components>
+  </component>
+  
+</components>

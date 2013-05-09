@@ -72,32 +72,32 @@ namespace TheArena.HUD
         }
 
 
-        private void ItemSlot_onMouseOver(object sender, EventArgs e)
+        private void ItemSlot_onMouseOver(object sender)
         {
             _sourceRect.X = 34;
             _drawToolTip = true;
         }
 
-        private void ItemSlot_onMouseOut(object sender, EventArgs e)
+        private void ItemSlot_onMouseOut(object sender)
         {
             _sourceRect.X = 0;
             _drawToolTip = false;
         }
 
-        private void ItemSlot_onMouseClick(object sender, EventArgs e)
+        private void ItemSlot_onMouseClick(object sender)
         {
             _followMouse = true;
             _drawToolTip = false;
         }
 
-        private void ItemSlot_onDrag(object sender, EventArgs e)
+        private void ItemSlot_onDrag(object sender)
         {
             MouseState mouse = (MouseState)sender;
 
             _mousePosition = new Vector2(mouse.X, mouse.Y);
         }
 
-        private void ItemSlot_onDragEnd(object sender, EventArgs e)
+        private void ItemSlot_onDragEnd(object sender)
         {
             _followMouse = false;
 

@@ -46,7 +46,9 @@ namespace GameUI
             _input.Update();
 
             foreach (string comp in _components.Keys)
-                _components[comp].HandleInput(_input, _prevScreenArea);
+                // if the component handles the input stop trying to process more
+                if (_components[comp].HandleInput(_input, _prevScreenArea))
+                    break;
         }
 
         public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime, Rectangle screenArea)

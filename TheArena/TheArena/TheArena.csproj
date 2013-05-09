@@ -253,9 +253,8 @@
     <None Include="Animations\Weapons\staff.anim">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="HUD\Elements\CharacterScreen.ui">
+    <None Include="HUD\Elements\Components.ui">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

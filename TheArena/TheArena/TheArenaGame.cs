@@ -119,8 +119,10 @@ namespace TheArena
 
             DefaultSpriteFont = Content.Load<SpriteFont>(@"Fonts\Default");
 
-            BaseWindow win = BaseWindow.LoadWindowFromXML(Content, "HUD/Elements/CharacterScreen.ui");
-            Hud.AddComponent(win.Name, win);
+            //BaseWindow win = BaseWindow.LoadWindowFromXML(Content, "HUD/Elements/CharacterScreen.ui");
+            List<Component> hudComponents = Component.LoadComponentsFromXml("HUD/Elements/Components.ui", Content);
+            foreach (Component c in hudComponents)
+                Hud.AddComponent(c.Name, c);
         }
 
         /// <summary>
