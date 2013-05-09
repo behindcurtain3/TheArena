@@ -10,8 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using TheArena.Shaders;
 using TheArena.GameObjects.Mobs;
-using TheArena.Interfaces;
 using System.ComponentModel;
+using GameEngine.Extensions;
 
 namespace TheArena.GameObjects.Heroes
 {
@@ -88,10 +88,11 @@ namespace TheArena.GameObjects.Heroes
         /// </summary>
         public int Intensity { get; set; }
 
-        private List<Entity> _prevIntersectingEntities;
-        private List<Entity> _prevAttackedEntities;
         private SoundEffect[] _onHitSfx;
         private SoundEffect[] _onDeathSfx;
+
+        // List of Entities hit during an attack cycle.
+        List<Entity> _hitEntityList = new List<Entity>();
 
         public Hero() : base(NPC.RACE_HUMAN_MALE)
         {
@@ -112,8 +113,6 @@ namespace TheArena.GameObjects.Heroes
 
         private void Construct(float x, float y)
         {
-            _prevAttackedEntities = new List<Entity>();
-
             Strength = 10;
             Dexterity = 10;
             Wisdom = 10;
@@ -125,6 +124,7 @@ namespace TheArena.GameObjects.Heroes
             Mana = MaxMana;
 
             XP = 0;
+            Faction = "Allies";
 
             LightSource = new LightSource();
             LightSource.Width = 32 * 8;
@@ -136,8 +136,7 @@ namespace TheArena.GameObjects.Heroes
 
         public override void PostCreate(GameTime gameTime, TeeEngine engine)
         {
-            LightShader lightShader = (LightShader)engine.GetPostGameShader("LightShader");
-            lightShader.LightSources.Add(LightSource);
+            engine.AddEntity(LightSource);
         }
 
         public override void LoadContent(ContentManager content)
@@ -145,22 +144,13 @@ namespace TheArena.GameObjects.Heroes
             base.LoadContent(content);
 
             _onHitSfx = new SoundEffect[3];
-            _onHitSfx[0] = content.Load<SoundEffect>("Sounds/Characters/Hit_Hurt14");
-            _onHitSfx[1] = content.Load<SoundEffect>("Sounds/Characters/Hit_Hurt6");
-            _onHitSfx[2] = content.Load<SoundEffect>("Sounds/Characters/Hit_Hurt11");
+            _onHitSfx[0] = content.Load<SoundEffect>("Sounds/Characters/Hit/Hit_14");
+            _onHitSfx[1] = content.Load<SoundEffect>("Sounds/Characters/Hit/Hit_6");
+            _onHitSfx[2] = content.Load<SoundEffect>("Sounds/Characters/Hit/Hit_11");
 
             _onDeathSfx = new SoundEffect[2];
             _onDeathSfx[0] = content.Load<SoundEffect>("Sounds/Characters/Death/revenge1");
             _onDeathSfx[1] = content.Load<SoundEffect>("Sounds/Characters/Death/death1");
-        }
-
-        // TODO REMOVE.
-        private bool ContainsItem(string[] array, string item)
-        {
-            for (int i = 0; i < array.Length; i++)
-                if (array[i] == item) return true;
-
-            return false;
         }
 
         public override void Update(GameTime gameTime, TeeEngine engine)
@@ -181,7 +171,6 @@ namespace TheArena.GameObjects.Heroes
             }
             else
             {
-                MouseState mouseState = Mouse.GetState();
                 KeyboardState keyboardState = Keyboard.GetState();
 
                 Vector2 movement = Vector2.Zero;
@@ -191,110 +180,124 @@ namespace TheArena.GameObjects.Heroes
                 Tile prevTile = engine.Map.GetPxTopMostTile(Pos.X, Pos.Y);
                 float moveSpeedModifier = prevTile.GetProperty<float>("MoveSpeed", 1.0f);
 
-                // Restore opacity after a hit
-                if (Opacity < 1)
-                {
-                    Opacity += 0.02f;
-                    if (Opacity > 1) Opacity = 1;
-                }
+                // TODO: Improve, we are retrieving this twice because it is called again in the CollidableEntity loop.
+                List<Entity> intersectingEntities = engine.Collider.GetIntersectingEntites(CurrentBoundingBox);
 
-                // ATTACK KEY.
-                if (keyboardState.IsKeyDown(Keys.A))
+                if (CurrentDrawableState.Contains("Slash")
+                    && !Drawables.IsStateFinished(CurrentDrawableState, gameTime))
                 {
-                    bool reset = !CurrentDrawableState.StartsWith(AttackType);
-                    CurrentDrawableState = AttackType + Direction;
+                    foreach (Entity entity in intersectingEntities)
+                    {
+                        if (this != entity && entity is NPC && !_hitEntityList.Contains(entity))
+                        {
+                            NPC entityNPC = (NPC)entity;
+                            if (entityNPC.Faction != this.Faction)
+                            {
+                                _hitEntityList.Add(entityNPC);
 
-                    if (reset) Drawables.ResetState(CurrentDrawableState, gameTime);
+                                entityNPC.HP -= RollForDamage();
+                                entityNPC.OnHit(this, gameTime, engine);
+                            }
+                        }                        
+                    }
                 }
                 else
                 {
-                    // MOVEMENT BASED KEYBOARD EVENTS.
-                    if (keyboardState.IsKeyDown(Keys.Up))
+                    _hitEntityList.Clear();
+
+                    if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.A, engine, true))
                     {
-                        CurrentDrawableState = "Walk_Up";
-                        Direction = Direction.Up;
-
-                        movement.Y--;
+                        CurrentDrawableState = "Slash_" + Direction;
+                        Drawables.ResetState(CurrentDrawableState, gameTime);
                     }
-                    if (keyboardState.IsKeyDown(Keys.Down))
-                    {
-                        CurrentDrawableState = "Walk_Down";
-                        Direction = Direction.Down;
-
-                        movement.Y++;
-                    }
-                    if (keyboardState.IsKeyDown(Keys.Left))
-                    {
-                        CurrentDrawableState = "Walk_Left";
-                        Direction = Direction.Left;
-
-                        movement.X--;
-                    }
-                    if (keyboardState.IsKeyDown(Keys.Right))
-                    {
-                        CurrentDrawableState = "Walk_Right";
-                        Direction = Direction.Right;
-
-                        movement.X++;
-                    }
-
-                    // Set animation to idle of no movements where made.
-                    if (movement.Length() == 0)
-                        CurrentDrawableState = "Idle_" + Direction;
                     else
                     {
-                        movement.Normalize();
-                        Pos += movement * MOVEMENT_SPEED * moveSpeedModifier;
-                    }
-                }
-                
-                // Change the radius of the LightSource overtime using a SINE wave pattern.
-                LightSource.Pos = Pos;
-                LightSource.Width = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
-                LightSource.Height = (int)(32 * (8.0f + 0.5 * Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3)));
-                  
-                _prevIntersectingEntities = engine.Collider.GetIntersectingEntites(this.CurrentBoundingBox);
-
-                foreach (Entity entity in _prevIntersectingEntities)
-                {
-                    if (!CurrentDrawableState.Contains(AttackType) && _prevAttackedEntities.Contains(entity))
-                    {
-                        _prevAttackedEntities.Remove(entity);
-                    }
-                    if (entity is IAttackable && entity != this)
-                    {
-                        if (CurrentDrawableState.Contains(AttackType) &&
-                            !_prevAttackedEntities.Contains(entity) &&
-                            Entity.IntersectsWith(this, "Weapon", entity, "Body", gameTime))
+                        // Interaction
+                        if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.S, engine, true))
                         {
-                            ((IAttackable)entity).onHit(this, RollForDamage(), gameTime);
-                            _prevAttackedEntities.Add(entity);
+                            foreach (Entity entity in intersectingEntities)
+                            {
+                                if (entity != this && entity is NPC)
+                                {
+                                    NPC entityNPC = (NPC)entity;
+                                    if (entityNPC.Faction == this.Faction)
+                                        entityNPC.OnInteract(this, gameTime, engine);
+                                }
+
+                            }
                         }
+
+                        // MOVEMENT BASED KEYBOARD EVENTS.
+                        if (keyboardState.IsKeyDown(Keys.Up))
+                        {
+                            CurrentDrawableState = "Walk_Up";
+                            Direction = Direction.Up;
+
+                            movement.Y--;
+                        }
+                        if (keyboardState.IsKeyDown(Keys.Down))
+                        {
+                            CurrentDrawableState = "Walk_Down";
+                            Direction = Direction.Down;
+
+                            movement.Y++;
+                        }
+                        if (keyboardState.IsKeyDown(Keys.Left))
+                        {
+                            CurrentDrawableState = "Walk_Left";
+                            Direction = Direction.Left;
+
+                            movement.X--;
+                        }
+                        if (keyboardState.IsKeyDown(Keys.Right))
+                        {
+                            CurrentDrawableState = "Walk_Right";
+                            Direction = Direction.Right;
+
+                            movement.X++;
+                        }
+
+                        // Set animation to idle of no movements where made.
+                        if (movement.Length() == 0)
+                            CurrentDrawableState = "Idle_" + Direction;
+                        else
+                        {
+                            movement.Normalize();
+                            Pos += movement * MOVEMENT_SPEED * moveSpeedModifier;
+                        }
+
+                        LightSource.Pos = this.Pos;
                     }
                 }
+
+                if (Opacity < 1.0f)
+                    Opacity += 0.02f;
+
+                if (Opacity > 1.0f)
+                    Opacity = 1.0f;
             }
 
             base.Update(gameTime, engine);
         }
 
-        public override void onHit(Entity source, int damage, GameTime gameTime)
+        public override void OnHit(Entity source, GameTime gameTime, TeeEngine engine)
         {
-            if (HP <= 0) return;
-
-            base.onHit(source, damage, gameTime);
-
             if (HP <= 0)
             {
-                HP = 0;
-                CurrentDrawableState = "Hurt";
-                Drawables.ResetState("Hurt", gameTime);
+                if (!CurrentDrawableState.Contains("Hurt"))
+                {
+                    CurrentDrawableState = "Hurt";
+                    Drawables.ResetState("Hurt", gameTime);
+                    _onDeathSfx[randomGenerator.Next(0, _onDeathSfx.Length)].Play(0.5f, 0.0f, 0.0f);
+                }
 
-                _onDeathSfx[randomGenerator.Next(0, _onDeathSfx.Length)].Play(0.2f, 0.0f, 0.0f);
+                if (HP < 0)
+                    HP = 0;
             }
             else
             {
                 // Increase intensity based on how much damage is done
-                Intensity += damage;
+                //Intensity += damage;
 
                 // Gfx & Sfx
                 Opacity = 0.5f;
@@ -310,7 +313,7 @@ namespace TheArena.GameObjects.Heroes
         public void UpdateMaxHP()
         {
             // Keep the HP at the same % of max hp after changing MaxHP
-            float percentMax = (MaxHP == 0) ? 1f : (HP / MaxHP);
+            float percentMax = (MaxHP == 0) ? 1f : ((float)HP / (float)MaxHP);
             MaxHP = 105 + (int)(Strength * 2);
             HP = (int)(MaxHP * percentMax);
         }
@@ -318,7 +321,7 @@ namespace TheArena.GameObjects.Heroes
         public void UpdateMaxMana()
         {
             // Keep the Mana at the same % of max hp after changing MaxMana
-            float percentMax = (MaxMana == 0) ? 1f : (Mana / MaxMana);
+            float percentMax = (MaxMana == 0) ? 1f : ((float)Mana / (float)MaxMana);
             MaxMana = (int)(Wisdom * 3);
             Mana = (int)(MaxMana * percentMax);
         }

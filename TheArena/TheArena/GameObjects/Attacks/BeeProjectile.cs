@@ -5,7 +5,6 @@ using System.Text;
 using GameEngine.GameObjects;
 using Microsoft.Xna.Framework;
 using GameEngine.Drawing;
-using TheArena.Interfaces;
 
 namespace TheArena.GameObjects.Attacks
 {
@@ -56,7 +55,12 @@ namespace TheArena.GameObjects.Attacks
             if (Entity.IntersectsWith(this, "Body", Target, "Body", gameTime))
             {
                 // Target is hit
-                ((IAttackable)Target).onHit(this, Damage, gameTime);
+                if (Target is NPC)
+                {
+                    NPC target = (NPC)Target;
+                    target.HP -= Damage;
+                    target.OnHit(this, gameTime, engine);
+                }
 
                 engine.RemoveEntity(this);
             }

@@ -12,13 +12,13 @@ namespace TheArena.GameObjects.Mobs
     {
 
         public Bee()
-            : base(Mob.BEE)
+            : base(NPC.CREATURES_BEE)
         {
             Construct();
         }
 
         public Bee(float x, float y)
-            : base(x, y, Mob.BEE)
+            : base(x, y, NPC.CREATURES_BEE)
         {
             Construct();
         }

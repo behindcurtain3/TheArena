@@ -4,24 +4,19 @@ using Microsoft.Xna.Framework;
 using GameEngine.Drawing;
 using System;
 using TheArena.GameObjects.Heroes;
-using TheArena.Interfaces;
 using TheArena.GameObjects.Attacks;
 
 namespace TheArena.GameObjects.Mobs
 {
-    public class Mob : Entity, IAttackable
+    public class Mob : NPC
     {
         public enum AttackStance { NotAttacking, Preparing, Attacking, Retreating };
-        public const string BAT = @"Animations/Monsters/bat.anim";
-        public const string BEE = @"Animations/Monsters/bee.anim";
-
+        
         private const int ATTACK_COUNTER_LIMIT = 40;
 
         private static Random randomGenerator = new Random();
 
-        public string Type { get; set; }
         public int Lvl { get; set; }
-        public int HP { get; set; }
         public int MaxHP { get; internal set; }
         public int Damage { get; set; }
         public int WorthGold { get; set; }
@@ -42,9 +37,9 @@ namespace TheArena.GameObjects.Mobs
         private float _moveSpeed = 1.8f;
         private bool _attackHit = false;
 
-        public Mob()
+        public Mob() : base(NPC.CREATURES_BAT)
         {
-            Construct(0, 0, BAT);
+            Construct(0, 0, NPC.CREATURES_BAT);
         }
 
         public Mob(string type)
@@ -53,7 +48,7 @@ namespace TheArena.GameObjects.Mobs
         }
 
         public Mob(float x, float y, string type)
-            : base(x, y)
+            : base(type)
         {
             Construct(x, y, type);
         }
@@ -64,7 +59,8 @@ namespace TheArena.GameObjects.Mobs
             HP = Lvl * 55;
             Damage = 25;
             Pos = new Vector2(x, y);
-            Type = type;
+            BaseRace = type;
+            Faction = "Creatures";
 
             _randomModifier = randomGenerator.NextDouble();
             _xpGiven = false;
@@ -73,16 +69,16 @@ namespace TheArena.GameObjects.Mobs
             AttackDistance = 40;
             AggroDistance = 200;
             Stance = AttackStance.NotAttacking;
+            EntityCollisionEnabled = false;
+            TerrainCollisionEnabled = false;
         }
 
         public override void LoadContent(ContentManager content)
         {
             // Load in the animation
-            DrawableSet.LoadDrawableSetXml(Drawables, Type, content);
+            DrawableSet.LoadDrawableSetXml(Drawables, BaseRace, content);
 
             CurrentDrawableState = "Down";
-
-            base.LoadContent(content);
         }
 
         public override void Update(GameTime gameTime, GameEngine.TeeEngine engine)
@@ -218,16 +214,13 @@ namespace TheArena.GameObjects.Mobs
             base.Update(gameTime, engine);
         }
 
-        public void onHit(Entity source, int damage, GameTime gameTime)
+        public override void OnHit(Entity sender, GameTime gameTime, GameEngine.TeeEngine engine)
         {
-            HP -= damage;
-
-            if (HP <= 0 && !_xpGiven && source is Hero)
+            if (HP <= 0 && !_xpGiven && sender is Hero)
             {
-                ((Hero)source).RewardXP(Lvl);
+                ((Hero)sender).RewardXP(Lvl);
                 _xpGiven = true;
             }
-            
         }
 
         /// <summary>
@@ -237,7 +230,13 @@ namespace TheArena.GameObjects.Mobs
         {
             if (!_attackHit && Entity.IntersectsWith(this, "Shadow", AttackTarget, "Shadow", gameTime))
             {
-                ((IAttackable)AttackTarget).onHit(this, Damage, gameTime);
+                if (AttackTarget is NPC)
+                {
+                    NPC target = (NPC)AttackTarget;
+
+                    target.HP -= Damage;
+                    target.OnHit(this, gameTime, engine);
+                }
                 _attackHit = true;
             }
 

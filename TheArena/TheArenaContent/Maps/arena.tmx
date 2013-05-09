@@ -289,5 +289,6 @@
    </properties>
   </object>
   <object name="Pathfinder" type="TheArena.GameObjects.PathFinder" x="522" y="233"/>
+  <object name="CombatDummy" type="TheArena.GameObjects.CombatDummy" x="876" y="145"/>
  </objectgroup>
 </map>

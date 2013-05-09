@@ -9,7 +9,7 @@ namespace TheArena.GameObjects.Mobs
     {
 
         public Bat(float x, float y)
-            : base(x, y, Mob.BAT)
+            : base(x, y, NPC.CREATURES_BAT)
         {
             WorthGold = 1;
             MaxHP = 100;

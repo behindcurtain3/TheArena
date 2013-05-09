@@ -38,7 +38,7 @@ namespace TheArena
         bool showDebugInfo = false;
         bool showDiagnostics = false;
 
-        float Zoom = 1.2f;
+        float Zoom = 1.65f;
 
         int TextCounter = 0;
         int SamplerIndex = 0;

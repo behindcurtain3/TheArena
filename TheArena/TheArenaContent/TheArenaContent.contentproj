@@ -698,18 +698,18 @@
       <Name>watergrass</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Sounds\Characters\Hit_Hurt14.wav">
-      <Name>Hit_Hurt14</Name>
+    <Compile Include="Sounds\Characters\Hit\Hit_14.wav">
+      <Name>Hit_14</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\Characters\Hit_Hurt6.wav">
-      <Name>Hit_Hurt6</Name>
+    <Compile Include="Sounds\Characters\Hit\Hit_6.wav">
+      <Name>Hit_6</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\Characters\Hit_Hurt11.wav">
-      <Name>Hit_Hurt11</Name>
+    <Compile Include="Sounds\Characters\Hit\Hit_11.wav">
+      <Name>Hit_11</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

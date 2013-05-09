@@ -3,16 +3,16 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using GameEngine.Drawing;
 using System;
-using TheArena.Interfaces;
 using TheArena.Items;
 using System.Collections.Generic;
 using System.ComponentModel;
+using GameEngine;
 
 namespace TheArena.GameObjects
 {
     public enum Direction { Up, Right, Down, Left };
 
-    public class NPC : CollidableEntity, IAttackable, INotifyPropertyChanged
+    public class NPC : CollidableEntity, INotifyPropertyChanged
     {
         
         public static Random randomGenerator = new Random();
@@ -21,11 +21,16 @@ namespace TheArena.GameObjects
         public const string RACE_HUMAN_FEMALE = @"Animations/Characters/female_npc.anim";
         public const string RACE_UNDEAD = @"Animations/Characters/skeleton.anim";
 
+        public const string CREATURES_DUMMY = @"Animations/Monsters/combat_dummy.anim";
+        public const string CREATURES_BAT = @"Animations/Monsters/bat.anim";
+        public const string CREATURES_BEE = @"Animations/Monsters/bee.anim";
+
         public Direction Direction { get; set; }
 
         public List<Item> Backpack { get; set; }
         public Dictionary<ItemType, Item> Equiped { get; set; }
         public string BaseRace { get; set; }
+        public string Faction { get; set; }
 
         // Stats
         private int _level;
@@ -40,7 +45,20 @@ namespace TheArena.GameObjects
         }
 
 
-        public int HP { get; set; }
+        public int HP 
+        {
+            get { return _hp; }
+            set
+            {
+                _hp = value;
+
+                if (_hp <= 0)
+                    _hp = 0;
+            }
+        }
+        private int _hp = 100;
+
+
         public int MaxHP { get; set; }
         public int XP { get; set; }
         public int XPToNextLevel { get; set; }
@@ -64,7 +82,7 @@ namespace TheArena.GameObjects
         private void Construct(float x, float y, string baseRace)
         {
             this.Level = 1;
-            this.HP = 0;
+            this.HP = 100;
             this.MaxHP = 0;
             this.XP = 0;
             this.XPToNextLevel = GetNeededXpAmount();
@@ -85,11 +103,6 @@ namespace TheArena.GameObjects
         {
             DrawableSet.LoadDrawableSetXml(Drawables, BaseRace, content);
             CurrentDrawableState = "Idle_Right";
-        }
-
-        public virtual void onHit(Entity source, int damage, GameTime gameTime)
-        {
-            HP -= damage;
         }
 
         /// <summary>
@@ -128,6 +141,31 @@ namespace TheArena.GameObjects
             Level++;
             XPToNextLevel = GetNeededXpAmount();
         }
+
+        #region Interaction Methods
+
+        /// <summary>
+        /// Method called when the NPC has been hit by some Entity residing within the
+        /// game engine. Override this method in order to perform custom functionality
+        /// during a Hit event.
+        /// </summary>
+        public virtual void OnHit(Entity sender, GameTime gameTime, TeeEngine engine)
+        {
+        }
+
+        /// <summary>
+        /// Method called when the NPC has been interacted with through some medium by
+        /// another Entity object residing within the same engine. Override this method in
+        /// order to allow interactions to occur with this entity.
+        /// </summary>
+        public virtual void OnInteract(Entity sender, GameTime gameTime, TeeEngine engine)
+        {
+            //SpeechBubble speech = new SpeechBubble(this, TimeSpan.FromSeconds(10));
+
+            //engine.AddEntity(speech);
+        }
+
+        #endregion
 
         #region Equipment Methods
 
