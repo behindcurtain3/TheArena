@@ -54,8 +54,13 @@ namespace GameUI
                 if (c.Name.Equals(name))
                     return c;
 
-                else if(c.Children.Count > 0)
-                    GetComponent(name, c.Children);
+                else if (c.Children.Count > 0)
+                {
+                    Component comp = GetComponent(name, c.Children);
+
+                    if (comp != null)
+                        return comp;
+                }
             }
 
             // Return null if not found

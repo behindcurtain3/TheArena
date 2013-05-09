@@ -198,7 +198,40 @@ namespace TheArena
 
                 characterScreen.Visible = !characterScreen.Visible;
             }
-            
+
+            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.L, this, true))
+            {
+                Hero player = (Hero)Engine.GetEntity("Player");
+                player.LevelUp();
+            }
+
+            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.B, this, true))
+            {
+                Hero player = (Hero)Engine.GetEntity("Player");
+                if (player != null)
+                {
+                    Label label = (Label)Hud.GetComponent("HeroLevel");
+                    if (label != null)
+                        label.SetDataBinding("Level", player);
+
+                    label = (Label)Hud.GetComponent("HeroStrength");
+                    if (label != null)
+                        label.SetDataBinding("Strength", player);
+
+                    label = (Label)Hud.GetComponent("HeroDexterity");
+                    if (label != null)
+                        label.SetDataBinding("Dexterity", player);
+
+                    label = (Label)Hud.GetComponent("HeroWisdom");
+                    if (label != null)
+                        label.SetDataBinding("Wisdom", player);
+
+
+                }
+
+                
+            }
+
             base.Update(gameTime);
         }
 

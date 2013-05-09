@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Reflection;
+using System.ComponentModel;
+using GameUI.Extensions;
 
 namespace GameUI.Components
 {
@@ -11,6 +14,8 @@ namespace GameUI.Components
     {
         public string Text { get; set; }
         public string Data { get; set; }
+
+        private string _boundProperty = String.Empty;
 
         public Label()
         {
@@ -28,6 +33,23 @@ namespace GameUI.Components
             {
                 Vector2 dataPositon = new Vector2(ContentPane.X + parent.X + ContentPane.Width - Font.MeasureString(Data).X, ContentPane.Y + parent.Y);
                 spriteBatch.DrawString(Font, Data, dataPositon, Color);
+            }
+        }
+
+        public void SetDataBinding(string property, INotifyPropertyChanged source)
+        {
+            source.PropertyChanged += new PropertyChangedEventHandler(binding_PropertyChanged);
+            _boundProperty = property;
+
+            // Update the data immediately
+            binding_PropertyChanged(source, new PropertyChangedEventArgs(property));
+        }
+
+        private void binding_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(_boundProperty))
+            {
+                Data = Convert.ToString(sender.GetType().GetProperty(_boundProperty).GetValue(sender, null));
             }
         }
 
