@@ -14,8 +14,18 @@ namespace GameUI.Components
         public int FrameLeft { get; set; }
         public int FrameRight { get; set; }
 
+        public FrameComponent()
+        {
+            Construct();
+        }
+
         public FrameComponent(Rectangle position)
             : base(position)
+        {
+            Construct();            
+        }
+
+        private void Construct()
         {
             FrameTop = 4;
             FrameBottom = 4;

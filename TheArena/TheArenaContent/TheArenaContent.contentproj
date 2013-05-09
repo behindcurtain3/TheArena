@@ -648,8 +648,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Fonts\Silkscreen.spritefont">
-      <Name>Silkscreen</Name>
+    <Compile Include="Fonts\SilkScreen.spritefont">
+      <Name>SilkScreen</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\ToolTipFlavor.spritefont">
+      <Name>ToolTipFlavor</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
@@ -811,6 +816,13 @@
     </Compile>
     <Compile Include="UI\Item-Frame.png">
       <Name>Item-Frame</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Tooltip-Frame.png">
+      <Name>Tooltip-Frame</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

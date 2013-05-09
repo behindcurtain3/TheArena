@@ -20,6 +20,8 @@ namespace GameUI.Components
 
         public Component Parent { get; set; }
 
+        public ToolTip ToolTip { get; set; }
+
         public bool Visible { get; set; }
 
         public string Name { get; set; }
@@ -86,9 +88,23 @@ namespace GameUI.Components
 
             // If none of the children handled the input then this component should try
             if (!inputHandled)
+            {
                 inputHandled = base.HandleInput(input, parent);
 
+                if (ToolTip != null)
+                    ToolTip.HandleInput(input, Position);
+            }
+
             return inputHandled;
+        }
+
+        public override void Update(ArenaUI hud, GameTime dt)
+        {
+            foreach (Component child in Children)
+                child.Update(hud, dt);
+
+            if (ToolTip != null)
+                ToolTip.Update(hud, dt);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent)
@@ -107,6 +123,20 @@ namespace GameUI.Components
                 else
                     child.Draw(spriteBatch, Position);
             }
+        }
+
+        public bool DrawToolTip(SpriteBatch spriteBatch, Rectangle parent)
+        {
+            foreach (Component child in Children)
+                if (child.DrawToolTip(spriteBatch, parent))
+                    return true;
+
+            if (ToolTip != null)
+            {
+                ToolTip.Draw(spriteBatch, parent);
+                return ToolTip.Visible;
+            }
+            return false;
         }
 
         /// <summary>
@@ -223,12 +253,22 @@ namespace GameUI.Components
                     comp.Texture = content.Load<Texture2D>(value);
                 else if (name.Equals("Font"))
                     comp.Font = content.Load<SpriteFont>(value);
+                else if (name.Equals("FlavorFont"))
+                    ((ToolTip)comp).FlavorFont = content.Load<SpriteFont>(value);
                 else
                     ReflectionExtensions.SmartSetProperty(comp, name, value);
             }
 
             // Reset the content pane on the component
             comp.ResetContentPane();
+
+            // Load the tooltip if specified
+            XmlNode tooltip = parentNode.SelectSingleNode("tooltip");
+            if (tooltip != null)
+            {
+                comp.ToolTip = (ToolTip)LoadComponentFromXmlNode(tooltip, content, assembly);
+                comp.ToolTip.Parent = comp;
+            }
 
             // Load any sub-components
             foreach (XmlNode child in parentNode.SelectNodes("components/component"))

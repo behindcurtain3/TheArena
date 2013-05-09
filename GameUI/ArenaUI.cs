@@ -77,6 +77,9 @@ namespace GameUI
                 // if the component handles the input stop trying to process more
                 if (_components[comp].HandleInput(_input, _prevScreenArea))
                     break;
+
+            foreach (string comp in _components.Keys)
+                _components[comp].Update(this, gameTime);
         }
 
         public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime, Rectangle screenArea)
@@ -89,6 +92,10 @@ namespace GameUI
             // Draw each component
             foreach (string comp in _components.Keys)
                 _components[comp].Draw(spriteBatch, screenArea);
+
+            foreach (string comp in _components.Keys)
+                if (_components[comp].DrawToolTip(spriteBatch, screenArea))
+                    break;
 
             spriteBatch.End();
 

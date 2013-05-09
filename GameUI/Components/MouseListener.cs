@@ -54,9 +54,8 @@ namespace GameUI.Components
             ConsumeOnMouseOver = false;
         }
 
-        public virtual void Update(GameTime dt)
+        public virtual void Update(ArenaUI hud, GameTime dt)
         {
-
         }
 
         public virtual bool HandleInput(InputState input, Rectangle parent)
