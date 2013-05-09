@@ -9,7 +9,7 @@ using GameEngine;
 using Microsoft.Xna.Framework.Audio;
 using System;
 
-namespace TheArena.GameObjects
+namespace TheArena.GameObjects.Mobs
 {
     public class CombatDummy : NPC
     {

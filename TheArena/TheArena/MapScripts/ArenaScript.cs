@@ -10,7 +10,7 @@ using GameEngine.Extensions;
 using Microsoft.Xna.Framework.Input;
 using TheArena.GameObjects.Heroes;
 using TheArena.GameObjects.Mobs;
-using TheArena.GameObjects;
+using TheArena.GameObjects.Misc;
 
 namespace TheArena.MapScripts
 {

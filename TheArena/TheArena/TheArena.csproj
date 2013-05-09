@@ -111,9 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameObjects\Attacks\BeeProjectile.cs" />
-    <Compile Include="GameObjects\Coin.cs" />
+    <Compile Include="GameObjects\Misc\Coin.cs" />
     <Compile Include="GameObjects\CollidableEntity.cs" />
-    <Compile Include="GameObjects\CombatDummy.cs" />
+    <Compile Include="GameObjects\Mobs\CombatDummy.cs" />
     <Compile Include="GameObjects\Heroes\DeathKnight.cs" />
     <Compile Include="GameObjects\Heroes\Hero.cs" />
     <Compile Include="GameObjects\Heroes\Monk.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="GameObjects\Mobs\Bat.cs" />
     <Compile Include="GameObjects\Mobs\Bee.cs" />
     <Compile Include="GameObjects\Mobs\Mob.cs" />
-    <Compile Include="GameObjects\MobSpawner.cs" />
+    <Compile Include="GameObjects\Misc\MobSpawner.cs" />
     <Compile Include="GameObjects\NPC.cs" />
     <Compile Include="GameObjects\PathFinder.cs" />
     <Compile Include="HUD\ItemSlot.cs" />

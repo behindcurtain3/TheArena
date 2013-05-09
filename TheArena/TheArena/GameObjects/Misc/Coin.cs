@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using TheArena.GameObjects.Heroes;
 
-namespace TheArena.GameObjects
+namespace TheArena.GameObjects.Misc
 {
     public enum CoinType { Gold, Silver, Copper };
 

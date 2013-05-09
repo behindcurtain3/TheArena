@@ -5,6 +5,7 @@ using GameEngine.Drawing;
 using System;
 using TheArena.GameObjects.Heroes;
 using TheArena.GameObjects.Attacks;
+using TheArena.GameObjects.Misc;
 
 namespace TheArena.GameObjects.Mobs
 {

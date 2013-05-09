@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using TheArena.GameObjects.Mobs;
 using GameEngine.Interfaces;
 
-namespace TheArena.GameObjects
+namespace TheArena.GameObjects.Misc
 {
     public class MobSpawner : Entity, ISizedEntity
     {
