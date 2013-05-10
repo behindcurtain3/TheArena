@@ -9,11 +9,35 @@ using Microsoft.Xna.Framework.Content;
 using System.IO;
 using GameUI.Extensions;
 using System.Reflection;
+using Microsoft.Xna.Framework.Input;
+using GameUI.Input;
 
 namespace GameUI.Components
 {
-    public class Component : MouseListener
+    public class Component
     {
+        #region Events
+
+        public delegate void OnMouseOverEventHandler(object sender);
+        public delegate void OnMouseOutEventHandler(object sender);
+        public delegate void OnMouseDownEventHandler(MouseState state);
+        public delegate void OnMouseUpEventHandler(MouseState state);
+        public delegate void OnMouseClickEventHandler(object sender);
+        public delegate void OnDragEventHandler(object sender);
+        public delegate void OnDragEndEventHandler(object sender);
+        public delegate void OnPositionChangedEventHandler(Rectangle position);
+
+        public event OnMouseOverEventHandler onMouseOver;
+        public event OnMouseOutEventHandler onMouseOut;
+        public event OnMouseDownEventHandler onMouseDown;
+        public event OnMouseUpEventHandler onMouseUp;
+        public event OnMouseClickEventHandler onMouseClick;
+        public event OnDragEventHandler onDrag;
+        public event OnDragEndEventHandler onDragEnd;
+        public event OnPositionChangedEventHandler onPositionChanged;
+
+        #endregion
+
         #region Properties
 
         public List<Component> Children { get; set; }
@@ -43,6 +67,26 @@ namespace GameUI.Components
 
         public bool UseParentContentPane { get; set; }
 
+        private Rectangle _position;
+        public Rectangle Position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
+
+                _position.Width = Math.Max(_position.Width, MinimumWidth);
+                _position.Height = Math.Max(_position.Height, MinimumHeight);
+
+                if (onPositionChanged != null)
+                    onPositionChanged(_position);
+            }
+        }
+
+        public int MinimumWidth { get; set; }
+        public int MinimumHeight { get; set; }
+        public bool IsMouseOver { get; set; }
+
         #endregion
 
         public Component()
@@ -63,50 +107,75 @@ namespace GameUI.Components
             Children = new List<Component>();
             Parent = null;
             UseParentContentPane = true;
+            IsMouseOver = false;
 
             PaddingTop = PaddingBottom = PaddingLeft = PaddingRight = 4;
 
             ResetContentPane();
 
-            base.onPositionChanged += new OnPositionChangedEventHandler(Component_onPositionChanged);
+            onPositionChanged += new OnPositionChangedEventHandler(Component_onPositionChanged);
         }
 
-        public override bool HandleInput(Input.InputState input, Rectangle parent)
+        public Component IsFocused(int x, int y, Rectangle parent)
         {
-            bool inputHandled = false;
-            
             foreach (Component child in Children)
             {
-                if (child.UseParentContentPane)
-                    inputHandled = child.HandleInput(input, ContentPane);
-                else
-                    inputHandled = child.HandleInput(input, Position);
-
-                if (inputHandled)
-                    break;
+                Component focused = child.IsFocused(x, y, (child.UseParentContentPane) ? ContentPane : Position);
+                if (focused != null)
+                    return focused;
             }
 
-            // If none of the children handled the input then this component should try
-            if (!inputHandled)
-            {
-                inputHandled = base.HandleInput(input, parent);
+            if (x >= parent.X + Position.X && x < parent.X + Position.X + Position.Width && y >= parent.Y + Position.Y && y < parent.Y + Position.Y + Position.Height)
+                return this;
 
-                if (ToolTip != null)
-                    ToolTip.HandleInput(input, Position);
-            }
-
-            return inputHandled;
+            return null;
         }
 
-        public override void Update(ArenaUI hud, GameTime dt)
+        public virtual void InjectMouseDown(ArenaUI hud, MouseState mouse)
+        {
+            if (onMouseDown != null)
+                onMouseDown(mouse);
+        }
+
+        public virtual void InjectMouseUp(ArenaUI hud, MouseState mouse)
+        {
+            if (onMouseUp != null)
+                onMouseUp(mouse);
+        }
+
+        public virtual void InjectMouseClick(ArenaUI hud, MouseState mouse)
+        {
+            if (onMouseClick != null)
+                onMouseClick(mouse);
+        }
+
+        public virtual void InjectMouseOver(ArenaUI hud, MouseState mouse)
+        {
+            if (onMouseOver != null)
+                onMouseOver(mouse);
+
+            IsMouseOver = true;
+        }
+
+        public virtual void InjectMouseOut(ArenaUI hud, MouseState mouse)
+        {
+            if (onMouseOut != null)
+                onMouseOut(mouse);
+
+            IsMouseOver = false;
+        }
+
+       
+        public virtual void Update(ArenaUI hud, GameTime dt, InputState input)
         {
             foreach (Component child in Children)
-                child.Update(hud, dt);
+                child.Update(hud, dt, input);
 
             if (ToolTip != null)
-                ToolTip.Update(hud, dt);
+                ToolTip.Update(hud, dt, input);
         }
-
+       
+ 
         public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent)
         {
             if (!Visible)

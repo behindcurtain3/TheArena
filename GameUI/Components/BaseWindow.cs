@@ -34,11 +34,6 @@ namespace GameUI.Components
             
         }
 
-        public override bool HandleInput(Input.InputState input, Rectangle parent)
-        {
-            return base.HandleInput(input, parent);
-        }
-
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
         {
             base.Draw(spriteBatch, parent);            

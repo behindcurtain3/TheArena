@@ -19,6 +19,8 @@ namespace GameUI
 
         private InputState _input;
         private Rectangle _prevScreenArea;
+        private Component _prevFocus;
+        private Component _clickFocus;
 
         public ArenaUI(Game game) : base(game)
         {
@@ -73,13 +75,49 @@ namespace GameUI
 
             _input.Update();
 
-            foreach (string comp in _components.Keys)
-                // if the component handles the input stop trying to process more
-                if (_components[comp].HandleInput(_input, _prevScreenArea))
+            MouseState currentMouse = _input.CurrentMouseState;
+            MouseState prevMouse = _input.LastMouseState;
+
+            Component currentFocus = null;
+            foreach (string node in _components.Keys)
+            {
+                currentFocus = _components[node].IsFocused(currentMouse.X, currentMouse.Y, _prevScreenArea);
+                if (currentFocus != null)
                     break;
+            }            
+
+            // If the focus changed, inject mouse over/out events
+            if (_prevFocus != currentFocus)
+            {
+                if (_prevFocus != null)
+                    _prevFocus.InjectMouseOut(this, currentMouse);
+
+                if (currentFocus != null)
+                    currentFocus.InjectMouseOver(this, currentMouse);
+            }
+
+            // Check for mouse down, on a mouse down event set _clickFocus to the current focused component
+            if (currentFocus != null && currentMouse.LeftButton == ButtonState.Pressed && prevMouse.LeftButton != ButtonState.Pressed)
+            {
+                _clickFocus = currentFocus;
+                _clickFocus.InjectMouseDown(this, currentMouse);
+            }
+
+            // Check for mouse up / click events
+            if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton != ButtonState.Released)
+            {
+                // If the component clicked is still the current focus send click event
+                if(_clickFocus != null && _clickFocus == currentFocus)
+                    _clickFocus.InjectMouseClick(this, currentMouse);
+
+                if (currentFocus != null)
+                    currentFocus.InjectMouseUp(this, currentMouse);
+            }
+
+            _prevFocus = currentFocus;
 
             foreach (string comp in _components.Keys)
-                _components[comp].Update(this, gameTime);
+                _components[comp].Update(this, gameTime, _input);
         }
 
         public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime, Rectangle screenArea)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameUI.Input;
 
 namespace GameUI.Components
 {
@@ -31,36 +32,7 @@ namespace GameUI.Components
             PaddingBottom = 10;
         }
 
-        public override bool HandleInput(Input.InputState input, Rectangle parent)
-        {
-            if (Parent == null)
-                return false;
-
-            _mousePosition.X = input.CurrentMouseState.X;
-            _mousePosition.Y = input.CurrentMouseState.Y;
-
-            int width;
-            int height;
-
-            if (_showFlavorText)
-            {
-                width = Math.Max((int)Font.MeasureString(Text).X, (int)FlavorFont.MeasureString(FlavorText).X);
-                width = Math.Max(100, width + FrameLeft + FrameRight + PaddingLeft + PaddingRight);
-
-                height = Math.Max(15, (int)Font.MeasureString(Text).Y + (int)FlavorFont.MeasureString(FlavorText).Y + 4 + PaddingBottom + FrameTop + FrameBottom);
-            }
-            else
-            {
-                width = Math.Max(100, (int)Font.MeasureString(Text).X + 20);
-                height = Math.Max(15, (int)Font.MeasureString(Text).Y + PaddingBottom + FrameTop + FrameBottom);
-            }
-
-            Position = new Rectangle((int)_mousePosition.X + 10, (int)_mousePosition.Y, width, height);
-
-            return false;
-        }
-
-        public override void Update(ArenaUI hud, GameTime dt)
+        public override void Update(ArenaUI hud, GameTime dt, InputState input)
         {
             if (Parent == null)
                 return;
@@ -84,6 +56,27 @@ namespace GameUI.Components
                 _showFlavorText = false;
                 _durationOfFlavor = 0;
             }
+
+            _mousePosition.X = input.CurrentMouseState.X;
+            _mousePosition.Y = input.CurrentMouseState.Y;
+
+            int width;
+            int height;
+
+            if (_showFlavorText)
+            {
+                width = Math.Max((int)Font.MeasureString(Text).X, (int)FlavorFont.MeasureString(FlavorText).X);
+                width = Math.Max(100, width + FrameLeft + FrameRight + PaddingLeft + PaddingRight);
+
+                height = Math.Max(15, (int)Font.MeasureString(Text).Y + (int)FlavorFont.MeasureString(FlavorText).Y + 4 + PaddingBottom + FrameTop + FrameBottom);
+            }
+            else
+            {
+                width = Math.Max(100, (int)Font.MeasureString(Text).X + 20);
+                height = Math.Max(15, (int)Font.MeasureString(Text).Y + PaddingBottom + FrameTop + FrameBottom);
+            }
+
+            Position = new Rectangle((int)_mousePosition.X + 10, (int)_mousePosition.Y, width, height);
         }
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
