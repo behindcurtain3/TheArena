@@ -90,12 +90,21 @@ namespace TheArena.MapScripts
 
             if (_mobSpawnTimer >= _mobSpawnDelay && player.Intensity < 30)
             {
-                // Spawn a new mob on a random mob spawner
-                int spawner = randomGenerator.Next(0, _spawners.Count);
+                List<Entity> entities = new List<Entity>(engine.GetEntities());
+                List<Entity> mobs = entities.FindAll(delegate(Entity e) { return e is Mob; });
 
-                _spawners[spawner].SpawnMob(engine);
+                // Only have up to x mobs at once
+                if (mobs.Count < 15)
+                {
+
+                    // Spawn a new mob on a random mob spawner
+                    int spawner = randomGenerator.Next(0, _spawners.Count);
+
+                    _spawners[spawner].SpawnMob(engine);                    
+                }
+
+                // Reset the timer regardless, just check again later
                 _mobSpawnTimer = 0;
-
             }
         }
 

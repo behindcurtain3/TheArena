@@ -53,9 +53,7 @@
             <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
-      </component>
-      
-      
+      </component>      
       
       <component name="HeroStrength" type="GameUI.Components.Label" x="210" y="45" width="140">
         <properties>
