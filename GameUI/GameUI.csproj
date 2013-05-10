@@ -92,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Button.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\FrameComponent.cs" />
     <Compile Include="Components\Label.cs" />

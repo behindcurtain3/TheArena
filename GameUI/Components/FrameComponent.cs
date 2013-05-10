@@ -14,6 +14,8 @@ namespace GameUI.Components
         public int FrameLeft { get; set; }
         public int FrameRight { get; set; }
 
+        public Rectangle SourceOffset { get; set; }
+
         public FrameComponent()
         {
             Construct();
@@ -31,6 +33,8 @@ namespace GameUI.Components
             FrameBottom = 4;
             FrameLeft = 4;
             FrameRight = 4;
+
+            SourceOffset = Rectangle.Empty;
         }
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
@@ -51,26 +55,74 @@ namespace GameUI.Components
 
         public Rectangle GetSourceRectangle(int index)
         {
+            if (SourceOffset == Rectangle.Empty)
+                SourceOffset = new Rectangle(0, 0, Texture.Width, Texture.Height);
+
             switch (index)
             {
                 case 0:
-                    return new Rectangle(0, 0, FrameLeft, FrameTop);
+                    return new Rectangle(
+                                        SourceOffset.X, 
+                                        SourceOffset.Y, 
+                                        FrameLeft, 
+                                        FrameTop
+                                    );
                 case 1:
-                    return new Rectangle(FrameLeft, 0, Texture.Width - (FrameLeft + FrameRight), FrameTop);
+                    return new Rectangle(
+                                        SourceOffset.X + FrameLeft, 
+                                        SourceOffset.Y, 
+                                        SourceOffset.Width - (FrameLeft + FrameRight), 
+                                        FrameTop
+                                    );
                 case 2:
-                    return new Rectangle(Texture.Width - FrameRight, 0, FrameRight, FrameTop);
+                    return new Rectangle(
+                                        SourceOffset.X + SourceOffset.Width - FrameRight, 
+                                        SourceOffset.Y, 
+                                        FrameRight, 
+                                        FrameTop
+                                    );
                 case 3:
-                    return new Rectangle(0, FrameTop, FrameLeft, Texture.Height - (FrameTop + FrameBottom));
+                    return new Rectangle(
+                                        SourceOffset.X,
+                                        SourceOffset.Y + FrameTop, 
+                                        FrameLeft, 
+                                        Texture.Height - (FrameTop + FrameBottom)
+                                    );
                 case 4:
-                    return new Rectangle(FrameLeft, FrameTop, Texture.Width - (FrameLeft + FrameRight), Texture.Height - (FrameTop + FrameBottom));
+                    return new Rectangle(
+                                        SourceOffset.X + FrameLeft,
+                                        SourceOffset.Y + FrameTop, 
+                                        SourceOffset.Width - (FrameLeft + FrameRight), 
+                                        Texture.Height - (FrameTop + FrameBottom)
+                                    );
                 case 5:
-                    return new Rectangle(Texture.Width - FrameRight, FrameTop, FrameRight, Texture.Height - (FrameTop + FrameBottom));
+                    return new Rectangle(
+                                        SourceOffset.X + SourceOffset.Width - FrameRight,
+                                        SourceOffset.Y + FrameTop, 
+                                        FrameRight, 
+                                        Texture.Height - (FrameTop + FrameBottom)
+                                    );
                 case 6:
-                    return new Rectangle(0, Texture.Height - FrameBottom, FrameLeft, FrameBottom);
+                    return new Rectangle(
+                                        SourceOffset.X,
+                                        SourceOffset.Y + Texture.Height - FrameBottom, 
+                                        FrameLeft, 
+                                        FrameBottom
+                                    );
                 case 7:
-                    return new Rectangle(FrameLeft, Texture.Height - FrameBottom, Texture.Width - (FrameLeft + FrameRight), FrameBottom);
+                    return new Rectangle(
+                                        SourceOffset.X + FrameLeft,
+                                        SourceOffset.Y + Texture.Height - FrameBottom, 
+                                        SourceOffset.Width - (FrameLeft + FrameRight), 
+                                        FrameBottom
+                                    );
                 case 8:
-                    return new Rectangle(Texture.Width - FrameRight, Texture.Height - FrameBottom, FrameRight, FrameBottom);
+                    return new Rectangle(
+                                        SourceOffset.X + SourceOffset.Width - FrameRight, 
+                                        SourceOffset.Y + Texture.Height - FrameBottom, 
+                                        FrameRight, 
+                                        FrameBottom
+                                    );
             }
 
             return Position;

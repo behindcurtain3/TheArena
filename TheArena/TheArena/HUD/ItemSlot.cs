@@ -19,7 +19,6 @@ namespace TheArena.HUD
         public Item Item { get; set; }
 
         private Rectangle _sourceRect;
-        private bool _drawToolTip = false;
         private bool _followMouse = false;
         private Vector2 _mousePosition;
 
@@ -75,19 +74,16 @@ namespace TheArena.HUD
         private void ItemSlot_onMouseOver(object sender)
         {
             _sourceRect.X = 34;
-            _drawToolTip = true;
         }
 
         private void ItemSlot_onMouseOut(object sender)
         {
             _sourceRect.X = 0;
-            _drawToolTip = false;
         }
 
         private void ItemSlot_onMouseClick(object sender)
         {
             _followMouse = true;
-            _drawToolTip = false;
         }
 
         private void ItemSlot_onDrag(object sender)

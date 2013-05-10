@@ -13,6 +13,8 @@ namespace GameUI.Components
     {
         public delegate void OnMouseOverEventHandler(object sender);
         public delegate void OnMouseOutEventHandler(object sender);
+        public delegate void OnMouseDownEventHandler(MouseState state);
+        public delegate void OnMouseUpEventHandler(MouseState state);
         public delegate void OnMouseClickEventHandler(object sender);
         public delegate void OnDragEventHandler(object sender);
         public delegate void OnDragEndEventHandler(object sender);
@@ -20,6 +22,8 @@ namespace GameUI.Components
 
         public event OnMouseOverEventHandler onMouseOver;
         public event OnMouseOutEventHandler onMouseOut;
+        public event OnMouseDownEventHandler onMouseDown;
+        public event OnMouseUpEventHandler onMouseUp;
         public event OnMouseClickEventHandler onMouseClick;
         public event OnDragEventHandler onDrag;
         public event OnDragEndEventHandler onDragEnd;
@@ -46,6 +50,7 @@ namespace GameUI.Components
         public bool IsMouseOver { get; set; }
         public bool IsMouseClick { get; set; }
         public bool ConsumeOnMouseOver { get; set; }
+        public bool WasMouseClickedOver { get; set; }
 
         public MouseListener()
         {
@@ -82,6 +87,7 @@ namespace GameUI.Components
                 if (currentMouse.X < absPosition.X || currentMouse.X > absPosition.X + absPosition.Width || currentMouse.Y < absPosition.Y || currentMouse.Y > absPosition.Y + absPosition.Height)
                 {
                     IsMouseOver = false;
+                    WasMouseClickedOver = false;
 
                     if (onMouseOut != null)
                         onMouseOut(currentMouse);
@@ -93,14 +99,26 @@ namespace GameUI.Components
             {
                 if (currentMouse.LeftButton == ButtonState.Pressed && prevMouse.LeftButton != ButtonState.Pressed)
                 {
+                    WasMouseClickedOver = true;
                     IsMouseClick = true;
 
-                    if (onMouseClick != null)
+                    if (onMouseDown != null)
+                        onMouseDown(currentMouse);
+                }
+                else if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton == ButtonState.Pressed)
+                {
+                    if (WasMouseClickedOver && onMouseClick != null)
                         onMouseClick(currentMouse);
+
+                    if (onMouseUp != null)
+                        onMouseUp(currentMouse);
+                  
                 }
             }
 
             // Check for dragging && releasing the mouse
+            // TODO: Rework drag events
+            /*
             if (IsMouseClick)
             {
                 if (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y)
@@ -116,6 +134,14 @@ namespace GameUI.Components
                     if (onDragEnd != null)
                         onDragEnd(currentMouse);
                 }
+            }
+             */
+
+            // Always check for mouse being released to clear variables
+            if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton == ButtonState.Pressed)
+            {
+                IsMouseClick = false;
+                WasMouseClickedOver = false;
             }
 
             return IsMouseClick || (ConsumeOnMouseOver && IsMouseOver);

@@ -31,6 +31,14 @@
         </properties>
       </component>
 
+      <component name="TestButton" type="GameUI.Components.Button" x="0" y="150" width="150" height="32">
+        <properties>
+          <property name="Texture" value="UI/Button" />
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Hello!" />
+        </properties>
+      </component>
+
       <component name="HeroStatsLabel" type="GameUI.Components.Label" x="210" y="0" width="140">
         <properties>
           <property name="Font" value="Fonts/SilkScreenBold" />
