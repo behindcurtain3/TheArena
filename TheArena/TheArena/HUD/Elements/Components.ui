@@ -25,7 +25,7 @@
           <property name="Font" value="Fonts/SilkScreenBold" />
           <property name="Text" value="Character Information" />
           <property name="UseParentContentPane" value="false" />
-          <property name="$onMouseClick" value="TitleBar_onMouseClick" />
+          <property name="$onMouseDown" value="TitleBar_onMouseDown" />
           <property name="$onDrag" value="TitleBar_onDrag" />
           <property name="$onDragEnd" value="TitleBar_onDragEnd" />
         </properties>
@@ -97,6 +97,7 @@
         <properties>
           <property name="Font" value="Fonts/SilkScreen" />
           <property name="Text" value="Inventory" />
+          <property name="Layer" value="10" />
         </properties>
       </component>
       <component name="Backpack1" type="TheArena.HUD.ItemSlot" x="0" y="301" width="34" height="34">

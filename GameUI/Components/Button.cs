@@ -57,15 +57,11 @@ namespace GameUI.Components
         {
             // TODO: Take out magic numbers
             SourceOffset = new Rectangle(32, SourceOffset.Y, SourceOffset.Width, SourceOffset.Height);
-
-            IsMouseOver = true;
         }
 
         void Button_onMouseOut(object sender)
         {
             SourceOffset = new Rectangle(0, SourceOffset.Y, SourceOffset.Width, SourceOffset.Height);
-
-            IsMouseOver = false;
         }
 
         void Button_onMouseDown(Microsoft.Xna.Framework.Input.MouseState state)

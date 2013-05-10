@@ -73,7 +73,7 @@ namespace GameUI
         {
             base.Update(gameTime);
 
-            _input.Update();
+            _input.Update();            
 
             MouseState currentMouse = _input.CurrentMouseState;
             MouseState prevMouse = _input.LastMouseState;
@@ -95,6 +95,12 @@ namespace GameUI
                 if (currentFocus != null)
                     currentFocus.InjectMouseOver(this, currentMouse);
             }
+            // They are the same, check for mouse move events
+            else
+            {
+                if (currentFocus != null && (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y))
+                    currentFocus.InjectMouseMove(this, currentMouse);
+            }
 
             // Check for mouse down, on a mouse down event set _clickFocus to the current focused component
             if (currentFocus != null && currentMouse.LeftButton == ButtonState.Pressed && prevMouse.LeftButton != ButtonState.Pressed)
@@ -107,9 +113,15 @@ namespace GameUI
             if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton != ButtonState.Released)
             {
                 // If the component clicked is still the current focus send click event
-                if(_clickFocus != null && _clickFocus == currentFocus)
+                if (_clickFocus != null && _clickFocus == currentFocus)
                     _clickFocus.InjectMouseClick(this, currentMouse);
 
+                if (_clickFocus != currentFocus)
+                {
+                    if (_clickFocus != null)
+                        _clickFocus.InjectMouseUp(this, currentMouse);
+                }
+                
                 if (currentFocus != null)
                     currentFocus.InjectMouseUp(this, currentMouse);
             }

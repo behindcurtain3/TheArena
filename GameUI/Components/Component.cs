@@ -23,6 +23,7 @@ namespace GameUI.Components
         public delegate void OnMouseDownEventHandler(MouseState state);
         public delegate void OnMouseUpEventHandler(MouseState state);
         public delegate void OnMouseClickEventHandler(object sender);
+        public delegate void OnMouseMoveEventHandler(MouseState state);
         public delegate void OnDragEventHandler(object sender);
         public delegate void OnDragEndEventHandler(object sender);
         public delegate void OnPositionChangedEventHandler(Rectangle position);
@@ -32,6 +33,7 @@ namespace GameUI.Components
         public event OnMouseDownEventHandler onMouseDown;
         public event OnMouseUpEventHandler onMouseUp;
         public event OnMouseClickEventHandler onMouseClick;
+        public event OnMouseMoveEventHandler onMouseMove;
         public event OnDragEventHandler onDrag;
         public event OnDragEndEventHandler onDragEnd;
         public event OnPositionChangedEventHandler onPositionChanged;
@@ -85,7 +87,8 @@ namespace GameUI.Components
 
         public int MinimumWidth { get; set; }
         public int MinimumHeight { get; set; }
-        public bool IsMouseOver { get; set; }
+        public bool IsMouseOver { get; private set; }
+        public bool IsMouseDown { get; private set; }
 
         #endregion
 
@@ -135,12 +138,16 @@ namespace GameUI.Components
         {
             if (onMouseDown != null)
                 onMouseDown(mouse);
+
+            IsMouseDown = true;
         }
 
         public virtual void InjectMouseUp(ArenaUI hud, MouseState mouse)
         {
             if (onMouseUp != null)
                 onMouseUp(mouse);
+
+            IsMouseDown = false;
         }
 
         public virtual void InjectMouseClick(ArenaUI hud, MouseState mouse)
@@ -163,6 +170,18 @@ namespace GameUI.Components
                 onMouseOut(mouse);
 
             IsMouseOver = false;
+        }
+
+        public virtual void InjectMouseMove(ArenaUI hud, MouseState mouse)
+        {
+            if (onMouseMove != null)
+                onMouseMove(mouse);
+
+            if (IsMouseDown)
+            {
+                if (onDrag != null)
+                    onDrag(mouse);
+            }
         }
 
        
