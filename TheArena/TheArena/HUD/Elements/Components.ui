@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <components assembly="TheArena">
-  <component name="CharacterScreen" type="GameUI.Components.BaseWindow" x="830" y="28" width="366" height="384">
+  <component name="CharacterScreen" type="TheArena.HUD.CharacterWindow" x="4" y="28" width="366" height="384">
     <properties>
       <property name="PaddingTop" value="5" />
       <property name="PaddingBottom" value="8" />
@@ -23,7 +23,7 @@
           <property name="FrameRight" value="1" />
           <property name="Texture" value="UI/Window-Title" />
           <property name="Font" value="Fonts/SilkScreenBold" />
-          <property name="Text" value="Character Information" />
+          <property name="Text" value="Character Information [C]" />
           <property name="UseParentContentPane" value="false" />
           <property name="$onMouseDown" value="TitleBar_onMouseDown" />
           <property name="$onDrag" value="TitleBar_onDrag" />
@@ -31,12 +31,22 @@
         </properties>
       </component>
 
-      <component name="TestButton" type="GameUI.Components.Button" x="0" y="150" width="150" height="32">
+      <component name="CheatButton" type="GameUI.Components.Button" x="210" y="150" width="140" height="32">
         <properties>
           <property name="Texture" value="UI/Button" />
           <property name="Font" value="Fonts/SilkScreen" />
-          <property name="Text" value="Hello!" />
+          <property name="Text" value="Cheat" />
         </properties>
+        <tooltip name="CheatTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Text" value="Don't do it!" />
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorText" value="Okay, go ahead... this will increase your level and do a full heal" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
 
       <component name="HeroStatsLabel" type="GameUI.Components.Label" x="210" y="0" width="140">

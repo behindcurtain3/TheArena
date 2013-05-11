@@ -205,7 +205,7 @@ namespace TheArena.GameObjects.Heroes
                 {
                     _hitEntityList.Clear();
 
-                    if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.A, engine, true))
+                    if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.Space, engine, true))
                     {
                         CurrentDrawableState = "Slash_" + Direction;
                         Drawables.ResetState(CurrentDrawableState, gameTime);
@@ -213,7 +213,7 @@ namespace TheArena.GameObjects.Heroes
                     else
                     {
                         // Interaction
-                        if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.S, engine, true))
+                        if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.E, engine, true))
                         {
                             foreach (Entity entity in intersectingEntities)
                             {
@@ -228,28 +228,28 @@ namespace TheArena.GameObjects.Heroes
                         }
 
                         // MOVEMENT BASED KEYBOARD EVENTS.
-                        if (keyboardState.IsKeyDown(Keys.Up))
+                        if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W))
                         {
                             CurrentDrawableState = "Walk_Up";
                             Direction = Direction.Up;
 
                             movement.Y--;
                         }
-                        if (keyboardState.IsKeyDown(Keys.Down))
+                        if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S))
                         {
                             CurrentDrawableState = "Walk_Down";
                             Direction = Direction.Down;
 
                             movement.Y++;
                         }
-                        if (keyboardState.IsKeyDown(Keys.Left))
+                        if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
                         {
                             CurrentDrawableState = "Walk_Left";
                             Direction = Direction.Left;
 
                             movement.X--;
                         }
-                        if (keyboardState.IsKeyDown(Keys.Right))
+                        if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
                         {
                             CurrentDrawableState = "Walk_Right";
                             Direction = Direction.Right;

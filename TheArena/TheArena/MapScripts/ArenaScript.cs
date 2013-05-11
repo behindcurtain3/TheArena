@@ -72,6 +72,14 @@ namespace TheArena.MapScripts
                 label = (Label)Hud.GetComponent("HeroWisdom");
                 if (label != null)
                     label.SetDataBinding("Wisdom", player);
+
+                Button cheat = (Button)Hud.GetComponent("CheatButton");
+                if(cheat != null)
+                    cheat.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender){
+                        Hero p = (Hero)engine.GetEntity("Player");
+                        p.LevelUp();
+                        p.HP = p.MaxHP;
+                    });
             }
 
             _mapLoaded = true;
