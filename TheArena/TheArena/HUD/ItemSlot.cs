@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine.Drawing;
+using GameEngine.Extensions;
 
 namespace TheArena.HUD
 {
@@ -58,12 +59,15 @@ namespace TheArena.HUD
 
             spriteBatch.Draw(Texture, drawAt, _sourceRect, Color);
 
-            if (Item != null)
+            if (Item != null && Item.Icon != null)
             {
                 if (_followMouse)
                     spriteBatch.Draw(Item.Icon, _mousePosition - new Vector2(16, 16), Color);
                 else
-                    spriteBatch.Draw(Item.Icon, ContentPane, Color);
+                {
+                    drawAt = new Rectangle(ContentPane.X + parent.X, ContentPane.Y + parent.Y, ContentPane.Width, ContentPane.Height);
+                    spriteBatch.Draw(Item.Icon, drawAt, Color);
+                }
             }
         }
 

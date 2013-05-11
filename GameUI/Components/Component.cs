@@ -215,6 +215,9 @@ namespace GameUI.Components
 
         public bool DrawToolTip(SpriteBatch spriteBatch, Rectangle parent)
         {
+            if (!Visible)
+                return false;
+
             foreach (Component child in Children)
                 if (child.DrawToolTip(spriteBatch, parent))
                     return true;
@@ -242,7 +245,7 @@ namespace GameUI.Components
         {
             ContentPane = new Rectangle(
                                 Position.X + PaddingLeft,
-                                Position.Top + PaddingTop,
+                                Position.Y + PaddingTop,
                                 Position.Width - (PaddingRight + PaddingLeft),
                                 Position.Height - (PaddingBottom + PaddingTop)
                             );

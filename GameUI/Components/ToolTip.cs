@@ -34,13 +34,15 @@ namespace GameUI.Components
 
         public override void Update(ArenaUI hud, GameTime dt, InputState input)
         {
-            if (Parent == null)
+            if (Parent == null || Text == null || Text.Equals(String.Empty))
                 return;
 
             if (Parent.IsMouseOver)
             {
                 _durationOfMouseOver += dt.ElapsedGameTime.Milliseconds;
-                _durationOfFlavor += dt.ElapsedGameTime.Milliseconds;
+
+                if(FlavorText != null && !FlavorText.Equals(String.Empty))
+                    _durationOfFlavor += dt.ElapsedGameTime.Milliseconds;
 
                 if (_durationOfMouseOver >= _mouseOverDelay)
                     Visible = true;
@@ -81,7 +83,7 @@ namespace GameUI.Components
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
         {
-            if (Parent == null || !Visible)
+            if (Parent == null || !Visible || Text == null || Text.Equals(String.Empty))
                 return;
 
             base.Draw(spriteBatch, parent);

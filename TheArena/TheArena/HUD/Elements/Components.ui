@@ -107,31 +107,79 @@
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>
+        <tooltip name="HeadGearTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
       <component name="EquippedVest" type="TheArena.HUD.ItemSlot" x="0" y="60" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>
+        <tooltip name="VestTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
       <component name="EquippedPants" type="TheArena.HUD.ItemSlot" x="0" y="95" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>
+        <tooltip name="PantsTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
       <component name="EquippedWeapon" type="TheArena.HUD.ItemSlot" x="85" y="25" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>
+        <tooltip name="WeaponTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
       <component name="EquippedGloves" type="TheArena.HUD.ItemSlot" x="85" y="60" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>
+        <tooltip name="GlovesTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
       <component name="EquippedBoots" type="TheArena.HUD.ItemSlot" x="85" y="95" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>
+        <tooltip name="BootsTT" type="GameUI.Components.ToolTip">
+          <properties>
+            <property name="Texture" value="UI/ToolTip-Frame" />
+            <property name="Font" value="Fonts/SilkScreen" />
+            <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
+            <property name="FlavorColor" value="FF0000" />
+          </properties>
+        </tooltip>
       </component>
       
       <!-- Backpack -->

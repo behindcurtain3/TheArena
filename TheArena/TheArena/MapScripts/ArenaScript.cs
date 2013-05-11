@@ -13,6 +13,9 @@ using TheArena.GameObjects.Mobs;
 using TheArena.GameObjects.Misc;
 using GameUI;
 using GameUI.Components;
+using TheArena.Items;
+using TheArena.GameObjects;
+using TheArena.HUD;
 
 namespace TheArena.MapScripts
 {
@@ -22,7 +25,6 @@ namespace TheArena.MapScripts
 
         public ArenaUI Hud;
 
-
         private int _intensityReductionTimer = 0;
         private int _intensityReductionDuration = 500;
         private int _mobSpawnTimer = 0;
@@ -30,13 +32,16 @@ namespace TheArena.MapScripts
         private List<MobSpawner> _spawners;
         private bool _mapLoaded = false;
 
+        private Hero _player;
+
         public void MapLoaded(TeeEngine engine, TiledMap map, MapEventArgs args)
         {
             engine.GetPostGameShader("LightShader").Enabled = false;
 
-            // The player should start with zero intensity
-            ((Hero)engine.GetEntity("Player")).Intensity = 0;
+            _player = (Hero)engine.GetEntity("Player");
 
+            // The player should start with zero intensity
+            _player.Intensity = 0;
             _spawners = new List<MobSpawner>();
 
             List<Entity> entities = new List<Entity>(engine.GetEntities());
@@ -54,32 +59,39 @@ namespace TheArena.MapScripts
                 Hud.AddComponent(c.Name, c);
 
             // Bind data to components
-            Hero player = (Hero)engine.GetEntity("Player");
-            if (player != null)
+            if (_player != null)
             {
                 Label label = (Label)Hud.GetComponent("HeroLevel");
                 if (label != null)
-                    label.SetDataBinding("Level", player);
+                    label.SetDataBinding("Level", _player);
 
                 label = (Label)Hud.GetComponent("HeroStrength");
                 if (label != null)
-                    label.SetDataBinding("Strength", player);
+                    label.SetDataBinding("Strength", _player);
 
                 label = (Label)Hud.GetComponent("HeroDexterity");
                 if (label != null)
-                    label.SetDataBinding("Dexterity", player);
+                    label.SetDataBinding("Dexterity", _player);
 
                 label = (Label)Hud.GetComponent("HeroWisdom");
                 if (label != null)
-                    label.SetDataBinding("Wisdom", player);
+                    label.SetDataBinding("Wisdom", _player);
 
                 Button cheat = (Button)Hud.GetComponent("CheatButton");
                 if(cheat != null)
                     cheat.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender){
-                        Hero p = (Hero)engine.GetEntity("Player");
-                        p.LevelUp();
-                        p.HP = p.MaxHP;
+                        _player.LevelUp();
+                        _player.HP = _player.MaxHP;
                     });
+
+                _player.onItemEquipped += new NPC.OnItemEquippedEventHandler(NPC_onItemEquiped);
+                _player.onItemUnEquipped += new NPC.OnItemUnEquippedEventHandler(NPC_onItemUnEquiped);
+
+                // Load the currently equipped items
+                foreach (KeyValuePair<ItemType, Item> pair in _player.Equiped)
+                {
+                    NPC_onItemEquiped(_player, pair.Value);
+                }
             }
 
             _mapLoaded = true;
@@ -173,6 +185,30 @@ namespace TheArena.MapScripts
 
                 // Rebuild the pathfinding nodes
                 engine.Pathfinding.RebuildNeighbors(engine.Map);
+            }
+        }
+
+        public void NPC_onItemEquiped(NPC sender, Item item)
+        {
+            ItemSlot slot = (ItemSlot)Hud.GetComponent("Equipped" + item.ItemType);
+
+            if (slot != null)
+            {
+                slot.Item = item;
+                slot.ToolTip.Text = item.FriendlyName;
+                slot.ToolTip.FlavorText = item.Description;
+            }
+        }
+
+        public void NPC_onItemUnEquiped(NPC sender, Item item)
+        {
+            ItemSlot slot = (ItemSlot)Hud.GetComponent("Equipped" + item.ItemType);
+
+            if (slot != null)
+            {
+                slot.Item = null;
+                slot.ToolTip.Text = null;
+                slot.ToolTip.FlavorText = null;
             }
         }
     }

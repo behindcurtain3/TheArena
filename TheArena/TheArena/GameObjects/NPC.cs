@@ -14,7 +14,20 @@ namespace TheArena.GameObjects
 
     public class NPC : CollidableEntity, INotifyPropertyChanged
     {
-        
+        #region Events
+
+        public delegate void OnItemEquippedEventHandler(NPC sender, Item item);
+        public delegate void OnItemUnEquippedEventHandler(NPC sender, Item item);
+        public delegate void OnItemAddedToBackPack(NPC sender, Item item, int slot);
+        public delegate void OnItemRemovedFromBackPack(NPC sender, Item item, int slot);
+
+        public OnItemEquippedEventHandler onItemEquipped;
+        public OnItemUnEquippedEventHandler onItemUnEquipped;
+        public OnItemAddedToBackPack onItemAddedToBackPack;
+        public OnItemRemovedFromBackPack onItemRemovedFromBackPack;
+
+        #endregion
+
         public static Random randomGenerator = new Random();
 
         public const string RACE_HUMAN_MALE = @"Animations/Characters/male_npc.anim";
@@ -175,6 +188,9 @@ namespace TheArena.GameObjects
 
             Equiped[item.ItemType] = item;
             Drawables.Union(item.Drawables);
+
+            if (onItemEquipped != null)
+                onItemEquipped(this, item);
         }
 
         public void Unequip(Item item)
@@ -185,7 +201,12 @@ namespace TheArena.GameObjects
         public void Unequip(ItemType itemType)
         {
             if (Equiped.ContainsKey(itemType))
+            {
                 Drawables.Remove(Equiped[itemType].Drawables);
+
+                if (onItemUnEquipped != null)
+                    onItemUnEquipped(this, Equiped[itemType]);
+            }
 
             Equiped.Remove(itemType);
         }
