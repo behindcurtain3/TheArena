@@ -60,13 +60,10 @@ namespace TheArena.HUD
 
             if (Item != null)
             {
-                // TODO: Implement item icons
-                /*
                 if (_followMouse)
-                    spriteBatch.Draw(Item.Icon.Texture, _mousePosition - new Vector2(16, 16), DrawableItem.GetIconTexture(Item.Type), Color);
+                    spriteBatch.Draw(Item.Icon, _mousePosition - new Vector2(16, 16), Color);
                 else
-                    spriteBatch.Draw(Item.Icon.Texture, ContentPane, DrawableItem.GetIconTexture(Item.Type), Color);
-                 */
+                    spriteBatch.Draw(Item.Icon, ContentPane, Color);
             }
         }
 

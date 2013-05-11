@@ -4,6 +4,7 @@ using System.Xml;
 using GameEngine.Drawing;
 using GameEngine.Extensions;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TheArena.Items
 {
@@ -31,6 +32,9 @@ namespace TheArena.Items
                     string src = XmlExtensions.GetAttributeValue(drawableSetNode, "src");
                     DrawableSet.LoadDrawableSetXml(item.Drawables, src, content);
                 }
+
+                if (itemNode.SelectSingleNode("Icon") != null)
+                    item.Icon = content.Load<Texture2D>(XmlExtensions.GetAttributeValue(itemNode.SelectSingleNode("Icon"), "src"));
 
                 GameItems.Add(item.Name, item);
             }

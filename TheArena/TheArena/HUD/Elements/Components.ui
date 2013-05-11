@@ -86,7 +86,39 @@
       </component>
       
       <!-- Equipped Item Slots-->
-      <component name="EquippedHead" type="TheArena.HUD.ItemSlot" x="0" y="0" width="34" height="34">
+      <component name="EquippedLabel" type="GameUI.Components.Label" x="0" y="0" width="50" height="16">
+        <properties>
+          <property name="Font" value="Fonts/SilkScreenBold" />
+          <property name="Text" value="Equipped" />
+          <property name="Layer" value="10" />
+        </properties>
+      </component>
+      <component name="EquippedHeadGear" type="TheArena.HUD.ItemSlot" x="0" y="25" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="EquippedVest" type="TheArena.HUD.ItemSlot" x="0" y="60" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="EquippedPants" type="TheArena.HUD.ItemSlot" x="0" y="95" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="EquippedWeapon" type="TheArena.HUD.ItemSlot" x="85" y="25" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="EquippedGloves" type="TheArena.HUD.ItemSlot" x="85" y="60" width="34" height="34">
+        <properties>
+          <property name="Texture" value="UI/Item-Frame" />
+        </properties>
+      </component>
+      <component name="EquippedBoots" type="TheArena.HUD.ItemSlot" x="85" y="95" width="34" height="34">
         <properties>
           <property name="Texture" value="UI/Item-Frame" />
         </properties>

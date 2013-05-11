@@ -7,6 +7,7 @@
     <Drawables>
       <Drawable src="Animations/Plate Armor/plate_armor_head.anim"></Drawable>
     </Drawables>
+    <Icon src="UI/Icons/Placeholder" />
   </Item>
 
   <Item Name="PlateChest" ItemType="Vest" Weight="12.0">

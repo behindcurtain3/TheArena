@@ -11,12 +11,17 @@ using Microsoft.Xna.Framework.Input;
 using TheArena.GameObjects.Heroes;
 using TheArena.GameObjects.Mobs;
 using TheArena.GameObjects.Misc;
+using GameUI;
+using GameUI.Components;
 
 namespace TheArena.MapScripts
 {
     public class ArenaScript : IMapScript
     {
         public static Random randomGenerator = new Random();
+
+        public ArenaUI Hud;
+
 
         private int _intensityReductionTimer = 0;
         private int _intensityReductionDuration = 500;
@@ -39,6 +44,34 @@ namespace TheArena.MapScripts
             {
                 if (e is MobSpawner)
                     _spawners.Add((MobSpawner)e);
+            }
+
+            // Setup and load the UI
+            Hud = new ArenaUI(engine.Game);
+
+            List<Component> hudComponents = Component.LoadComponentsFromXml("HUD/Elements/Components.ui", engine.Game.Content);
+            foreach (Component c in hudComponents)
+                Hud.AddComponent(c.Name, c);
+
+            // Bind data to components
+            Hero player = (Hero)engine.GetEntity("Player");
+            if (player != null)
+            {
+                Label label = (Label)Hud.GetComponent("HeroLevel");
+                if (label != null)
+                    label.SetDataBinding("Level", player);
+
+                label = (Label)Hud.GetComponent("HeroStrength");
+                if (label != null)
+                    label.SetDataBinding("Strength", player);
+
+                label = (Label)Hud.GetComponent("HeroDexterity");
+                if (label != null)
+                    label.SetDataBinding("Dexterity", player);
+
+                label = (Label)Hud.GetComponent("HeroWisdom");
+                if (label != null)
+                    label.SetDataBinding("Wisdom", player);
             }
 
             _mapLoaded = true;

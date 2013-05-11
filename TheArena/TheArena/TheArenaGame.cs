@@ -17,6 +17,7 @@ using TheArena.GameObjects.Heroes;
 using TheArena.Items;
 using GameUI;
 using GameUI.Components;
+using TheArena.MapScripts;
 
 namespace TheArena
 {
@@ -63,7 +64,6 @@ namespace TheArena
         Random Random = new Random();
 
         TeeEngine Engine;
-        ArenaUI Hud;
 
         public TheArenaGame()
         {
@@ -84,7 +84,6 @@ namespace TheArena
         protected override void Initialize()
         {
             Engine = new TeeEngine(this, WINDOW_WIDTH, WINDOW_HEIGHT);
-            Hud = new ArenaUI(this);
 
             base.Initialize();
         }
@@ -116,11 +115,6 @@ namespace TheArena
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             DefaultSpriteFont = Content.Load<SpriteFont>(@"Fonts\Default");
-
-            List<Component> hudComponents = Component.LoadComponentsFromXml("HUD/Elements/Components.ui", Content);
-            foreach (Component c in hudComponents)
-                Hud.AddComponent(c.Name, c);
-
         }
 
         /// <summary>
@@ -139,9 +133,6 @@ namespace TheArena
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Update the Hud
-            Hud.Update(gameTime);
-
             // F1 = Show/Hide Bounding Boxes
             // F2 = Show/Hide Debug Info
             // F3 = Enable/Disable LightShader
@@ -191,44 +182,10 @@ namespace TheArena
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.OemMinus, this, true))
                 Zoom -= 0.1f;
 
-            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.C, this, true))
-            {
-                BaseWindow characterScreen = (BaseWindow)Hud.GetComponent("CharacterScreen");
-
-                characterScreen.Visible = !characterScreen.Visible;
-            }
-
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.L, this, true))
             {
                 Hero player = (Hero)Engine.GetEntity("Player");
                 player.LevelUp();
-            }
-
-            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.B, this, true))
-            {
-                Hero player = (Hero)Engine.GetEntity("Player");
-                if (player != null)
-                {
-                    Label label = (Label)Hud.GetComponent("HeroLevel");
-                    if (label != null)
-                        label.SetDataBinding("Level", player);
-
-                    label = (Label)Hud.GetComponent("HeroStrength");
-                    if (label != null)
-                        label.SetDataBinding("Strength", player);
-
-                    label = (Label)Hud.GetComponent("HeroDexterity");
-                    if (label != null)
-                        label.SetDataBinding("Dexterity", player);
-
-                    label = (Label)Hud.GetComponent("HeroWisdom");
-                    if (label != null)
-                        label.SetDataBinding("Wisdom", player);
-
-
-                }
-
-                
             }
 
             base.Update(gameTime);
@@ -269,7 +226,11 @@ namespace TheArena
             // Update static variable
             ViewPortInfo = viewPort;
 
-            Hud.RenderUI(SpriteBatch, gameTime, pxDestRectangle);
+            // Render the UI
+            if (Engine.MapScript != null)
+            {
+                ((ArenaScript)Engine.MapScript).Hud.RenderUI(SpriteBatch, gameTime, pxDestRectangle);
+            }
 
             // DRAW DEBUGGING INFORMATION
             SpriteBatch.Begin();

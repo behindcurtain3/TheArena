@@ -28,6 +28,8 @@ namespace GameUI
 
             _input = new InputState();
             _prevScreenArea = new Rectangle();
+
+            game.Components.Add(this);
         }
 
         public void AddComponent(string name, Component comp)

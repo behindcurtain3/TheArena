@@ -1,4 +1,5 @@
 ﻿using GameEngine.Drawing;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TheArena.Items
 {
@@ -14,6 +15,8 @@ namespace TheArena.Items
         public ItemType ItemType { get; set; }
 
         public DrawableSet Drawables { get; set; }
+
+        public Texture2D Icon { get; set; }
 
         public Item()
         {
