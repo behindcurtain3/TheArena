@@ -26,10 +26,7 @@ namespace GameUI.Components
         public ToolTip()
         {
             Visible = false;
-            PaddingTop = 10;
-            PaddingLeft = 10;
-            PaddingRight = 10;
-            PaddingBottom = 10;
+            SetAllPadding(5);
 
             FlavorColor = new Color(180, 180, 180);
         }
@@ -72,12 +69,12 @@ namespace GameUI.Components
                 width = Math.Max((int)Font.MeasureString(Text).X, (int)FlavorFont.MeasureString(FlavorText).X);
                 width = Math.Max(100, width + FrameLeft + FrameRight + PaddingLeft + PaddingRight);
 
-                height = Math.Max(15, (int)Font.MeasureString(Text).Y + (int)FlavorFont.MeasureString(FlavorText).Y + 4 + PaddingBottom + FrameTop + FrameBottom);
+                height = Math.Max(15, (int)Font.MeasureString(Text).Y + (int)FlavorFont.MeasureString(FlavorText).Y + 4 + PaddingTop + PaddingBottom + FrameTop + FrameBottom);
             }
             else
             {
                 width = Math.Max(100, (int)Font.MeasureString(Text).X + 20);
-                height = Math.Max(15, (int)Font.MeasureString(Text).Y + PaddingBottom + FrameTop + FrameBottom);
+                height = Math.Max(15, (int)Font.MeasureString(Text).Y + PaddingTop + PaddingBottom + FrameTop + FrameBottom);
             }
 
             Position = new Rectangle((int)_mousePosition.X + 10, (int)_mousePosition.Y, width, height);
