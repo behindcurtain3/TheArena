@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using GameEngine;
 using TheArena.GameObjects.Misc;
+using TheArena.GameObjects.Heroes;
 
 namespace TheArena.GameObjects
 {
@@ -155,7 +156,7 @@ namespace TheArena.GameObjects
                 LevelUp();
             }
 
-            StatusText text = new StatusText(String.Format("+{0} XP", xpGiven), Color.Yellow, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height));
+            StatusText text = new StatusText(String.Format("+{0} XP", xpGiven), Color.Yellow, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height), Direction.Up);
 
             engine.AddEntity(text);
         }
@@ -185,7 +186,11 @@ namespace TheArena.GameObjects
 
             HP -= damage;
 
-            StatusText text = new StatusText(String.Format("-{0}", damage), Color.Red, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height));
+            StatusText text;             
+            if(sender is Hero)
+                text = new StatusText(String.Format("-{0}", damage), Color.White, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height), Direction.Up);
+            else
+                text = new StatusText(String.Format("-{0}", damage), Color.White, new Vector2(Pos.X, Pos.Y + 15), Direction.Down);
 
             engine.AddEntity(text);
         }

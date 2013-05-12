@@ -30,6 +30,8 @@ namespace GameUI.Components
             PaddingLeft = 10;
             PaddingRight = 10;
             PaddingBottom = 10;
+
+            FlavorColor = new Color(180, 180, 180);
         }
 
         public override void Update(ArenaUI hud, GameTime dt, InputState input)

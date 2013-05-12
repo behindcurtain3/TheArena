@@ -42,17 +42,19 @@ namespace TheArena.GameObjects.Mobs
 
         public override void OnHit(Entity sender, int damage, GameTime gameTime, TeeEngine engine)
         {
+            HP = 10000; // Combat dummy always has tons of HP
+
             base.OnHit(sender, damage, gameTime, engine);
 
             if (!CurrentDrawableState.Contains("Spin"))
             {
                 CurrentDrawableState = "Spin_" + Direction;
                 Drawables.ResetState(CurrentDrawableState, gameTime);
-
-                // Play random Hit Sound.
-                int index = _randomGenerator.Next(3);
-                _hitSounds[index].Play();
             }
+
+            // Play random Hit Sound.
+            int index = _randomGenerator.Next(3);
+            _hitSounds[index].Play();
         }
 
         public override void Update(GameTime gameTime, GameEngine.TeeEngine engine)

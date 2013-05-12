@@ -46,6 +46,7 @@
       <Name>Default</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -655,6 +656,11 @@
     </Compile>
     <Compile Include="Fonts\ToolTipFlavor.spritefont">
       <Name>ToolTipFlavor</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\DefaultBold.spritefont">
+      <Name>DefaultBold</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>

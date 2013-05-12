@@ -44,7 +44,6 @@
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorText" value="Okay, go ahead... this will increase your level and do a full heal" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
@@ -58,7 +57,7 @@
       
       <component name="HeroLevel" type="GameUI.Components.Label" x="210" y="25" width="140" height="18">
         <properties>
-          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Font" value="Fonts/Default" />
           <property name="Text" value="Level:" />
         </properties>
         <tooltip name="HeroLevelTT" type="GameUI.Components.ToolTip">
@@ -68,7 +67,7 @@
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorText" value="Kill mobs to gain experience!" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
+            <property name="FlavorColor" value="848484" />
           </properties>
         </tooltip>
       </component>      
@@ -112,7 +111,6 @@
             <property name="Texture" value="UI/ToolTip-Frame" />
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
@@ -125,7 +123,6 @@
             <property name="Texture" value="UI/ToolTip-Frame" />
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
@@ -138,7 +135,6 @@
             <property name="Texture" value="UI/ToolTip-Frame" />
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
@@ -151,7 +147,6 @@
             <property name="Texture" value="UI/ToolTip-Frame" />
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
@@ -164,7 +159,6 @@
             <property name="Texture" value="UI/ToolTip-Frame" />
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
@@ -177,7 +171,6 @@
             <property name="Texture" value="UI/ToolTip-Frame" />
             <property name="Font" value="Fonts/SilkScreen" />
             <property name="FlavorFont" value="Fonts/ToolTipFlavor" />
-            <property name="FlavorColor" value="FF0000" />
           </properties>
         </tooltip>
       </component>
