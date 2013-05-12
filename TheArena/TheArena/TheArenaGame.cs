@@ -229,7 +229,10 @@ namespace TheArena
             // Render the UI
             if (Engine.MapScript != null)
             {
-                ((ArenaScript)Engine.MapScript).Hud.RenderUI(SpriteBatch, gameTime, pxDestRectangle);
+                ArenaScript script = (ArenaScript)Engine.MapScript;
+
+                if (script.Hud != null)
+                    script.Hud.RenderUI(SpriteBatch, gameTime, pxDestRectangle);
             }
 
             // DRAW DEBUGGING INFORMATION

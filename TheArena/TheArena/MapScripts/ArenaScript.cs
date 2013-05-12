@@ -31,6 +31,8 @@ namespace TheArena.MapScripts
         private int _mobSpawnDelay = 4000;
         private List<MobSpawner> _spawners;
         private bool _mapLoaded = false;
+        private bool _isGameOver = false;
+        private bool _gameOverLoaded = false;
 
         private Hero _player;
 
@@ -86,6 +88,7 @@ namespace TheArena.MapScripts
 
                 _player.onItemEquipped += new NPC.OnItemEquippedEventHandler(NPC_onItemEquiped);
                 _player.onItemUnEquipped += new NPC.OnItemUnEquippedEventHandler(NPC_onItemUnEquiped);
+                _player.onDeath += new NPC.OnDeathEventHandler(NPC_onDeath);
 
                 // Load the currently equipped items
                 foreach (KeyValuePair<ItemType, Item> pair in _player.Equiped)
@@ -106,58 +109,85 @@ namespace TheArena.MapScripts
         {
             if (!_mapLoaded) return;
 
-            Hero player = (Hero)engine.GetEntity("Player");
-            bool reduceIntensity = true;
-            
-            foreach (Entity entity in engine.EntitiesOnScreen)
+            if (_isGameOver)
             {
-                if (entity is Mob)
+                if (!_gameOverLoaded)
                 {
-                    Mob mob = (Mob)entity;
+                    List<Component> hudComponents = Component.LoadComponentsFromXml("HUD/Elements/GameOver.ui", engine.Game.Content);
+                    foreach (Component c in hudComponents)
+                        Hud.AddComponent(c.Name, c);
 
-                    // If any mob on screen is attacking the player, don't reduce their intensity value
-                    if (mob.Stance == Mob.AttackStance.Attacking)
+                    _gameOverLoaded = true;
+
+                    Button restart = (Button)Hud.GetComponent("RestartButton");
+                    restart.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender)
                     {
-                        reduceIntensity = false;
-                        break;
+                        engine.ClearEntities();
+                        engine.LoadMap("Content/Maps/arena.tmx");
+                    });
+
+                    Button exit = (Button)Hud.GetComponent("QuitButton");
+                    exit.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender)
+                    {
+                        engine.Game.Exit();
+                    });
+                }
+            }
+            else
+            {
+                Hero player = (Hero)engine.GetEntity("Player");
+                bool reduceIntensity = true;
+
+                foreach (Entity entity in engine.EntitiesOnScreen)
+                {
+                    if (entity is Mob)
+                    {
+                        Mob mob = (Mob)entity;
+
+                        // If any mob on screen is attacking the player, don't reduce their intensity value
+                        if (mob.Stance == Mob.AttackStance.Attacking)
+                        {
+                            reduceIntensity = false;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (reduceIntensity)
-            {
-                _intensityReductionTimer += gameTime.ElapsedGameTime.Milliseconds;
-
-                // Intensity should reduce at a rate of 90pts per 30 sec or 3pts per second
-                if (_intensityReductionTimer >= _intensityReductionDuration)
+                if (reduceIntensity)
                 {
-                    player.Intensity--;
-                    if (player.Intensity < 0) player.Intensity = 0;
+                    _intensityReductionTimer += gameTime.ElapsedGameTime.Milliseconds;
 
-                    _intensityReductionTimer = 0;
-                }
-            }
+                    // Intensity should reduce at a rate of 90pts per 30 sec or 3pts per second
+                    if (_intensityReductionTimer >= _intensityReductionDuration)
+                    {
+                        player.Intensity--;
+                        if (player.Intensity < 0) player.Intensity = 0;
 
-            // Check to spawn new mobs
-            _mobSpawnTimer += gameTime.ElapsedGameTime.Milliseconds;
-
-            if (_mobSpawnTimer >= _mobSpawnDelay && player.Intensity < 30)
-            {
-                List<Entity> entities = new List<Entity>(engine.GetEntities());
-                List<Entity> mobs = entities.FindAll(delegate(Entity e) { return e is Mob; });
-
-                // Only have up to x mobs at once
-                if (mobs.Count < 15)
-                {
-
-                    // Spawn a new mob on a random mob spawner
-                    int spawner = randomGenerator.Next(0, _spawners.Count);
-
-                    _spawners[spawner].SpawnMob(engine);                    
+                        _intensityReductionTimer = 0;
+                    }
                 }
 
-                // Reset the timer regardless, just check again later
-                _mobSpawnTimer = 0;
+                // Check to spawn new mobs
+                _mobSpawnTimer += gameTime.ElapsedGameTime.Milliseconds;
+
+                if (_mobSpawnTimer >= _mobSpawnDelay && player.Intensity < 30)
+                {
+                    List<Entity> entities = new List<Entity>(engine.GetEntities());
+                    List<Entity> mobs = entities.FindAll(delegate(Entity e) { return e is Mob; });
+
+                    // Only have up to x mobs at once
+                    if (mobs.Count < 15)
+                    {
+
+                        // Spawn a new mob on a random mob spawner
+                        int spawner = randomGenerator.Next(0, _spawners.Count);
+
+                        _spawners[spawner].SpawnMob(engine);
+                    }
+
+                    // Reset the timer regardless, just check again later
+                    _mobSpawnTimer = 0;
+                }
             }
         }
 
@@ -210,6 +240,11 @@ namespace TheArena.MapScripts
                 slot.ToolTip.Text = null;
                 slot.ToolTip.FlavorText = null;
             }
+        }
+
+        public void NPC_onDeath(NPC sender)
+        {
+            _isGameOver = true;
         }
     }
 }

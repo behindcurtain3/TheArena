@@ -290,9 +290,6 @@ namespace TheArena.GameObjects.Heroes
                     Drawables.ResetState("Hurt", gameTime);
                     _onDeathSfx[randomGenerator.Next(0, _onDeathSfx.Length)].Play(0.5f, 0.0f, 0.0f);
                 }
-
-                if (HP < 0)
-                    HP = 0;
             }
             else
             {

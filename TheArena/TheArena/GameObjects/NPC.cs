@@ -180,6 +180,9 @@ namespace TheArena.GameObjects
         /// </summary>
         public virtual void OnHit(Entity sender, int damage, GameTime gameTime, TeeEngine engine)
         {
+            if (HP <= 0)
+                return;
+
             HP -= damage;
 
             StatusText text = new StatusText(String.Format("-{0}", damage), Color.Red, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height));

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<components assembly="TheArena">
+  <component name="GameOver" type="GameUI.Components.FrameComponent" x="450" y="250" width="300" height="100">
+    <properties>
+      <property name="Texture" value="UI/Window-Content" />
+      <property name="PaddingTop" value="5" />
+      <property name="PaddingBottom" value="8" />
+      <property name="PaddingLeft" value="8" />
+      <property name="PaddingRight" value="8" />
+      <property name="FrameTop" value="2" />
+      <property name="FrameBottom" value="5" />
+      <property name="FrameLeft" value="5" />
+      <property name="FrameRight" value="5" />
+    </properties>
+
+    <components>
+      <component name="GameOverTitleBar" type="GameUI.Components.TitleBar" x="0" y="-24" width="300" height="24">
+        <properties>
+          <property name="FrameTop" value="1" />
+          <property name="FrameBottom" value="1" />
+          <property name="FrameLeft" value="1" />
+          <property name="FrameRight" value="1" />
+          <property name="Texture" value="UI/Window-Title" />
+          <property name="Font" value="Fonts/SilkScreenBold" />
+          <property name="Text" value="Game Over" />
+          <property name="UseParentContentPane" value="false" />
+        </properties>
+      </component>
+
+      <component name="RestartButton" type="GameUI.Components.Button" x="50" y="32" width="95" height="32">
+        <properties>
+          <property name="Texture" value="UI/Button" />
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Restart" />
+        </properties>
+      </component>
+      <component name="QuitButton" type="GameUI.Components.Button" x="155" y="32" width="75" height="32">
+        <properties>
+          <property name="Texture" value="UI/Button" />
+          <property name="Font" value="Fonts/SilkScreen" />
+          <property name="Text" value="Quit" />
+        </properties>
+      </component>
+    </components>
+  </component>
+</components>
