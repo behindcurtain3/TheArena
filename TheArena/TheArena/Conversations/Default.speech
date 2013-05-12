@@ -16,11 +16,15 @@
       <Text>I am an Imperial Guard, please stop wasting my time.</Text>
       <Prompt>Who are you?</Prompt>
       <Children>
-        <Speech name="Exit">
+        <Speech>
           <Prompt>Fine!</Prompt>
           <PromptLink>Exit</PromptLink>
         </Speech>
       </Children>
+    </Speech>
+    <Speech name="Exit">
+      <Prompt>Nevermind</Prompt>
+      <PromptLink>Exit</PromptLink>
     </Speech>
   </Children>  
 </Speech>
