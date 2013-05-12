@@ -194,9 +194,7 @@ namespace TheArena.GameObjects.Heroes
                             if (entityNPC.Faction != this.Faction)
                             {
                                 _hitEntityList.Add(entityNPC);
-
-                                entityNPC.HP -= RollForDamage();
-                                entityNPC.OnHit(this, gameTime, engine);
+                                entityNPC.OnHit(this, RollForDamage(), gameTime, engine);
                             }
                         }                        
                     }
@@ -280,8 +278,10 @@ namespace TheArena.GameObjects.Heroes
             base.Update(gameTime, engine);
         }
 
-        public override void OnHit(Entity source, GameTime gameTime, TeeEngine engine)
+        public override void OnHit(Entity sender, int damage, GameTime gameTime, TeeEngine engine)
         {
+            base.OnHit(sender, damage, gameTime, engine);
+
             if (HP <= 0)
             {
                 if (!CurrentDrawableState.Contains("Hurt"))

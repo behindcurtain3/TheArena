@@ -38,7 +38,7 @@ namespace TheArena.GameObjects.Attacks
 
             MoveTo = realTarget;
 
-            Speed = 3.4f;
+            Speed = 6f;
         }
 
         public override void LoadContent(Microsoft.Xna.Framework.Content.ContentManager content)
@@ -58,8 +58,7 @@ namespace TheArena.GameObjects.Attacks
                 if (Target is NPC)
                 {
                     NPC target = (NPC)Target;
-                    target.HP -= Damage;
-                    target.OnHit(this, gameTime, engine);
+                    target.OnHit(this, Damage, gameTime, engine);
                 }
 
                 engine.RemoveEntity(this);

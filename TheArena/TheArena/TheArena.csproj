@@ -113,6 +113,7 @@
     <Compile Include="GameObjects\Attacks\BeeProjectile.cs" />
     <Compile Include="GameObjects\Misc\Coin.cs" />
     <Compile Include="GameObjects\CollidableEntity.cs" />
+    <Compile Include="GameObjects\Misc\StatusText.cs" />
     <Compile Include="GameObjects\Mobs\CombatDummy.cs" />
     <Compile Include="GameObjects\Heroes\DeathKnight.cs" />
     <Compile Include="GameObjects\Heroes\Hero.cs" />

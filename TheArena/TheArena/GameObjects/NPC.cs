@@ -7,6 +7,7 @@ using TheArena.Items;
 using System.Collections.Generic;
 using System.ComponentModel;
 using GameEngine;
+using TheArena.GameObjects.Misc;
 
 namespace TheArena.GameObjects
 {
@@ -18,13 +19,15 @@ namespace TheArena.GameObjects
 
         public delegate void OnItemEquippedEventHandler(NPC sender, Item item);
         public delegate void OnItemUnEquippedEventHandler(NPC sender, Item item);
-        public delegate void OnItemAddedToBackPack(NPC sender, Item item, int slot);
-        public delegate void OnItemRemovedFromBackPack(NPC sender, Item item, int slot);
+        public delegate void OnItemAddedToBackPackEventHandler(NPC sender, Item item, int slot);
+        public delegate void OnItemRemovedFromBackPackEventHandler(NPC sender, Item item, int slot);
+        public delegate void OnDeathEventHandler(NPC sender);
 
         public OnItemEquippedEventHandler onItemEquipped;
         public OnItemUnEquippedEventHandler onItemUnEquipped;
-        public OnItemAddedToBackPack onItemAddedToBackPack;
-        public OnItemRemovedFromBackPack onItemRemovedFromBackPack;
+        public OnItemAddedToBackPackEventHandler onItemAddedToBackPack;
+        public OnItemRemovedFromBackPackEventHandler onItemRemovedFromBackPack;
+        public OnDeathEventHandler onDeath;
 
         #endregion
 
@@ -63,6 +66,12 @@ namespace TheArena.GameObjects
             get { return _hp; }
             set
             {
+                if (value <= 0 && _hp > 0)
+                {
+                    if (onDeath != null)
+                        onDeath(this);
+                }
+
                 _hp = value;
 
                 if (_hp <= 0)
@@ -122,26 +131,33 @@ namespace TheArena.GameObjects
         /// Rewards the NPC with XP based on the level of the Mob killed.
         /// </summary>
         /// <param name="mobLevel">The level of the mob that is awarding XP.</param>
-        public void RewardXP(int mobLevel)
+        public void RewardXP(Entity sender, int mobLevel, GameTime gameTime, TeeEngine engine)
         {
+            int xpGiven;
             if (mobLevel == Level)
             {
-                XP += (Level * 5) + 45;
+                xpGiven = (Level * 5) + 45;
             }
             else if (mobLevel < Level)
             {
-                XP += ((Level * 5) + 45) * (1 - (Level - mobLevel) / 5);
+                xpGiven = ((Level * 5) + 45) * (1 - (Level - mobLevel) / 5);
             }
             else // mobLevel > Level
             {
-                XP += ((Level * 5) + 45) * (int)(1 + 0.05 * (mobLevel - Level));
+                xpGiven = ((Level * 5) + 45) * (int)(1 + 0.05 * (mobLevel - Level));
             }
+
+            XP += xpGiven;
 
             // Check for lvl up condition
             if (XP >= XPToNextLevel)
             {
                 LevelUp();
             }
+
+            StatusText text = new StatusText(String.Format("+{0} XP", xpGiven), Color.Yellow, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height));
+
+            engine.AddEntity(text);
         }
 
         public int GetNeededXpAmount()
@@ -162,8 +178,13 @@ namespace TheArena.GameObjects
         /// game engine. Override this method in order to perform custom functionality
         /// during a Hit event.
         /// </summary>
-        public virtual void OnHit(Entity sender, GameTime gameTime, TeeEngine engine)
+        public virtual void OnHit(Entity sender, int damage, GameTime gameTime, TeeEngine engine)
         {
+            HP -= damage;
+
+            StatusText text = new StatusText(String.Format("-{0}", damage), Color.Red, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height));
+
+            engine.AddEntity(text);
         }
 
         /// <summary>

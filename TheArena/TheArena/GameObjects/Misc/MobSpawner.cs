@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using GameEngine.GameObjects;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using GameEngine.Drawing;
+using GameEngine.Drawing.Bitmap;
 using Microsoft.Xna.Framework.Graphics;
 using TheArena.GameObjects.Mobs;
 using GameEngine.Interfaces;
+using GameEngine.Drawing;
 
 namespace TheArena.GameObjects.Misc
 {

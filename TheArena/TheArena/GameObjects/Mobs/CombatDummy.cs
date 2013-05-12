@@ -40,8 +40,10 @@ namespace TheArena.GameObjects.Mobs
             base.LoadContent(content);
         }
 
-        public override void OnHit(Entity sender, GameTime gameTime, TeeEngine engine)
+        public override void OnHit(Entity sender, int damage, GameTime gameTime, TeeEngine engine)
         {
+            base.OnHit(sender, damage, gameTime, engine);
+
             if (!CurrentDrawableState.Contains("Spin"))
             {
                 CurrentDrawableState = "Spin_" + Direction;

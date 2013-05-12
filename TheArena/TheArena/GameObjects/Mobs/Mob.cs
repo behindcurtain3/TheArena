@@ -15,10 +15,7 @@ namespace TheArena.GameObjects.Mobs
         
         private const int ATTACK_COUNTER_LIMIT = 40;
 
-        private static Random randomGenerator = new Random();
-
         public int Lvl { get; set; }
-        public int MaxHP { get; internal set; }
         public int Damage { get; set; }
         public int WorthGold { get; set; }
 
@@ -183,8 +180,8 @@ namespace TheArena.GameObjects.Mobs
                             player.Pos.X - this.Pos.X
                             );
 
-                        Pos.X += (float)(Math.Cos(angle) * -_moveSpeed);
-                        Pos.Y += (float)(Math.Sin(angle) * -_moveSpeed);
+                        Pos.X += (float)(Math.Cos(angle) * -(_moveSpeed * 0.8f));
+                        Pos.Y += (float)(Math.Sin(angle) * -(_moveSpeed * 0.8f));
                     }
                     else
                     {
@@ -215,11 +212,13 @@ namespace TheArena.GameObjects.Mobs
             base.Update(gameTime, engine);
         }
 
-        public override void OnHit(Entity sender, GameTime gameTime, GameEngine.TeeEngine engine)
+        public override void OnHit(Entity sender, int damage, GameTime gameTime, GameEngine.TeeEngine engine)
         {
+            base.OnHit(sender, damage, gameTime, engine);
+
             if (HP <= 0 && !_xpGiven && sender is Hero)
             {
-                ((Hero)sender).RewardXP(Lvl);
+                ((Hero)sender).RewardXP(this, Lvl, gameTime, engine);
                 _xpGiven = true;
             }
         }
@@ -234,9 +233,7 @@ namespace TheArena.GameObjects.Mobs
                 if (AttackTarget is NPC)
                 {
                     NPC target = (NPC)AttackTarget;
-
-                    target.HP -= Damage;
-                    target.OnHit(this, gameTime, engine);
+                    target.OnHit(this, Damage, gameTime, engine);
                 }
                 _attackHit = true;
             }
