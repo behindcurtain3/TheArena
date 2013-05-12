@@ -50,7 +50,7 @@ namespace TheArena.HUD
             onDragEnd += new OnDragEndEventHandler(ItemSlot_onDragEnd);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
             if (!Visible)
                 return;

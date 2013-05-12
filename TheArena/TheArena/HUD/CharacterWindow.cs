@@ -23,7 +23,8 @@ namespace TheArena.HUD
         }
 
         private void Construct()
-        {            
+        {
+            SetAllPadding(4);
         }
 
         public override void Update(GameUI.ArenaUI hud, GameTime dt, GameUI.Input.InputState input)

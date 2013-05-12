@@ -22,9 +22,9 @@ namespace GameUI.Components
             SetAllPadding(0);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
-            base.Draw(spriteBatch, parent);
+            base.Draw(spriteBatch, parent, gameTime);
 
             spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X + 1, ContentPane.Y + parent.Y + 1), Color.Black);
             spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X, ContentPane.Y + parent.Y), Color);            

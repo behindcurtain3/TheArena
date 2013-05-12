@@ -83,12 +83,12 @@ namespace GameUI.Components
             Position = new Rectangle((int)_mousePosition.X + 10, (int)_mousePosition.Y, width, height);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
             if (Parent == null || !Visible || Text == null || Text.Equals(String.Empty))
                 return;
 
-            base.Draw(spriteBatch, parent);
+            base.Draw(spriteBatch, parent, gameTime);
             spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X, ContentPane.Y), Color);
 
             if (_showFlavorText)

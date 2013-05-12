@@ -52,7 +52,7 @@ namespace GameUI.Components
 
         public string Name { get; set; }
 
-        public Rectangle ContentPane { get; private set; }
+        public Rectangle ContentPane { get; protected set; }
 
         public Color Color { get; set; }
 
@@ -195,7 +195,7 @@ namespace GameUI.Components
         }
        
  
-        public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent)
+        public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
             if (!Visible)
                 return;
@@ -207,24 +207,24 @@ namespace GameUI.Components
             foreach (Component child in Children)
             {
                 if (child.UseParentContentPane)
-                    child.Draw(spriteBatch, ContentPane);
+                    child.Draw(spriteBatch, ContentPane, gameTime);
                 else
-                    child.Draw(spriteBatch, Position);
+                    child.Draw(spriteBatch, Position, gameTime);
             }
         }
 
-        public bool DrawToolTip(SpriteBatch spriteBatch, Rectangle parent)
+        public bool DrawToolTip(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
             if (!Visible)
                 return false;
 
             foreach (Component child in Children)
-                if (child.DrawToolTip(spriteBatch, parent))
+                if (child.DrawToolTip(spriteBatch, parent, gameTime))
                     return true;
 
             if (ToolTip != null)
             {
-                ToolTip.Draw(spriteBatch, parent);
+                ToolTip.Draw(spriteBatch, parent, gameTime);
                 return ToolTip.Visible;
             }
             return false;
@@ -241,7 +241,7 @@ namespace GameUI.Components
             ResetContentPane();
         }
 
-        private void ResetContentPane()
+        protected virtual void ResetContentPane()
         {
             ContentPane = new Rectangle(
                                 Position.X + PaddingLeft,

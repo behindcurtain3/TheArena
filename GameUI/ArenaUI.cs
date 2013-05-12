@@ -143,10 +143,10 @@ namespace GameUI
 
             // Draw each component
             foreach (string comp in _components.Keys)
-                _components[comp].Draw(spriteBatch, screenArea);
+                _components[comp].Draw(spriteBatch, screenArea, gameTime);
 
             foreach (string comp in _components.Keys)
-                if (_components[comp].DrawToolTip(spriteBatch, screenArea))
+                if (_components[comp].DrawToolTip(spriteBatch, screenArea, gameTime))
                     break;
 
             spriteBatch.End();

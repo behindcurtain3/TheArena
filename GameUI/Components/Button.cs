@@ -39,9 +39,9 @@ namespace GameUI.Components
             this.onMouseUp += new OnMouseUpEventHandler(Button_onMouseUp);
         }            
 
-        public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
-            base.Draw(spriteBatch, parent);
+            base.Draw(spriteBatch, parent, gameTime);
 
             if (Text != null)
             {

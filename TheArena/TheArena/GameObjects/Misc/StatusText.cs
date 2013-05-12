@@ -20,7 +20,7 @@ namespace TheArena.GameObjects.Misc
         private Random _randomGenerator;
         private Direction _direction;
 
-        public StatusText(string text, Color color, Vector2 position, Direction direction)
+        public StatusText(string text, Color color, Vector2 position, Direction direction = Direction.Up)
         {
             Construct(text, color, position, direction);
         }
@@ -33,7 +33,7 @@ namespace TheArena.GameObjects.Misc
             this._direction = direction;
             this._randomGenerator = new Random();
 
-            _targetY = _randomGenerator.Next(25, 40);
+            _targetY = _randomGenerator.Next(15, 30);
         }
 
         public override void LoadContent(ContentManager content)
@@ -54,14 +54,14 @@ namespace TheArena.GameObjects.Misc
             {
                 this._offset.Y -= (_targetY - Math.Abs(_offset.Y)) * 0.05f;
 
-                if (Math.Abs(this._offset.Y) >= _targetY - 5)
+                if (Math.Abs(this._offset.Y) >= _targetY - 3)
                     engine.RemoveEntity(this);
             }
             else if (_direction == Direction.Down)
             {
                 this._offset.Y += (_targetY - Math.Abs(_offset.Y)) * 0.05f;
 
-                if (Math.Abs(this._offset.Y) >= _targetY - 5)
+                if (Math.Abs(this._offset.Y) >= _targetY - 3)
                     engine.RemoveEntity(this);
             }
 

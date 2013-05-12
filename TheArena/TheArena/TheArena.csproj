@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conversations\Speech.cs" />
     <Compile Include="GameObjects\Attacks\BeeProjectile.cs" />
     <Compile Include="GameObjects\Misc\Coin.cs" />
     <Compile Include="GameObjects\CollidableEntity.cs" />
@@ -126,7 +127,9 @@
     <Compile Include="GameObjects\NPC.cs" />
     <Compile Include="GameObjects\PathFinder.cs" />
     <Compile Include="HUD\CharacterWindow.cs" />
+    <Compile Include="HUD\Conversation.cs" />
     <Compile Include="HUD\ItemSlot.cs" />
+    <Compile Include="HUD\SpeechLabel.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ItemRepository.cs" />
     <Compile Include="MapScripts\ArenaScript.cs" />
@@ -254,6 +257,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Animations\Weapons\staff.anim">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Conversations\Default.speech">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="HUD\Elements\Components.ui">

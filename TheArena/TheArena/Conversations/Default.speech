@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Speech name="Root">
+  <Text>Welcome to the Arena</Text>
+  <Children>
+    <Speech name="Option1">
+      <Text>The Arena is a fight to death, kill all sent against you to be victorious!</Text>
+      <Prompt>What is the Arena?</Prompt>
+      <Children>
+        <Speech name="Option3">
+          <Prompt>Okay...</Prompt>
+          <PromptLink>Root</PromptLink>
+        </Speech>
+      </Children>
+    </Speech>
+    <Speech name="Option2">
+      <Text>I am an Imperial Guard, please stop wasting my time.</Text>
+      <Prompt>Who are you?</Prompt>
+      <Children>
+        <Speech name="Exit">
+          <Prompt>Fine!</Prompt>
+          <PromptLink>Exit</PromptLink>
+        </Speech>
+      </Children>
+    </Speech>
+  </Children>  
+</Speech>

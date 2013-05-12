@@ -9,18 +9,18 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using GameEngine.Info;
+using TheArena.Items;
 
 namespace TheArena.GameObjects
 {
-    public class PathFinder : CollidableEntity
+    public class PathFinder : NPC
     {
 
         public Path CurrentPath { get; set; }
-        public Direction Direction { get; set; }
 
         private float _moveSpeed = 1.8f;
 
-        public PathFinder()
+        public PathFinder() : base(NPC.RACE_HUMAN_MALE)
         {
             Construct(0, 0);
         }
@@ -35,11 +35,17 @@ namespace TheArena.GameObjects
             Pos = new Vector2(x, y);
             Direction = GameObjects.Direction.Down;
             CollisionGroup = "Shadow";
+            Faction = "Allies";
+
+            Equip(ItemRepository.GameItems["PlateBoots"]);
+            Equip(ItemRepository.GameItems["PlateGloves"]);
+            Equip(ItemRepository.GameItems["PlatePants"]);
+            Equip(ItemRepository.GameItems["PlateChest"]);
+            Equip(ItemRepository.GameItems["Longsword"]);
         }
 
         public override void LoadContent(ContentManager content)
         {
-            DrawableSet.LoadDrawableSetXml(Drawables, "Animations/Characters/skeleton.anim", content);
             CurrentDrawableState = "Idle_" + Direction;
 
             base.LoadContent(content);

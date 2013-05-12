@@ -37,7 +37,7 @@ namespace GameUI.Components
             SourceOffset = Rectangle.Empty;
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Rectangle parent)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
             if (!Visible)
                 return;
@@ -50,7 +50,7 @@ namespace GameUI.Components
                 spriteBatch.Draw(Texture, absPosition, GetSourceRectangle(i), Color);
             }
 
-            base.Draw(spriteBatch, parent);
+            base.Draw(spriteBatch, parent, gameTime);
         }
 
         public Rectangle GetSourceRectangle(int index)
@@ -153,6 +153,16 @@ namespace GameUI.Components
             }
 
             return Position;
+        }
+
+        protected override void ResetContentPane()
+        {
+            ContentPane = new Rectangle(
+                                Position.X + PaddingLeft + FrameLeft,
+                                Position.Y + PaddingTop + FrameTop,
+                                Position.Width - (PaddingRight + FrameRight + PaddingLeft + FrameLeft),
+                                Position.Height - (PaddingBottom + FrameBottom + PaddingTop + FrameTop)
+                            );
         }
     }
 }

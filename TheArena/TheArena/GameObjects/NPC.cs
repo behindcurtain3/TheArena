@@ -9,6 +9,9 @@ using System.ComponentModel;
 using GameEngine;
 using TheArena.GameObjects.Misc;
 using TheArena.GameObjects.Heroes;
+using TheArena.GameObjects.Mobs;
+using TheArena.MapScripts;
+using TheArena.HUD;
 
 namespace TheArena.GameObjects
 {
@@ -188,9 +191,9 @@ namespace TheArena.GameObjects
 
             StatusText text;             
             if(sender is Hero)
-                text = new StatusText(String.Format("-{0}", damage), Color.White, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height), Direction.Up);
+                text = new StatusText(String.Format("-{0}", damage), Color.OrangeRed, new Vector2(Pos.X, Pos.Y - CurrentBoundingBox.Height), Direction.Up);
             else
-                text = new StatusText(String.Format("-{0}", damage), Color.White, new Vector2(Pos.X, Pos.Y + 15), Direction.Down);
+                text = new StatusText(String.Format("-{0}", damage), Color.Maroon, new Vector2(Pos.X, Pos.Y + 15), Direction.Down);
 
             engine.AddEntity(text);
         }
@@ -202,9 +205,12 @@ namespace TheArena.GameObjects
         /// </summary>
         public virtual void OnInteract(Entity sender, GameTime gameTime, TeeEngine engine)
         {
-            //SpeechBubble speech = new SpeechBubble(this, TimeSpan.FromSeconds(10));
+            if (this is Mob)
+                return;
 
-            //engine.AddEntity(speech);
+            Conversation conv = (Conversation)((ArenaScript)engine.MapScript).Hud.GetComponent("Conversation");
+            conv.LoadSpeech("Conversations/Default.speech", engine.Game.Content);
+            conv.Visible = true;
         }
 
         #endregion

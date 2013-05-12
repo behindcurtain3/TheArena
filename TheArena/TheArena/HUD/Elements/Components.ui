@@ -1,11 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <components assembly="TheArena">
+  <component name="Conversation" type="TheArena.HUD.Conversation" x="350" y="450" width="500" height="200">
+    <properties>
+      <property name="Texture" value="UI/Speech-Frame" />
+      <property name="Font" value="Fonts/Default" />
+      <property name="Visible" value="false" />
+    </properties>
+  </component>
+  
+  
   <component name="CharacterScreen" type="TheArena.HUD.CharacterWindow" x="4" y="28" width="366" height="384">
     <properties>
-      <property name="PaddingTop" value="5" />
-      <property name="PaddingBottom" value="8" />
-      <property name="PaddingLeft" value="8" />
-      <property name="PaddingRight" value="8" />
       <property name="FrameTop" value="2" />
       <property name="FrameBottom" value="5" />
       <property name="FrameLeft" value="5" />
