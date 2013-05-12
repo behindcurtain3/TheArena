@@ -110,7 +110,7 @@ namespace TheArena.Conversations
             if (root == null)
                 root = speech;
 
-            speech.Name = XmlExtensions.GetAttributeValue(node, "name");
+            speech.Name = XmlExtensions.GetAttributeValue(node, "name", "SpeechNode");
 
             if (node["Text"] != null)
                 speech.Text = node.SelectSingleNode("Text").InnerText;
