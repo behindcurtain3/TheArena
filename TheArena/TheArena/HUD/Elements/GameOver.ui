@@ -3,10 +3,6 @@
   <component name="GameOver" type="GameUI.Components.FrameComponent" x="450" y="250" width="300" height="100">
     <properties>
       <property name="Texture" value="UI/Window-Content" />
-      <property name="PaddingTop" value="5" />
-      <property name="PaddingBottom" value="8" />
-      <property name="PaddingLeft" value="8" />
-      <property name="PaddingRight" value="8" />
       <property name="FrameTop" value="2" />
       <property name="FrameBottom" value="5" />
       <property name="FrameLeft" value="5" />
