@@ -294,7 +294,7 @@ namespace TheArena.GameObjects.Heroes
             else
             {
                 // Increase intensity based on how much damage is done
-                //Intensity += damage;
+               Intensity += damage;
 
                 // Gfx & Sfx
                 Opacity = 0.5f;
