@@ -7,7 +7,7 @@
     <Drawables>
       <Drawable src="Animations/Plate Armor/plate_armor_head.anim"></Drawable>
     </Drawables>
-    <Icon src="UI/Icons/Placeholder" />
+    <Icon src="UI/Icons/Plate_helmet" />
   </Item>
 
   <Item Name="PlateChest" ItemType="Vest" Weight="12.0">
@@ -17,6 +17,7 @@
       <Drawable src="Animations/Plate Armor/plate_armor_torso.anim"></Drawable>
       <Drawable src="Animations/Plate Armor/plate_armor_shoulders.anim"></Drawable>
     </Drawables>
+    <Icon src="UI/Icons/Plate_torso" />
   </Item>
 
   <Item Name="PlateGloves" ItemType="Gloves" Weight="0.5">
@@ -25,6 +26,7 @@
     <Drawables>
       <Drawable src="Animations/Plate Armor/plate_armor_hands.anim"></Drawable>
     </Drawables>
+    <Icon src="UI/Icons/Plate_gloves" />
   </Item>
 
   <Item Name="PlatePants" ItemType="Pants" Weight="5.0">
@@ -33,6 +35,7 @@
     <Drawables>
       <Drawable src="Animations/Plate Armor/plate_armor_legs.anim"></Drawable>
     </Drawables>
+    <Icon src="UI/Icons/Plate_legs" />
   </Item>
 
   <Item Name="PlateBoots" ItemType="Boots" Weight="2.5">
@@ -41,6 +44,7 @@
     <Drawables>
       <Drawable src="Animations/Plate Armor/plate_armor_feet.anim"></Drawable>
     </Drawables>
+    <Icon src="UI/Icons/Plate_boots" />
   </Item>
 
   <Item Name="PlainShoes" ItemType="Boots" Weight="0.1">
