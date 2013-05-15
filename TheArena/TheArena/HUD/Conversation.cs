@@ -8,14 +8,22 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using GameUI.Extensions;
+using GameEngine.GameObjects;
+using GameUI;
+using GameUI.Input;
 
 namespace TheArena.HUD
 {
     public class Conversation : FrameComponent
     {
         public Speech Speech { get; set; }
-
+        public Entity Speaker { get; set; }
+        public Entity Audience { get; set; }
+        
         private ContentManager _content;
+        private List<string> _currentText;
+        private Vector2 _promptStartPosition;
 
         public Conversation()
         {
@@ -26,6 +34,9 @@ namespace TheArena.HUD
         {
             FrameTop = 4;
             SetAllPadding(4);
+
+            _currentText = new List<string>();
+            _promptStartPosition = Vector2.Zero;
         }
 
         public void LoadSpeech(string speech, ContentManager content)
@@ -40,6 +51,9 @@ namespace TheArena.HUD
 
             this.Speech = speech;
             _content = content;
+
+            _currentText = StringExtensions.WrapText(Speech.Text, ContentPane.Width, ContentPane.Height, Font);
+            _promptStartPosition = new Vector2(35, 15 + _currentText.Count * Font.MeasureString("W").Y + _currentText.Count * 2);
 
             // Clear any children (get rid of the labels)
             Children.Clear();
@@ -86,6 +100,18 @@ namespace TheArena.HUD
             }
         }
 
+        public override void Update(ArenaUI hud, GameTime dt, InputState input)
+        {
+            if (!Visible)
+                return;
+
+            base.Update(hud, dt, input);
+
+            // If the entities go out of range of one another close the conversation
+            if (Vector2.Distance(Speaker.Pos, Audience.Pos) > 40)
+                Visible = false;
+        }
+
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
             if (!Visible || Speech == null)
@@ -99,14 +125,26 @@ namespace TheArena.HUD
 
             // Draw the Speech         
             // TODO: Make sure the text wraps
-            spriteBatch.DrawString(Font, Speech.Text, new Vector2(x, y), Color);
+            Vector2 textPos = new Vector2(x, y);
+            foreach (string line in _currentText)
+            {
+                spriteBatch.DrawString(Font, line, new Vector2(textPos.X + 1, textPos.Y + 1), Color.Black);
+                spriteBatch.DrawString(Font, line, textPos, Color);
+                textPos.Y += Font.MeasureString(line).Y + 2;
+            }
+            
         }
 
         private Rectangle GetPromptPosition(SpriteFont font, string text)
         {
             Vector2 vText = font.MeasureString(text);
 
-            return new Rectangle(35, 35 + (Children.Count * (int)vText.Y) + (Children.Count * (int)(vText.Y / 2)), (int)vText.X, (int)vText.Y);
+            return new Rectangle(
+                            (int)_promptStartPosition.X, 
+                            (int)_promptStartPosition.Y + (Children.Count * (int)vText.Y) + (Children.Count * (int)(vText.Y / 2)), 
+                            (int)vText.X, 
+                            (int)vText.Y
+                        );
         }
     }
 }

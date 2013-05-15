@@ -18,6 +18,8 @@ namespace TheArena.GameObjects
         // The property to search for in Tiles to check if it is considered Impassable.
         public static string ImpassableTerrainProperty = "Impassable";
 
+        public List<CollidableEntity> IntersectingEntities { get; internal set; }
+
         // Boolean flags to enable or disable Terrain Collisions and Entity Collision
         public bool TerrainCollisionEnabled { get; set; }
         public bool EntityCollisionEnabled { get; set; }
@@ -117,8 +119,8 @@ namespace TheArena.GameObjects
 
             if (EntityCollisionEnabled)
             {
-                List<Entity> intersectingEntities = engine.GetIntersectingEntities(CurrentBoundingBox);
-                foreach (Entity entity in intersectingEntities)
+                IntersectingEntities = engine.GetIntersectingEntities<CollidableEntity>(CurrentBoundingBox);
+                foreach (Entity entity in IntersectingEntities)
                 {
                     if (entity != this && entity is CollidableEntity)
                     {

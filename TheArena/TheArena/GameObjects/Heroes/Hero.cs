@@ -181,12 +181,12 @@ namespace TheArena.GameObjects.Heroes
                 float moveSpeedModifier = prevTile.GetProperty<float>("MoveSpeed", 1.0f);
 
                 // TODO: Improve, we are retrieving this twice because it is called again in the CollidableEntity loop.
-                List<Entity> intersectingEntities = engine.Collider.GetIntersectingEntites(CurrentBoundingBox);
+                //List<CollidableEntity> intersectingEntities = engine.GetIntersectingEntities<CollidableEntity>(CurrentBoundingBox);
 
                 if (CurrentDrawableState.Contains("Slash")
                     && !Drawables.IsStateFinished(CurrentDrawableState, gameTime))
                 {
-                    foreach (Entity entity in intersectingEntities)
+                    foreach (Entity entity in IntersectingEntities)
                     {
                         if (this != entity && entity is NPC && !_hitEntityList.Contains(entity))
                         {
@@ -213,7 +213,7 @@ namespace TheArena.GameObjects.Heroes
                         // Interaction
                         if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.E, engine, true))
                         {
-                            foreach (Entity entity in intersectingEntities)
+                            foreach (Entity entity in IntersectingEntities)
                             {
                                 if (entity != this && entity is NPC)
                                 {

@@ -209,6 +209,8 @@ namespace TheArena.GameObjects
                 return;
 
             Conversation conv = (Conversation)((ArenaScript)engine.MapScript).Hud.GetComponent("Conversation");
+            conv.Audience = sender;
+            conv.Speaker = this;
             conv.LoadSpeech("Conversations/Default.speech", engine.Game.Content);
             conv.Visible = true;
         }
