@@ -101,27 +101,27 @@
   
   <Animation State="Slash_Up" Group="Body" Loop="True" SpriteSheet="LPC\Characters\skeleton_slash" FrameDelay="45" Origin="0.4, 0.9">
     <Frames>
-      <Frame>79  , 13, 43, 50</Frame>
-      <Frame>143 , 13, 43, 50</Frame>
-      <Frame>207 , 13, 43, 50</Frame>
-      <Frame>271 , 13, 43, 50</Frame>
-      <Frame>335 , 13, 43, 50</Frame>
+      <Frame>79, 13, 43, 50</Frame>
+      <Frame>143, 13, 43, 50</Frame>
+      <Frame>207, 13, 43, 50</Frame>
+      <Frame>271, 13, 43, 50</Frame>
+      <Frame>335, 13, 43, 50</Frame>
     </Frames>
   </Animation>
 
   <Animation State="Slash_Left" Group="Body" Loop="True" SpriteSheet="LPC\Characters\skeleton_slash" FrameDelay="45" Origin="0.7, 0.9">
     <Frames>
-      <Frame>69  , 78, 40, 49</Frame>
-      <Frame>133 , 78, 40, 49</Frame>
-      <Frame>197 , 78, 40, 49</Frame>
-      <Frame>261 , 78, 40, 49</Frame>
-      <Frame>325 , 78, 40, 49</Frame>
+      <Frame>69, 78, 40, 49</Frame>
+      <Frame>133, 78, 40, 49</Frame>
+      <Frame>197, 78, 40, 49</Frame>
+      <Frame>261, 78, 40, 49</Frame>
+      <Frame>325, 78, 40, 49</Frame>
     </Frames>
   </Animation>
   
   <Animation State="Slash_Down" Group="Body" Loop="True" SpriteSheet="LPC\Characters\skeleton_slash" FrameDelay="45" Origin="0.4, 0.9">
     <Frames>
-      <Frame>80 , 142, 42, 49</Frame>
+      <Frame>80, 142, 42, 49</Frame>
       <Frame>144, 142, 42, 49</Frame>
       <Frame>208, 142, 42, 49</Frame>
       <Frame>272, 142, 42, 49</Frame>
@@ -131,7 +131,7 @@
   
   <Animation State="Slash_Right" Group="Body" Loop="True" SpriteSheet="LPC\Characters\skeleton_slash" FrameDelay="45" Origin="0.4, 0.9">
     <Frames>
-      <Frame>82 , 207, 40, 48</Frame>
+      <Frame>82, 207, 40, 48</Frame>
       <Frame>146, 207, 40, 48</Frame>
       <Frame>210, 207, 40, 48</Frame>
       <Frame>274, 207, 40, 48</Frame>
@@ -156,11 +156,11 @@
   <Animation State="Hurt" Group="Body" Layer="0" Loop="False" SpriteSheet="LPC\Characters\Hurt\BODY_skeleton" FrameDelay="75" Origin="0.5,0.9">
     <Frames>
       <Frame>0, 0, 64, 64</Frame>
-      <Frame>64,0, 64, 64</Frame>
-      <Frame>128,0, 64, 64</Frame>
-      <Frame>192,0, 64, 64</Frame>
-      <Frame>256,0, 64, 64</Frame>
-      <Frame>320,0, 64, 64</Frame>
+      <Frame>64, 0, 64, 64</Frame>
+      <Frame>128, 0, 64, 64</Frame>
+      <Frame>192, 0, 64, 64</Frame>
+      <Frame>256, 0, 64, 64</Frame>
+      <Frame>320, 0, 64, 64</Frame>
     </Frames>
   </Animation>
 </Animations>

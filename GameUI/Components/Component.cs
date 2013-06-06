@@ -176,14 +176,19 @@ namespace GameUI.Components
         {
             if (onMouseMove != null)
                 onMouseMove(mouse);
-
-            if (IsMouseDown)
-            {
-                if (onDrag != null)
-                    onDrag(mouse);
-            }
         }
 
+        public virtual void InjectDrag(ArenaUI hud, MouseState mouse)
+        {
+            if (onDrag != null)
+                onDrag(mouse);
+        }
+
+        public virtual void InjectDragEnd(ArenaUI hud, MouseState mouse)
+        {
+            if (onDragEnd != null)
+                onDragEnd(mouse);
+        }
        
         public virtual void Update(ArenaUI hud, GameTime dt, InputState input)
         {

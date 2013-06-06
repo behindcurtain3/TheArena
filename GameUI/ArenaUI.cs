@@ -21,6 +21,7 @@ namespace GameUI
         private Rectangle _prevScreenArea;
         private Component _prevFocus;
         private Component _clickFocus;
+        private bool _isDragActive = false;
 
         public ArenaUI(Game game) : base(game)
         {
@@ -78,18 +79,18 @@ namespace GameUI
             _input.Update();            
 
             MouseState currentMouse = _input.CurrentMouseState;
-            MouseState prevMouse = _input.LastMouseState;
-
+            MouseState prevMouse = _input.LastMouseState;           
+            
             Component currentFocus = null;
             foreach (string node in _components.Keys)
             {
                 currentFocus = _components[node].IsFocused(currentMouse.X, currentMouse.Y, _prevScreenArea);
                 if (currentFocus != null)
                     break;
-            }            
+            }
 
             // If the focus changed, inject mouse over/out events
-            if (_prevFocus != currentFocus)
+            if (_prevFocus != currentFocus && !_isDragActive)
             {
                 if (_prevFocus != null)
                     _prevFocus.InjectMouseOut(this, currentMouse);
@@ -100,7 +101,7 @@ namespace GameUI
             // They are the same, check for mouse move events
             else
             {
-                if (currentFocus != null && (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y))
+                if (currentFocus != null && (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y) && !_isDragActive)
                     currentFocus.InjectMouseMove(this, currentMouse);
             }
 
@@ -109,11 +110,18 @@ namespace GameUI
             {
                 _clickFocus = currentFocus;
                 _clickFocus.InjectMouseDown(this, currentMouse);
+                _isDragActive = true;
             }
 
             // Check for mouse up / click events
             if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton != ButtonState.Released)
             {
+                if (_isDragActive)
+                {
+                    _prevFocus.InjectDragEnd(this, currentMouse);
+                    _isDragActive = false;
+                }
+
                 // If the component clicked is still the current focus send click event
                 if (_clickFocus != null && _clickFocus == currentFocus)
                     _clickFocus.InjectMouseClick(this, currentMouse);
@@ -123,12 +131,19 @@ namespace GameUI
                     if (_clickFocus != null)
                         _clickFocus.InjectMouseUp(this, currentMouse);
                 }
-                
+
                 if (currentFocus != null)
                     currentFocus.InjectMouseUp(this, currentMouse);
             }
 
-            _prevFocus = currentFocus;
+            if (_isDragActive)
+            {
+                _prevFocus.InjectDrag(this, currentMouse);
+            }
+            else
+            {
+                _prevFocus = currentFocus;
+            }
 
             foreach (string comp in _components.Keys)
                 _components[comp].Update(this, gameTime, _input);
