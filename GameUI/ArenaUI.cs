@@ -20,6 +20,11 @@ namespace GameUI
         private InputState _input;
         private Rectangle _prevScreenArea;
         private Component _prevFocus;
+        public Component ActiveComponent
+        {
+            get { return _prevFocus; }
+        }
+
         private Component _clickFocus;
         private bool _isDragActive = false;
 

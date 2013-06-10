@@ -129,6 +129,8 @@ namespace GameUI.Components
 
         public Component IsFocused(int x, int y, Rectangle parent)
         {
+            if (!Visible) return null;
+
             foreach (Component child in Children)
             {
                 Component focused = child.IsFocused(x, y, (child.UseParentContentPane) ? ContentPane : Position);
