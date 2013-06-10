@@ -50,6 +50,8 @@ namespace GameUI.Components
 
         public bool Visible { get; set; }
 
+        public bool Moveable { get; set; }
+
         public string Name { get; set; }
 
         public Rectangle ContentPane { get; protected set; }
@@ -105,6 +107,7 @@ namespace GameUI.Components
         private void Construct(Rectangle position)
         {
             Visible = true;
+            Moveable = true;
             Position = position;
             Color = Color.White;
             Children = new List<Component>();
@@ -180,13 +183,13 @@ namespace GameUI.Components
 
         public virtual void InjectDrag(ArenaUI hud, MouseState mouse)
         {
-            if (onDrag != null)
+            if (onDrag != null && Moveable)
                 onDrag(mouse);
         }
 
         public virtual void InjectDragEnd(ArenaUI hud, MouseState mouse)
         {
-            if (onDragEnd != null)
+            if (onDragEnd != null && Moveable)
                 onDragEnd(mouse);
         }
        
