@@ -69,17 +69,17 @@ namespace TheArena.HUD
                     lbl.Font = content.Load<SpriteFont>("Fonts/DefaultBold");
                     lbl.Text = child.Prompt;
                     lbl.Position = GetPromptPosition(lbl.Font, child.Prompt);
-                    lbl.onMouseOver += new OnMouseOverEventHandler(delegate(object sender)
+                    lbl.onMouseOver += new MouseEventHandler(delegate(Component sender, MouseState mouse)
                     {
                         lbl.Color = Color.Yellow;
                     });
 
-                    lbl.onMouseOut += new OnMouseOutEventHandler(delegate(object sender)
+                    lbl.onMouseOut += new MouseEventHandler(delegate(Component sender, MouseState mouse)
                     {
                         lbl.Color = Color.White;
                     });
 
-                    lbl.onMouseClick += new OnMouseClickEventHandler(delegate(object sender)
+                    lbl.onMouseClick += new MouseEventHandler(delegate(Component sender, MouseState mouse)
                     {
                         if (lbl.Speech.PromptLink.Equals("Child"))
                             this.LoadSpeech(lbl.Speech, _content);
@@ -96,7 +96,7 @@ namespace TheArena.HUD
             }
             else
             {
-                this.onMouseClick += new OnMouseClickEventHandler(delegate(object sender){ this.Visible = false; });
+                this.onMouseClick += new MouseEventHandler(delegate(Component sender, MouseState mouse) { this.Visible = false; });
             }
         }
 

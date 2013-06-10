@@ -31,19 +31,17 @@ namespace GameUI.Components
             spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X, ContentPane.Y + parent.Y), Color);
         }
 
-        public void TitleBar_onMouseDown(MouseState state)
+        public void TitleBar_onMouseDown(Component sender, MouseState mouse)
         {
-            _mousePosition = new Vector2(state.X - Parent.Position.X, state.Y - Parent.Position.Y - Position.Y);            
+            _mousePosition = new Vector2(mouse.X - Parent.Position.X, mouse.Y - Parent.Position.Y - Position.Y);            
         }
 
-        public void TitleBar_onDragEnd(object sender)
+        public void TitleBar_onDragEnd(Component sender, MouseState mouse)
         {
         }
 
-        public void TitleBar_onDrag(object sender)
+        public void TitleBar_onDrag(Component sender, MouseState mouse)
         {
-            MouseState mouse = (MouseState)sender;
-
             int x = (int)(mouse.X - _mousePosition.X);
             int y = (int)(mouse.Y - _mousePosition.Y);
 

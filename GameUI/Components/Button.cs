@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameUI.Components
 {
@@ -33,10 +34,10 @@ namespace GameUI.Components
             SourceOffset = new Rectangle(0, 0, 32, 32);
             TextColor = Color.White;
 
-            this.onMouseOver += new OnMouseOverEventHandler(Button_onMouseOver);
-            this.onMouseOut += new OnMouseOutEventHandler(Button_onMouseOut);
-            this.onMouseDown += new OnMouseDownEventHandler(Button_onMouseDown);
-            this.onMouseUp += new OnMouseUpEventHandler(Button_onMouseUp);
+            this.onMouseOver += new MouseEventHandler(Button_onMouseOver);
+            this.onMouseOut += new MouseEventHandler(Button_onMouseOut);
+            this.onMouseDown += new MouseEventHandler(Button_onMouseDown);
+            this.onMouseUp += new MouseEventHandler(Button_onMouseUp);
         }            
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
@@ -53,23 +54,23 @@ namespace GameUI.Components
             }
         }
 
-        void Button_onMouseOver(object sender)
+        void Button_onMouseOver(Component sender, MouseState mouse)
         {
             // TODO: Take out magic numbers
             SourceOffset = new Rectangle(32, SourceOffset.Y, SourceOffset.Width, SourceOffset.Height);
         }
 
-        void Button_onMouseOut(object sender)
+        void Button_onMouseOut(Component sender, MouseState mouse)
         {
             SourceOffset = new Rectangle(0, SourceOffset.Y, SourceOffset.Width, SourceOffset.Height);
         }
 
-        void Button_onMouseDown(Microsoft.Xna.Framework.Input.MouseState state)
+        void Button_onMouseDown(Component sender, MouseState mouse)
         {
             SourceOffset = new Rectangle(64, SourceOffset.Y, SourceOffset.Width, SourceOffset.Height);
         }
 
-        void Button_onMouseUp(Microsoft.Xna.Framework.Input.MouseState state)
+        void Button_onMouseUp(Component sender, MouseState mouse)
         {
             if(IsMouseOver)
                 SourceOffset = new Rectangle(32, SourceOffset.Y, SourceOffset.Width, SourceOffset.Height);

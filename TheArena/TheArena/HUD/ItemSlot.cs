@@ -43,11 +43,11 @@ namespace TheArena.HUD
             Item = null;
             SetAllPadding(1);
 
-            onMouseOver += new OnMouseOverEventHandler(ItemSlot_onMouseOver);
-            onMouseOut += new OnMouseOutEventHandler(ItemSlot_onMouseOut);
-            onMouseClick += new OnMouseClickEventHandler(ItemSlot_onMouseClick);
-            onDrag += new OnDragEventHandler(ItemSlot_onDrag);
-            onDragEnd += new OnDragEndEventHandler(ItemSlot_onDragEnd);
+            onMouseOver += new MouseEventHandler(ItemSlot_onMouseOver);
+            onMouseOut += new MouseEventHandler(ItemSlot_onMouseOut);
+            onMouseClick += new MouseEventHandler(ItemSlot_onMouseClick);
+            onDrag += new MouseEventHandler(ItemSlot_onDrag);
+            onDragEnd += new MouseEventHandler(ItemSlot_onDragEnd);
         }
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
@@ -72,29 +72,27 @@ namespace TheArena.HUD
         }
 
 
-        private void ItemSlot_onMouseOver(object sender)
+        private void ItemSlot_onMouseOver(Component sender, MouseState mouse)
         {
             _sourceRect.X = 34;
         }
 
-        private void ItemSlot_onMouseOut(object sender)
+        private void ItemSlot_onMouseOut(Component sender, MouseState mouse)
         {
             _sourceRect.X = 0;
         }
 
-        private void ItemSlot_onMouseClick(object sender)
+        private void ItemSlot_onMouseClick(Component sender, MouseState mouse)
         {
             _followMouse = true;
         }
 
-        private void ItemSlot_onDrag(object sender)
+        private void ItemSlot_onDrag(Component sender, MouseState mouse)
         {
-            MouseState mouse = (MouseState)sender;
-
             _mousePosition = new Vector2(mouse.X, mouse.Y);
         }
 
-        private void ItemSlot_onDragEnd(object sender)
+        private void ItemSlot_onDragEnd(Component sender, MouseState mouse)
         {
             _followMouse = false;
 

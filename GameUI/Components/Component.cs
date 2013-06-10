@@ -18,24 +18,17 @@ namespace GameUI.Components
     {
         #region Events
 
-        public delegate void OnMouseOverEventHandler(object sender);
-        public delegate void OnMouseOutEventHandler(object sender);
-        public delegate void OnMouseDownEventHandler(MouseState state);
-        public delegate void OnMouseUpEventHandler(MouseState state);
-        public delegate void OnMouseClickEventHandler(object sender);
-        public delegate void OnMouseMoveEventHandler(MouseState state);
-        public delegate void OnDragEventHandler(object sender);
-        public delegate void OnDragEndEventHandler(object sender);
-        public delegate void OnPositionChangedEventHandler(Rectangle position);
+        public delegate void MouseEventHandler(Component sender, MouseState mouse);
+        public delegate void OnPositionChangedEventHandler(Component sender, Rectangle position);
 
-        public event OnMouseOverEventHandler onMouseOver;
-        public event OnMouseOutEventHandler onMouseOut;
-        public event OnMouseDownEventHandler onMouseDown;
-        public event OnMouseUpEventHandler onMouseUp;
-        public event OnMouseClickEventHandler onMouseClick;
-        public event OnMouseMoveEventHandler onMouseMove;
-        public event OnDragEventHandler onDrag;
-        public event OnDragEndEventHandler onDragEnd;
+        public event MouseEventHandler onMouseOver;
+        public event MouseEventHandler onMouseOut;
+        public event MouseEventHandler onMouseDown;
+        public event MouseEventHandler onMouseUp;
+        public event MouseEventHandler onMouseClick;
+        public event MouseEventHandler onMouseMove;
+        public event MouseEventHandler onDrag;
+        public event MouseEventHandler onDragEnd;
         public event OnPositionChangedEventHandler onPositionChanged;
 
         #endregion
@@ -83,7 +76,7 @@ namespace GameUI.Components
                 _position.Height = Math.Max(_position.Height, MinimumHeight);
 
                 if (onPositionChanged != null)
-                    onPositionChanged(_position);
+                    onPositionChanged(this, _position);
             }
         }
 
@@ -140,7 +133,7 @@ namespace GameUI.Components
         public virtual void InjectMouseDown(ArenaUI hud, MouseState mouse)
         {
             if (onMouseDown != null)
-                onMouseDown(mouse);
+                onMouseDown(this, mouse);
 
             IsMouseDown = true;
         }
@@ -148,7 +141,7 @@ namespace GameUI.Components
         public virtual void InjectMouseUp(ArenaUI hud, MouseState mouse)
         {
             if (onMouseUp != null)
-                onMouseUp(mouse);
+                onMouseUp(this, mouse);
 
             IsMouseDown = false;
         }
@@ -156,13 +149,13 @@ namespace GameUI.Components
         public virtual void InjectMouseClick(ArenaUI hud, MouseState mouse)
         {
             if (onMouseClick != null)
-                onMouseClick(mouse);
+                onMouseClick(this, mouse);
         }
 
         public virtual void InjectMouseOver(ArenaUI hud, MouseState mouse)
         {
             if (onMouseOver != null)
-                onMouseOver(mouse);
+                onMouseOver(this, mouse);
 
             IsMouseOver = true;
         }
@@ -170,7 +163,7 @@ namespace GameUI.Components
         public virtual void InjectMouseOut(ArenaUI hud, MouseState mouse)
         {
             if (onMouseOut != null)
-                onMouseOut(mouse);
+                onMouseOut(this, mouse);
 
             IsMouseOver = false;
         }
@@ -178,19 +171,19 @@ namespace GameUI.Components
         public virtual void InjectMouseMove(ArenaUI hud, MouseState mouse)
         {
             if (onMouseMove != null)
-                onMouseMove(mouse);
+                onMouseMove(this, mouse);
         }
 
         public virtual void InjectDrag(ArenaUI hud, MouseState mouse)
         {
             if (onDrag != null && Moveable)
-                onDrag(mouse);
+                onDrag(this, mouse);
         }
 
         public virtual void InjectDragEnd(ArenaUI hud, MouseState mouse)
         {
             if (onDragEnd != null && Moveable)
-                onDragEnd(mouse);
+                onDragEnd(this, mouse);
         }
        
         public virtual void Update(ArenaUI hud, GameTime dt, InputState input)
@@ -259,7 +252,7 @@ namespace GameUI.Components
                             );
         }
 
-        private void Component_onPositionChanged(Rectangle position)
+        private void Component_onPositionChanged(Component sender, Rectangle position)
         {
             ResetContentPane();
         }

@@ -81,7 +81,8 @@ namespace TheArena.MapScripts
 
                 Button cheat = (Button)Hud.GetComponent("CheatButton");
                 if(cheat != null)
-                    cheat.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender){
+                    cheat.onMouseClick += new Component.MouseEventHandler(delegate(Component sender, MouseState mouse)
+                    {
                         _player.LevelUp();
                         _player.HP = _player.MaxHP;
                     });
@@ -120,14 +121,14 @@ namespace TheArena.MapScripts
                     _gameOverLoaded = true;
 
                     Button restart = (Button)Hud.GetComponent("RestartButton");
-                    restart.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender)
+                    restart.onMouseClick += new Component.MouseEventHandler(delegate(Component sender, MouseState mouse)
                     {
                         engine.ClearEntities();
                         engine.LoadMap("Content/Maps/arena.tmx");
                     });
 
                     Button exit = (Button)Hud.GetComponent("QuitButton");
-                    exit.onMouseClick += new Component.OnMouseClickEventHandler(delegate(object sender)
+                    exit.onMouseClick += new Component.MouseEventHandler(delegate(Component sender, MouseState mouse)
                     {
                         engine.Game.Exit();
                     });
