@@ -19,7 +19,7 @@ namespace GameUI.Components
         #region Events
 
         public delegate void MouseEventHandler(Component sender, MouseState mouse);
-        public delegate void OnPositionChangedEventHandler(Component sender, Rectangle position);
+        public delegate void PropertyEventHandler(Component sender);
 
         public event MouseEventHandler onMouseOver;
         public event MouseEventHandler onMouseOut;
@@ -29,7 +29,8 @@ namespace GameUI.Components
         public event MouseEventHandler onMouseMove;
         public event MouseEventHandler onDrag;
         public event MouseEventHandler onDragEnd;
-        public event OnPositionChangedEventHandler onPositionChanged;
+        public event PropertyEventHandler onPositionChanged;
+        public event PropertyEventHandler onVisibilityChanged;
 
         #endregion
 
@@ -41,7 +42,18 @@ namespace GameUI.Components
 
         public ToolTip ToolTip { get; set; }
 
-        public bool Visible { get; set; }
+        private bool _visible;
+        public bool Visible 
+        {
+            get { return _visible; }
+            set
+            {
+                _visible = value;
+
+                if (onVisibilityChanged != null)
+                    onVisibilityChanged(this);
+            }
+        }
 
         public bool Moveable { get; set; }
 
@@ -76,7 +88,7 @@ namespace GameUI.Components
                 _position.Height = Math.Max(_position.Height, MinimumHeight);
 
                 if (onPositionChanged != null)
-                    onPositionChanged(this, _position);
+                    onPositionChanged(this);
             }
         }
 
@@ -112,7 +124,7 @@ namespace GameUI.Components
 
             ResetContentPane();
 
-            onPositionChanged += new OnPositionChangedEventHandler(Component_onPositionChanged);
+            onPositionChanged += new PropertyEventHandler(Component_onPositionChanged);
         }
 
         public Component IsFocused(int x, int y, Rectangle parent)
@@ -193,8 +205,7 @@ namespace GameUI.Components
 
             if (ToolTip != null)
                 ToolTip.Update(hud, dt, input);
-        }
-       
+        }       
  
         public virtual void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
@@ -252,7 +263,7 @@ namespace GameUI.Components
                             );
         }
 
-        private void Component_onPositionChanged(Component sender, Rectangle position)
+        private void Component_onPositionChanged(Component sender)
         {
             ResetContentPane();
         }
