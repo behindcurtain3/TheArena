@@ -55,6 +55,8 @@ namespace GameUI.Components
             }
         }
 
+        public bool Enabled { get; set; }
+
         public bool Moveable { get; set; }
 
         public string Name { get; set; }
@@ -112,6 +114,7 @@ namespace GameUI.Components
         private void Construct(Rectangle position)
         {
             Visible = true;
+            Enabled = true;
             Moveable = true;
             Position = position;
             Color = Color.White;
@@ -138,7 +141,7 @@ namespace GameUI.Components
                     return focused;
             }
 
-            if (x >= parent.X + Position.X && x < parent.X + Position.X + Position.Width && y >= parent.Y + Position.Y && y < parent.Y + Position.Y + Position.Height)
+            if (x >= parent.X + Position.X && x < parent.X + Position.X + Position.Width && y >= parent.Y + Position.Y && y < parent.Y + Position.Y + Position.Height && Enabled)
                 return this;
 
             return null;
@@ -146,7 +149,7 @@ namespace GameUI.Components
 
         public virtual void InjectMouseDown(ArenaUI hud, MouseState mouse)
         {
-            if (onMouseDown != null)
+            if (onMouseDown != null && Enabled)
                 onMouseDown(this, mouse);
 
             IsMouseDown = true;
@@ -154,7 +157,7 @@ namespace GameUI.Components
 
         public virtual void InjectMouseUp(ArenaUI hud, MouseState mouse)
         {
-            if (onMouseUp != null)
+            if (onMouseUp != null && Enabled)
                 onMouseUp(this, mouse);
 
             IsMouseDown = false;
@@ -162,13 +165,13 @@ namespace GameUI.Components
 
         public virtual void InjectMouseClick(ArenaUI hud, MouseState mouse)
         {
-            if (onMouseClick != null)
+            if (onMouseClick != null && Enabled)
                 onMouseClick(this, mouse);
         }
 
         public virtual void InjectMouseOver(ArenaUI hud, MouseState mouse)
         {
-            if (onMouseOver != null)
+            if (onMouseOver != null && Enabled)
                 onMouseOver(this, mouse);
 
             IsMouseOver = true;
@@ -176,7 +179,7 @@ namespace GameUI.Components
 
         public virtual void InjectMouseOut(ArenaUI hud, MouseState mouse)
         {
-            if (onMouseOut != null)
+            if (onMouseOut != null && Enabled)
                 onMouseOut(this, mouse);
 
             IsMouseOver = false;
@@ -184,19 +187,19 @@ namespace GameUI.Components
 
         public virtual void InjectMouseMove(ArenaUI hud, MouseState mouse)
         {
-            if (onMouseMove != null)
+            if (onMouseMove != null && Enabled)
                 onMouseMove(this, mouse);
         }
 
         public virtual void InjectDrag(ArenaUI hud, MouseState mouse)
         {
-            if (onDrag != null && Moveable)
+            if (onDrag != null && Moveable && Enabled)
                 onDrag(this, mouse);
         }
 
         public virtual void InjectDragEnd(ArenaUI hud, MouseState mouse)
         {
-            if (onDragEnd != null && Moveable)
+            if (onDragEnd != null && Moveable && Enabled)
                 onDragEnd(this, mouse);
         }
        
@@ -205,7 +208,7 @@ namespace GameUI.Components
             foreach (Component child in Children)
                 child.Update(hud, dt, input);
 
-            if (ToolTip != null)
+            if (ToolTip != null && Enabled)
                 ToolTip.Update(hud, dt, input);
         }       
  
