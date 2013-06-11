@@ -13,6 +13,7 @@ using TheArena.Items;
 
 namespace TheArena.GameObjects
 {
+    /*
     public class PathFinder : NPC
     {
 
@@ -121,4 +122,5 @@ namespace TheArena.GameObjects
             base.Update(gameTime, engine);
         }
     }
+     */
 }

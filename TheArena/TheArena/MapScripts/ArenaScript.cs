@@ -194,6 +194,7 @@ namespace TheArena.MapScripts
 
         public void NorthBridge_MapZoneHit(MapZone sender, Entity entity, TeeEngine engine, GameTime gameTime)
         {
+            /*
             // Return if the bridge is already destroyed
             if (!(entity is Hero))
                 return;
@@ -217,6 +218,7 @@ namespace TheArena.MapScripts
                 // Rebuild the pathfinding nodes
                 engine.Pathfinding.RebuildNeighbors(engine.Map);
             }
+             */
         }
 
         public void NPC_onItemEquiped(NPC sender, Item item)

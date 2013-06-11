@@ -44,6 +44,25 @@ namespace GameUI
                 _components.Add(name, comp);
         }
 
+        public bool RemoveComponent(string name)
+        {
+            if (_components.ContainsKey(name))
+            {
+                Component comp = _components[name];
+
+                if (_prevFocus == comp)
+                {
+                    _prevFocus = null;
+                    _isDragActive = false;
+                }
+
+                if (_clickFocus == comp)
+                    _clickFocus = null;
+            }
+
+            return _components.Remove(name);
+        }
+
         public Component GetComponent(string name)
         {
             // I split these because its faster to just look the component

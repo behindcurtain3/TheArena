@@ -182,12 +182,6 @@ namespace TheArena
             if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.OemMinus, this, true))
                 Zoom -= 0.1f;
 
-            if (KeyboardExtensions.GetKeyDownState(keyboardState, Keys.L, this, true))
-            {
-                Hero player = (Hero)Engine.GetEntity("Player");
-                player.LevelUp();
-            }
-
             base.Update(gameTime);
         }
 
