@@ -187,76 +187,85 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Animations\Armor\robe_belt.anim">
+    <None Include="Animations\Armor\robe_belt.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Armor\robe_feet.anim">
+    <None Include="Animations\Armor\robe_feet.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Armor\robe_head.anim">
+    <None Include="Animations\Armor\robe_head.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Armor\robe_legs.anim">
+    <None Include="Animations\Armor\robe_legs.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Armor\robe_torso.anim">
+    <None Include="Animations\Armor\robe_torso.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Characters\female_npc.anim">
+    <None Include="Animations\Characters\female_npc.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Characters\male_npc.anim">
+    <None Include="Animations\Characters\male_npc.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Characters\skeleton.anim">
+    <None Include="Animations\Misc\chests.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Misc\chests.anim">
+    <None Include="Animations\Misc\coin.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Misc\coin.anim">
+    <None Include="Animations\Monsters\bat.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Monsters\bat.anim">
+    <None Include="Animations\Monsters\bee.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Monsters\bee.anim">
+    <None Include="Animations\Monsters\bee_attack_projectile.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Monsters\bee_attack_projectile.anim">
+    <None Include="Animations\Monsters\combat_dummy.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Monsters\combat_dummy.anim">
+    <None Include="Animations\Monsters\skeleton.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Objects\fireplace.anim">
+    <None Include="Animations\Objects\fireplace.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Plate Armor\plate_armor_feet.anim">
+    <None Include="Animations\Plate Armor\plate_armor_feet.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Plate Armor\plate_armor_hands.anim">
+    <None Include="Animations\Plate Armor\plate_armor_hands.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Plate Armor\plate_armor_head.anim">
+    <None Include="Animations\Plate Armor\plate_armor_head.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Plate Armor\plate_armor_legs.anim">
+    <None Include="Animations\Plate Armor\plate_armor_legs.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Plate Armor\plate_armor_shoulders.anim">
+    <None Include="Animations\Plate Armor\plate_armor_shoulders.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Plate Armor\plate_armor_torso.anim">
+    <None Include="Animations\Plate Armor\plate_armor_torso.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Weapons\dagger.anim">
+    <None Include="Animations\Weapons\dagger.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Weapons\longsword.anim">
+    <None Include="Animations\Weapons\longsword.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Animations\Weapons\staff.anim">
+    <None Include="Animations\Weapons\mace.draw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Animations\Weapons\rapier.draw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Animations\Weapons\saber.draw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Animations\Weapons\staff.draw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Conversations\Default.speech">

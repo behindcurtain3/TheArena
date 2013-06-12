@@ -5,7 +5,7 @@
     <FriendlyName>Platemail Helmet</FriendlyName>
     <Description>A standard Imperial Plate Mail Helmet used by all Imperial Guards in the realm.</Description>
     <Drawables>
-      <Drawable src="Animations/Plate Armor/plate_armor_head.anim"></Drawable>
+      <Drawable src="Animations/Plate Armor/plate_armor_head.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Plate_helmet" />
   </Item>
@@ -14,8 +14,8 @@
     <FriendlyName>Platemail Chest Armor</FriendlyName>
     <Description>A standard Imperial Plate Mail Chest Armor used by all Imperial Guards in the realm.</Description>
     <Drawables>
-      <Drawable src="Animations/Plate Armor/plate_armor_torso.anim"></Drawable>
-      <Drawable src="Animations/Plate Armor/plate_armor_shoulders.anim"></Drawable>
+      <Drawable src="Animations/Plate Armor/plate_armor_torso.draw"></Drawable>
+      <Drawable src="Animations/Plate Armor/plate_armor_shoulders.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Plate_torso" />
   </Item>
@@ -24,7 +24,7 @@
     <FriendlyName>Platemail Gloves</FriendlyName>
     <Description>A standard Imperial Plate Mail pair of Gloves used by all Imperial Guards in the realm.</Description>
     <Drawables>
-      <Drawable src="Animations/Plate Armor/plate_armor_hands.anim"></Drawable>
+      <Drawable src="Animations/Plate Armor/plate_armor_hands.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Plate_gloves" />
   </Item>
@@ -33,7 +33,7 @@
     <FriendlyName>Platemail Pants</FriendlyName>
     <Description>A standard Imperial Plate Mail pair of Pants used by all Imperial Guards in the realm.</Description>
     <Drawables>
-      <Drawable src="Animations/Plate Armor/plate_armor_legs.anim"></Drawable>
+      <Drawable src="Animations/Plate Armor/plate_armor_legs.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Plate_legs" />
   </Item>
@@ -42,7 +42,7 @@
     <FriendlyName>Platemail Boots</FriendlyName>
     <Description>A standard Imperial Plate Mail pair of Boots used by all Imperial Guards in the realm.</Description>
     <Drawables>
-      <Drawable src="Animations/Plate Armor/plate_armor_feet.anim"></Drawable>
+      <Drawable src="Animations/Plate Armor/plate_armor_feet.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Plate_boots" />
   </Item>
@@ -51,7 +51,7 @@
     <FriendlyName>Shoes</FriendlyName>
     <Description>A pretty standard pair of normal walking shoes.</Description>
     <Drawables>
-      <Drawable src="Animations/Armor/robe_feet.anim"></Drawable>
+      <Drawable src="Animations/Armor/robe_feet.draw"></Drawable>
     </Drawables>
   </Item>
 
@@ -59,7 +59,7 @@
     <FriendlyName>Robe Hood</FriendlyName>
     <Description></Description>
     <Drawables>
-      <Drawable src="Animations/Armor/robe_head.anim"></Drawable>
+      <Drawable src="Animations/Armor/robe_head.draw"></Drawable>
     </Drawables>
   </Item>
 
@@ -67,8 +67,8 @@
     <FriendlyName>Robe Shirt</FriendlyName>
     <Description></Description>
     <Drawables>
-      <Drawable src="Animations/Armor/robe_torso.anim"></Drawable>
-      <Drawable src="Animations/Armor/robe_belt.anim"></Drawable>
+      <Drawable src="Animations/Armor/robe_torso.draw"></Drawable>
+      <Drawable src="Animations/Armor/robe_belt.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Placeholder" />
   </Item>
@@ -77,7 +77,7 @@
     <FriendlyName>Robe Skirt</FriendlyName>
     <Description></Description>
     <Drawables>
-      <Drawable src="Animations/Armor/robe_legs.anim"></Drawable>
+      <Drawable src="Animations/Armor/robe_legs.draw"></Drawable>
     </Drawables>
     <Icon src="UI/Icons/Placeholder" />
   </Item>
@@ -86,7 +86,7 @@
     <FriendlyName>Wooden Staff</FriendlyName>
     <Description></Description>
     <Drawables>
-      <Drawable src="Animations/Weapons/staff.anim"></Drawable>
+      <Drawable src="Animations/Weapons/staff.draw"></Drawable>
     </Drawables>
   </Item>
 
@@ -94,7 +94,7 @@
     <FriendlyName>Longsword</FriendlyName>
     <Description></Description>
     <Drawables>
-      <Drawable src="Animations/Weapons/longsword.anim"></Drawable>
+      <Drawable src="Animations/Weapons/longsword.draw"></Drawable>
     </Drawables>
   </Item>
   

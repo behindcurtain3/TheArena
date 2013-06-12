@@ -23,6 +23,7 @@ namespace TheArena.GameObjects.Mobs
         public double AggroDistance { get; set; }
         public Entity AttackTarget { get; set; }
         public AttackStance Stance { get; set; }
+        public string Prefix { get; set; }
         
         private bool _xpGiven = false;
         private bool _goldGiven = false;
@@ -59,6 +60,7 @@ namespace TheArena.GameObjects.Mobs
             Pos = new Vector2(x, y);
             BaseRace = type;
             Faction = "Creatures";
+            Prefix = "Fly_";
 
             _randomModifier = randomGenerator.NextDouble();
             _xpGiven = false;
@@ -76,7 +78,7 @@ namespace TheArena.GameObjects.Mobs
             // Load in the animation
             DrawableSet.LoadDrawableSetXml(Drawables, BaseRace, content);
 
-            CurrentDrawableState = "Down";
+            CurrentDrawableState = Prefix + "Down";
         }
 
         public override void Update(GameTime gameTime, GameEngine.TeeEngine engine)
@@ -195,16 +197,16 @@ namespace TheArena.GameObjects.Mobs
                 if (Math.Abs(prevPos.X - Pos.X) > Math.Abs(prevPos.Y - Pos.Y))
                 {
                     if (prevPos.X < Pos.X)
-                        this.CurrentDrawableState = "Right";
+                        this.CurrentDrawableState = Prefix + "Right";
                     if (prevPos.X > Pos.X)
-                        this.CurrentDrawableState = "Left";
+                        this.CurrentDrawableState = Prefix + "Left";
                 }
                 else
                 {
                     if (prevPos.Y < Pos.Y)
-                        this.CurrentDrawableState = "Down";
+                        this.CurrentDrawableState = Prefix + "Down";
                     if (prevPos.Y > Pos.Y)
-                        this.CurrentDrawableState = "Up";
+                        this.CurrentDrawableState = Prefix + "Up";
                 }
             }
 

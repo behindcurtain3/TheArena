@@ -37,13 +37,13 @@ namespace TheArena.GameObjects
 
         public static Random randomGenerator = new Random();
 
-        public const string RACE_HUMAN_MALE = @"Animations/Characters/male_npc.anim";
-        public const string RACE_HUMAN_FEMALE = @"Animations/Characters/female_npc.anim";
-        public const string RACE_UNDEAD = @"Animations/Characters/skeleton.anim";
+        public const string RACE_HUMAN_MALE = @"Animations/Characters/male_npc.draw";
+        public const string RACE_HUMAN_FEMALE = @"Animations/Characters/female_npc.draw";
+        public const string RACE_UNDEAD = @"Animations/Monsters/skeleton.draw";
 
-        public const string CREATURES_DUMMY = @"Animations/Monsters/combat_dummy.anim";
-        public const string CREATURES_BAT = @"Animations/Monsters/bat.anim";
-        public const string CREATURES_BEE = @"Animations/Monsters/bee.anim";
+        public const string CREATURES_DUMMY = @"Animations/Monsters/combat_dummy.draw";
+        public const string CREATURES_BAT = @"Animations/Monsters/bat.draw";
+        public const string CREATURES_BEE = @"Animations/Monsters/bee.draw";
 
         public Direction Direction { get; set; }
 

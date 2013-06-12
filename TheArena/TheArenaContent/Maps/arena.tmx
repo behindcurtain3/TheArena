@@ -288,7 +288,7 @@
     <property name="$MapZoneHit" value="NorthBridge_MapZoneHit"/>
    </properties>
   </object>
-  <object name="Pathfinder" type="TheArena.GameObjects.NPC" x="846" y="210">
+  <object name="Pathfinder" type="TheArena.GameObjects.PathFinder" x="846" y="210">
    <properties>
     <property name="Direction" value="Up"/>
     <property name="Immovable" value="true"/>

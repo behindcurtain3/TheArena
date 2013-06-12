@@ -159,10 +159,10 @@ namespace TheArena.GameObjects.Heroes
             {
                 // Hero is dead :(
                 // Make sure the correct animation is playing
-                if (!CurrentDrawableState.Equals("Hurt"))
+                if (!CurrentDrawableState.Equals("Death"))
                 {
-                    Drawables.ResetState("Hurt", gameTime);
-                    CurrentDrawableState = "Hurt";
+                    Drawables.ResetState("Death", gameTime);
+                    CurrentDrawableState = "Death";
                 }
 
                 // Reset the opacity
@@ -284,10 +284,10 @@ namespace TheArena.GameObjects.Heroes
 
             if (HP <= 0)
             {
-                if (!CurrentDrawableState.Contains("Hurt"))
+                if (!CurrentDrawableState.Contains("Death"))
                 {
-                    CurrentDrawableState = "Hurt";
-                    Drawables.ResetState("Hurt", gameTime);
+                    CurrentDrawableState = "Death";
+                    Drawables.ResetState("Death", gameTime);
                     _onDeathSfx[randomGenerator.Next(0, _onDeathSfx.Length)].Play(0.5f, 0.0f, 0.0f);
                 }
             }

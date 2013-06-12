@@ -55,53 +55,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="LPC\Characters\female_slash.png">
-      <Name>female_slash</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\female_spellcast.png">
-      <Name>female_spellcast</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\female_walkcycle.png">
-      <Name>female_walkcycle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="LPC\Characters\Hurt\male_hurt.png">
       <Name>male_hurt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\male_shadow.png">
-      <Name>male_shadow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\male_slash.png">
-      <Name>male_slash</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\male_spellcast.png">
-      <Name>male_spellcast</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\male_walkcycle.png">
-      <Name>male_walkcycle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\skeleton_slash.png">
-      <Name>skeleton_slash</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\skeleton_walkcycle.png">
-      <Name>skeleton_walkcycle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -114,6 +69,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LPC\Characters\Walkcycle\female_spellcast.png">
+      <Name>female_spellcast</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\Walkcycle\male_spellcast.png">
+      <Name>male_spellcast</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="LPC\Misc\chests.png">
       <Name>chests</Name>
       <Importer>TextureImporter</Importer>
@@ -191,8 +156,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="LPC\Plate Armor\Slash\FEET_plate_armor_shoes.png">
       <Name>FEET_plate_armor_shoes</Name>
       <Importer>TextureImporter</Importer>
@@ -312,8 +275,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LPC\Weapons\sabre_sheet.png">
-      <Name>sabre_sheet</Name>
+    <Compile Include="LPC\Monsters\Dummy\BODY_animation.png">
+      <Name>BODY_animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Monsters\Dummy\BODY_death.png">
+      <Name>BODY_death</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -322,190 +290,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="LPC\Weapons\WEAPON_longsword.png">
-      <Name>WEAPON_longsword</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="LPC\Armor\Walkcycle\FEET_shoes_brown.png">
-      <Name>FEET_shoes_brown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\BELT_leather.png">
-      <Name>BELT_leather</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\BELT_rope.png">
-      <Name>BELT_rope</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\HEAD_chain_armor_helmet.png">
-      <Name>HEAD_chain_armor_helmet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\HEAD_chain_armor_hood.png">
-      <Name>HEAD_chain_armor_hood</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\HEAD_hair_blonde.png">
-      <Name>HEAD_hair_blonde</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\HEAD_leather_armor_hat.png">
-      <Name>HEAD_leather_armor_hat</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\HEAD_robe_hood.png">
-      <Name>HEAD_robe_hood</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\LEGS_pants_greenish.png">
-      <Name>LEGS_pants_greenish</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\LEGS_robe_skirt.png">
-      <Name>LEGS_robe_skirt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_chain_armor_jacket_purple.png">
-      <Name>TORSO_chain_armor_jacket_purple</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_chain_armor_torso.png">
-      <Name>TORSO_chain_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_leather_armor_shirt_white.png">
-      <Name>TORSO_leather_armor_shirt_white</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_leather_armor_torso.png">
-      <Name>TORSO_leather_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_robe_shirt_brown.png">
-      <Name>TORSO_robe_shirt_brown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_leather_armor_bracers.png">
-      <Name>TORSO_leather_armor_bracers</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Walkcycle\TORSO_leather_armor_shoulders.png">
-      <Name>TORSO_leather_armor_shoulders</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\BELT_leather.png">
-      <Name>BELT_leather</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\BELT_rope.png">
-      <Name>BELT_rope</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\FEET_shoes_brown.png">
-      <Name>FEET_shoes_brown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\HEAD_chain_armor_helmet.png">
-      <Name>HEAD_chain_armor_helmet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\HEAD_chain_armor_hood.png">
-      <Name>HEAD_chain_armor_hood</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\HEAD_hair_blonde.png">
-      <Name>HEAD_hair_blonde</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\HEAD_leather_armor_hat.png">
-      <Name>HEAD_leather_armor_hat</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\HEAD_robe_hood.png">
-      <Name>HEAD_robe_hood</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\LEGS_pants_greenish.png">
-      <Name>LEGS_pants_greenish</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\LEGS_robe_skirt.png">
-      <Name>LEGS_robe_skirt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_chain_armor_jacket_purple.png">
-      <Name>TORSO_chain_armor_jacket_purple</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_chain_armor_torso.png">
-      <Name>TORSO_chain_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_leather_armor_bracers.png">
-      <Name>TORSO_leather_armor_bracers</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_leather_armor_shirt_white.png">
-      <Name>TORSO_leather_armor_shirt_white</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_leather_armor_shoulders.png">
-      <Name>TORSO_leather_armor_shoulders</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_leather_armor_torso.png">
-      <Name>TORSO_leather_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Slash\TORSO_robe_shirt_brown.png">
-      <Name>TORSO_robe_shirt_brown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Monsters\Dummy\BODY_animation.png">
-      <Name>BODY_animation</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Monsters\Dummy\BODY_death.png">
-      <Name>BODY_death</Name>
+    <Compile Include="LPC\Weapons\WEAPON_staff.png">
+      <Name>WEAPON_staff</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -519,133 +305,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="LPC\Armor\Hurt\BELT_leather.png">
-      <Name>BELT_leather</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\BELT_rope.png">
-      <Name>BELT_rope</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\FEET_plate_armor_shoes.png">
-      <Name>FEET_plate_armor_shoes</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\FEET_shoes_brown.png">
-      <Name>FEET_shoes_brown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HANDS_plate_armor_gloves.png">
-      <Name>HANDS_plate_armor_gloves</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HEAD_chain_armor_helmet.png">
-      <Name>HEAD_chain_armor_helmet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HEAD_chain_armor_hood.png">
-      <Name>HEAD_chain_armor_hood</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HEAD_hair_blonde.png">
-      <Name>HEAD_hair_blonde</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HEAD_leather_armor_hat.png">
-      <Name>HEAD_leather_armor_hat</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HEAD_plate_armor_helmet.png">
-      <Name>HEAD_plate_armor_helmet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\HEAD_robe_hood.png">
-      <Name>HEAD_robe_hood</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\LEGS_pants_greenish.png">
-      <Name>LEGS_pants_greenish</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\LEGS_plate_armor_pants.png">
-      <Name>LEGS_plate_armor_pants</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\LEGS_robe_skirt.png">
-      <Name>LEGS_robe_skirt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_chain_armor_jacket_purple.png">
-      <Name>TORSO_chain_armor_jacket_purple</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_chain_armor_torso.png">
-      <Name>TORSO_chain_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_leather_armor_bracers.png">
-      <Name>TORSO_leather_armor_bracers</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_leather_armor_shirt_white.png">
-      <Name>TORSO_leather_armor_shirt_white</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_leather_armor_shoulders.png">
-      <Name>TORSO_leather_armor_shoulders</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_leather_armor_torso.png">
-      <Name>TORSO_leather_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_plate_armor_arms_shoulders.png">
-      <Name>TORSO_plate_armor_arms_shoulders</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_plate_armor_torso.png">
-      <Name>TORSO_plate_armor_torso</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Armor\Hurt\TORSO_robe_shirt_brown.png">
-      <Name>TORSO_robe_shirt_brown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="LPC\Monsters\Bee\bee_attack.png">
       <Name>bee_attack</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Weapons\WEAPON_staff.png">
-      <Name>WEAPON_staff</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LPC\Characters\Thrust\BODY_animation.png">
-      <Name>BODY_animation</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -879,6 +540,391 @@
     </Compile>
     <Compile Include="UI\Icons\Plate_legs.png">
       <Name>Plate_legs</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Characters\Thrust\male_thrust.png">
+      <Name>male_thrust</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Characters\Slash\female_slash.png">
+      <Name>female_slash</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\Slash\male_slash.png">
+      <Name>male_slash</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\Slash\skeleton_slash.png">
+      <Name>skeleton_slash</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Characters\Spellcast\female_spellcast.png">
+      <Name>female_spellcast</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\Spellcast\male_spellcast.png">
+      <Name>male_spellcast</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Characters\Walkcycle\female_walkcycle.png">
+      <Name>female_walkcycle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\Walkcycle\male_walkcycle.png">
+      <Name>male_walkcycle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\Walkcycle\skeleton_walkcycle.png">
+      <Name>skeleton_walkcycle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Characters\female_shadow.png">
+      <Name>female_shadow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Characters\male_shadow.png">
+      <Name>male_shadow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Misc\COLLISION_chests.png">
+      <Name>COLLISION_chests</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Misc\INTERACTION_chests.png">
+      <Name>INTERACTION_chests</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LPC\Leather Armor\Hurt\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Leather Armor\Slash\BELT_leather.png">
+      <Name>BELT_leather</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Slash\HEAD_leather_armor_hat.png">
+      <Name>HEAD_leather_armor_hat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Slash\TORSO_leather_armor_bracers.png">
+      <Name>TORSO_leather_armor_bracers</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Slash\TORSO_leather_armor_shirt_white.png">
+      <Name>TORSO_leather_armor_shirt_white</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Slash\TORSO_leather_armor_shoulders.png">
+      <Name>TORSO_leather_armor_shoulders</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Slash\TORSO_leather_armor_torso.png">
+      <Name>TORSO_leather_armor_torso</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Leather Armor\Walkcycle\BELT_leather.png">
+      <Name>BELT_leather</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Walkcycle\HEAD_leather_armor_hat.png">
+      <Name>HEAD_leather_armor_hat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Walkcycle\TORSO_leather_armor_bracers.png">
+      <Name>TORSO_leather_armor_bracers</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Walkcycle\TORSO_leather_armor_shirt_white.png">
+      <Name>TORSO_leather_armor_shirt_white</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Walkcycle\TORSO_leather_armor_shoulders.png">
+      <Name>TORSO_leather_armor_shoulders</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Leather Armor\Walkcycle\TORSO_leather_armor_torso.png">
+      <Name>TORSO_leather_armor_torso</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Monsters\Bat\bat.png">
+      <Name>bat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Monsters\Snake\snake.png">
+      <Name>snake</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Plate Armor\Hurt\BELT_leather.png">
+      <Name>BELT_leather</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\BELT_rope.png">
+      <Name>BELT_rope</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\FEET_plate_armor_shoes.png">
+      <Name>FEET_plate_armor_shoes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\FEET_shoes_brown.png">
+      <Name>FEET_shoes_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HANDS_plate_armor_gloves.png">
+      <Name>HANDS_plate_armor_gloves</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HEAD_chain_armor_helmet.png">
+      <Name>HEAD_chain_armor_helmet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HEAD_chain_armor_hood.png">
+      <Name>HEAD_chain_armor_hood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HEAD_hair_blonde.png">
+      <Name>HEAD_hair_blonde</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HEAD_leather_armor_hat.png">
+      <Name>HEAD_leather_armor_hat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HEAD_plate_armor_helmet.png">
+      <Name>HEAD_plate_armor_helmet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\HEAD_robe_hood.png">
+      <Name>HEAD_robe_hood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\LEGS_pants_greenish.png">
+      <Name>LEGS_pants_greenish</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\LEGS_plate_armor_pants.png">
+      <Name>LEGS_plate_armor_pants</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\LEGS_robe_skirt.png">
+      <Name>LEGS_robe_skirt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_chain_armor_jacket_purple.png">
+      <Name>TORSO_chain_armor_jacket_purple</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_chain_armor_torso.png">
+      <Name>TORSO_chain_armor_torso</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_leather_armor_bracers.png">
+      <Name>TORSO_leather_armor_bracers</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_leather_armor_shirt_white.png">
+      <Name>TORSO_leather_armor_shirt_white</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_leather_armor_shoulders.png">
+      <Name>TORSO_leather_armor_shoulders</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_leather_armor_torso.png">
+      <Name>TORSO_leather_armor_torso</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_plate_armor_arms_shoulders.png">
+      <Name>TORSO_plate_armor_arms_shoulders</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_plate_armor_torso.png">
+      <Name>TORSO_plate_armor_torso</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Plate Armor\Hurt\TORSO_robe_shirt_brown.png">
+      <Name>TORSO_robe_shirt_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Robe\Hurt\BELT_rope.png">
+      <Name>BELT_rope</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Hurt\FEET_shoes_brown.png">
+      <Name>FEET_shoes_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Hurt\HEAD_robe_hood.png">
+      <Name>HEAD_robe_hood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Hurt\LEGS_robe_skirt.png">
+      <Name>LEGS_robe_skirt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Hurt\TORSO_robe_shirt_brown.png">
+      <Name>TORSO_robe_shirt_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Robe\Slash\BELT_rope.png">
+      <Name>BELT_rope</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Slash\FEET_shoes_brown.png">
+      <Name>FEET_shoes_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Slash\HEAD_robe_hood.png">
+      <Name>HEAD_robe_hood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Slash\LEGS_robe_skirt.png">
+      <Name>LEGS_robe_skirt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Slash\TORSO_robe_shirt_brown.png">
+      <Name>TORSO_robe_shirt_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Robe\Walkcycle\BELT_rope.png">
+      <Name>BELT_rope</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Walkcycle\FEET_shoes_brown.png">
+      <Name>FEET_shoes_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Walkcycle\HEAD_robe_hood.png">
+      <Name>HEAD_robe_hood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Walkcycle\LEGS_robe_skirt.png">
+      <Name>LEGS_robe_skirt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Robe\Walkcycle\TORSO_robe_shirt_brown.png">
+      <Name>TORSO_robe_shirt_brown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Weapons\longsword_male.png">
+      <Name>longsword_male</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Weapons\mace_male.png">
+      <Name>mace_male</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Weapons\rapier_male.png">
+      <Name>rapier_male</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="LPC\Weapons\saber_male.png">
+      <Name>saber_male</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LPC\Monsters\Dummy\COLLISION_animation.png">
+      <Name>COLLISION_animation</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

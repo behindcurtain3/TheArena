@@ -13,7 +13,7 @@ using TheArena.Items;
 
 namespace TheArena.GameObjects
 {
-    /*
+    
     public class PathFinder : NPC
     {
 
@@ -51,7 +51,7 @@ namespace TheArena.GameObjects
 
             base.LoadContent(content);
         }
-
+        /*
         public override void Update(GameTime gameTime, GameEngine.TeeEngine engine)
         {
             MouseState mouseState = Mouse.GetState();
@@ -76,7 +76,8 @@ namespace TheArena.GameObjects
 
                     CurrentPath = engine.Pathfinding.GeneratePath(start, target);
                 }
-            } 
+            }
+            
 
             // Path to the next nobe on current path
             if (CurrentPath != null && CurrentPath.Count > 0)
@@ -121,6 +122,6 @@ namespace TheArena.GameObjects
 
             base.Update(gameTime, engine);
         }
+         */
     }
-     */
 }

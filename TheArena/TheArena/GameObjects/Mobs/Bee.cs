@@ -33,6 +33,8 @@ namespace TheArena.GameObjects.Mobs
 
             AttackDistance = 200;
             AggroDistance = 250;
+
+            Prefix = "";
         }
 
         public override void onAttack(GameEngine.TeeEngine engine, GameTime gameTime)
