@@ -103,70 +103,77 @@ namespace GameUI
             _input.Update();            
 
             MouseState currentMouse = _input.CurrentMouseState;
-            MouseState prevMouse = _input.LastMouseState;           
-            
-            Component currentFocus = null;
-            foreach (string node in _components.Keys)
-            {
-                currentFocus = _components[node].IsFocused(currentMouse.X, currentMouse.Y, _prevScreenArea);
-                if (currentFocus != null)
-                    break;
-            }
+            MouseState prevMouse = _input.LastMouseState;
 
-            // If the focus changed, inject mouse over/out events
-            if (_prevFocus != currentFocus && !_isDragActive)
+            if (Game.IsActive)
             {
-                if (_prevFocus != null)
-                    _prevFocus.InjectMouseOut(this, currentMouse);
 
-                if (currentFocus != null)
-                    currentFocus.InjectMouseOver(this, currentMouse);
-            }
-            // They are the same, check for mouse move events
-            else
-            {
-                if (currentFocus != null && (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y) && !_isDragActive)
-                    currentFocus.InjectMouseMove(this, currentMouse);
-            }
+                Component currentFocus = null;
+                foreach (string node in _components.Keys)
+                {
+                    currentFocus = _components[node].IsFocused(currentMouse.X, currentMouse.Y, _prevScreenArea);
+                    if (currentFocus != null)
+                        break;
+                }
 
-            // Check for mouse down, on a mouse down event set _clickFocus to the current focused component
-            if (currentFocus != null && currentMouse.LeftButton == ButtonState.Pressed && prevMouse.LeftButton != ButtonState.Pressed)
-            {
-                _clickFocus = currentFocus;
-                _clickFocus.InjectMouseDown(this, currentMouse);
-                _isDragActive = true;
-            }
+                // If the focus changed, inject mouse over/out events
+                if (_prevFocus != currentFocus && !_isDragActive)
+                {
+                    if (_prevFocus != null)
+                    {
+                        _prevFocus.InjectMouseOut(this, currentMouse);
+                        _clickFocus = null;
+                    }
 
-            // Check for mouse up / click events
-            if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton != ButtonState.Released)
-            {
+                    if (currentFocus != null)
+                        currentFocus.InjectMouseOver(this, currentMouse);
+                }
+                // They are the same, check for mouse move events
+                else
+                {
+                    if (currentFocus != null && (currentMouse.X != prevMouse.X || currentMouse.Y != prevMouse.Y) && !_isDragActive)
+                        currentFocus.InjectMouseMove(this, currentMouse);
+                }
+
+                // Check for mouse down, on a mouse down event set _clickFocus to the current focused component
+                if (currentFocus != null && currentMouse.LeftButton == ButtonState.Pressed && prevMouse.LeftButton != ButtonState.Pressed)
+                {
+                    _clickFocus = currentFocus;
+                    _clickFocus.InjectMouseDown(this, currentMouse);
+                    _isDragActive = true;
+                }
+
+                // Check for mouse up / click events
+                if (currentMouse.LeftButton == ButtonState.Released && prevMouse.LeftButton != ButtonState.Released)
+                {
+                    if (_isDragActive)
+                    {
+                        _prevFocus.InjectDragEnd(this, currentMouse);
+                        _isDragActive = false;
+                    }
+
+                    // If the component clicked is still the current focus send click event
+                    if (_clickFocus != null && _clickFocus == currentFocus)
+                        _clickFocus.InjectMouseClick(this, currentMouse);
+
+                    if (_clickFocus != currentFocus)
+                    {
+                        if (_clickFocus != null)
+                            _clickFocus.InjectMouseUp(this, currentMouse);
+                    }
+
+                    if (currentFocus != null)
+                        currentFocus.InjectMouseUp(this, currentMouse);
+                }
+
                 if (_isDragActive)
                 {
-                    _prevFocus.InjectDragEnd(this, currentMouse);
-                    _isDragActive = false;
+                    _prevFocus.InjectDrag(this, currentMouse);
                 }
-
-                // If the component clicked is still the current focus send click event
-                if (_clickFocus != null && _clickFocus == currentFocus)
-                    _clickFocus.InjectMouseClick(this, currentMouse);
-
-                if (_clickFocus != currentFocus)
+                else
                 {
-                    if (_clickFocus != null)
-                        _clickFocus.InjectMouseUp(this, currentMouse);
+                    _prevFocus = currentFocus;
                 }
-
-                if (currentFocus != null)
-                    currentFocus.InjectMouseUp(this, currentMouse);
-            }
-
-            if (_isDragActive)
-            {
-                _prevFocus.InjectDrag(this, currentMouse);
-            }
-            else
-            {
-                _prevFocus = currentFocus;
             }
 
             foreach (string comp in _components.Keys)

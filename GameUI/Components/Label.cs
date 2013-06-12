@@ -24,6 +24,8 @@ namespace GameUI.Components
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle parent, GameTime gameTime)
         {
+            if (!Visible) return;
+
             base.Draw(spriteBatch, parent, gameTime);
 
             spriteBatch.DrawString(Font, Text, new Vector2(ContentPane.X + parent.X + 1, ContentPane.Y + parent.Y + 1), Color.Black);
