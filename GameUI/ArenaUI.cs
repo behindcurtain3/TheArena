@@ -105,13 +105,15 @@ namespace GameUI
             MouseState currentMouse = _input.CurrentMouseState;
             MouseState prevMouse = _input.LastMouseState;
 
+            List<Component> components = _components.Values.ToList();
+            components.Sort(delegate(Component c1, Component c2) { return -c1.Layer.CompareTo(c2.Layer); });
+
             if (Game.IsActive)
             {
-
                 Component currentFocus = null;
-                foreach (string node in _components.Keys)
+                foreach (Component node in components)
                 {
-                    currentFocus = _components[node].IsFocused(currentMouse.X, currentMouse.Y, _prevScreenArea);
+                    currentFocus = node.IsFocused(currentMouse.X, currentMouse.Y, _prevScreenArea);
                     if (currentFocus != null)
                         break;
                 }
@@ -176,23 +178,24 @@ namespace GameUI
                 }
             }
 
-            foreach (string comp in _components.Keys)
-                _components[comp].Update(this, gameTime, _input);
+            foreach (Component comp in components)
+                comp.Update(this, gameTime, _input);
         }
 
         public void RenderUI(SpriteBatch spriteBatch, GameTime gameTime, Rectangle screenArea)
         {
             // Sort the components by their layer
-            _components.OrderBy(x => x.Value.Layer);
+            List<Component> componentsToDraw = _components.Values.ToList();
+            componentsToDraw.Sort(delegate(Component c1, Component c2) { return c1.Layer.CompareTo(c2.Layer); });
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.PointWrap, DepthStencilState.Default, null);
 
             // Draw each component
-            foreach (string comp in _components.Keys)
-                _components[comp].Draw(spriteBatch, screenArea, gameTime);
+            foreach(Component comp in componentsToDraw)
+                comp.Draw(spriteBatch, screenArea, gameTime);
 
-            foreach (string comp in _components.Keys)
-                if (_components[comp].DrawToolTip(spriteBatch, screenArea, gameTime))
+            foreach (Component comp in componentsToDraw)
+                if (comp.DrawToolTip(spriteBatch, screenArea, gameTime))
                     break;
 
             spriteBatch.End();
